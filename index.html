@@ -270,12 +270,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
             <!-- Logo -->
-            <a href="#" class="flex items-center gap-3 group">
-                <div class="relative w-10 h-10 rounded-xl bg-gradient-to-br from-brand-red to-brand-orange flex items-center justify-center shadow-[0_8px_24px_-8px_rgba(255,0,77,.7)]">
-                    <i data-lucide="zap" class="w-5 h-5 text-white"></i>
-                    <div class="absolute -inset-1 rounded-xl bg-gradient-to-br from-brand-red to-brand-orange opacity-30 blur-md group-hover:opacity-60 transition"></div>
-                </div>
-                <span class="display text-3xl tracking-wide">TURBI</span>
+            <a href="#" class="flex items-center group relative">
+                <div class="absolute -inset-2 rounded-xl bg-gradient-to-br from-brand-red to-brand-orange opacity-0 group-hover:opacity-30 blur-md transition"></div>
+                <img src="./logo.jpeg" alt="TURBI" class="relative h-10 w-auto rounded-lg" />
             </a>
             <!-- Links -->
             <div class="hidden md:flex items-center gap-10 text-sm font-medium text-white/70">
@@ -837,11 +834,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-5 gap-10 mb-12">
             <div class="md:col-span-2">
-                <a href="#" class="flex items-center gap-3 mb-5">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-red to-brand-orange flex items-center justify-center">
-                        <i data-lucide="zap" class="w-5 h-5 text-white"></i>
-                    </div>
-                    <span class="display text-3xl">TURBI</span>
+                <a href="#" class="inline-flex items-center mb-5">
+                    <img src="./logo.jpeg" alt="TURBI" class="h-12 w-auto rounded-lg" />
                 </a>
                 <p class="text-white/55 max-w-sm">Conectando conductores con tiendas de autopartes verificadas. Hecho en Venezuela 🇻🇪</p>
                 <div class="flex gap-3 mt-6">
@@ -964,7 +958,7 @@
     }, { threshold: 0.4 });
     document.querySelectorAll('[data-count]').forEach(el => statObs.observe(el));
 
-    // ============ THREE.JS WHEEL ============
+    // ============ THREE.JS WHEEL (REALISTIC) ============
     (function initWheel() {
         const canvas = document.getElementById('wheel-canvas');
         if (!canvas || !window.THREE) return;
@@ -976,130 +970,359 @@
         const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setSize(width, height, false);
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.05;
 
         const scene = new THREE.Scene();
 
-        const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 100);
-        camera.position.set(0, 0.6, 6);
+        const camera = new THREE.PerspectiveCamera(32, width / height, 0.1, 100);
+        camera.position.set(0.6, 0.5, 5.8);
         camera.lookAt(0, 0, 0);
 
-        // Lights
-        scene.add(new THREE.AmbientLight(0x222222, 0.6));
+        // ---------- ENVIRONMENT (fake studio for chrome reflections) ----------
+        // Build a small cube texture procedurally so chrome surfaces actually reflect something.
+        function buildEnvTexture() {
+            const size = 128;
+            const faces = [];
+            const colors = [
+                ['#1a1a1a', '#0a0a0a'], // +x
+                ['#1a1a1a', '#0a0a0a'], // -x
+                ['#3a3a3a', '#0a0a0a'], // +y (top - lighter)
+                ['#050505', '#000000'], // -y (bottom - darker)
+                ['#1a1a1a', '#0a0a0a'], // +z
+                ['#1a1a1a', '#0a0a0a'], // -z
+            ];
+            // Add red & orange "studio lights" on a couple faces
+            const accentFaces = {
+                0: { x: 0.7, y: 0.5, color: 'rgba(255,0,77,0.9)' },   // +x face: red glow
+                1: { x: 0.3, y: 0.5, color: 'rgba(255,94,0,0.85)' },  // -x face: orange glow
+                4: { x: 0.5, y: 0.3, color: 'rgba(255,255,255,0.4)' },// +z face: white top highlight
+            };
+            for (let i = 0; i < 6; i++) {
+                const c = document.createElement('canvas');
+                c.width = c.height = size;
+                const ctx = c.getContext('2d');
+                const grad = ctx.createLinearGradient(0, 0, 0, size);
+                grad.addColorStop(0, colors[i][0]);
+                grad.addColorStop(1, colors[i][1]);
+                ctx.fillStyle = grad; ctx.fillRect(0, 0, size, size);
+                if (accentFaces[i]) {
+                    const a = accentFaces[i];
+                    const rg = ctx.createRadialGradient(a.x*size, a.y*size, 0, a.x*size, a.y*size, size*0.5);
+                    rg.addColorStop(0, a.color);
+                    rg.addColorStop(1, 'rgba(0,0,0,0)');
+                    ctx.fillStyle = rg; ctx.fillRect(0, 0, size, size);
+                }
+                faces.push(c);
+            }
+            const tex = new THREE.CubeTexture(faces);
+            tex.needsUpdate = true;
+            tex.encoding = THREE.sRGBEncoding;
+            return tex;
+        }
+        const envMap = buildEnvTexture();
+        scene.environment = envMap;
 
-        const keyLight = new THREE.DirectionalLight(0xffffff, 1.4);
+        // ---------- LIGHTS ----------
+        scene.add(new THREE.AmbientLight(0x404040, 0.5));
+
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1.6);
         keyLight.position.set(3, 5, 4);
         scene.add(keyLight);
 
-        const rimLightRed = new THREE.PointLight(0xff004d, 5, 12, 2);
-        rimLightRed.position.set(-3, 1, -2);
+        const rimLightRed = new THREE.PointLight(0xff004d, 6, 14, 2);
+        rimLightRed.position.set(-3.5, 0.8, -1);
         scene.add(rimLightRed);
 
-        const rimLightOrange = new THREE.PointLight(0xff5e00, 3, 12, 2);
-        rimLightOrange.position.set(3, -1, -1);
+        const rimLightOrange = new THREE.PointLight(0xff5e00, 4, 12, 2);
+        rimLightOrange.position.set(3.5, -0.5, -0.5);
         scene.add(rimLightOrange);
 
-        const fillLight = new THREE.DirectionalLight(0x88aaff, 0.3);
+        const topLight = new THREE.PointLight(0xffffff, 1.2, 10, 2);
+        topLight.position.set(0, 4, 3);
+        scene.add(topLight);
+
+        const fillLight = new THREE.DirectionalLight(0x88aaff, 0.25);
         fillLight.position.set(-2, -2, 3);
         scene.add(fillLight);
 
-        // ===== Wheel group =====
+        // ---------- WHEEL GROUP ----------
         const wheel = new THREE.Group();
+        scene.add(wheel);
 
-        // Tire (torus)
-        const tireGeo = new THREE.TorusGeometry(1.6, 0.45, 36, 80);
+        // ===== TIRE (LatheGeometry — realistic cross-section with sidewall bulge) =====
+        // Profile points: x = radius from axle, y = depth. Total tire depth ~1.0
+        const tireProfile = [];
+        const segs = [
+            [1.05, -0.42],   // bead seat back
+            [1.08, -0.45],
+            [1.20, -0.50],   // sidewall transition
+            [1.55, -0.50],   // sidewall bulge
+            [1.62, -0.42],   // shoulder back
+            [1.64, -0.30],   // tread shoulder
+            [1.64,  0.30],   // tread shoulder front
+            [1.62,  0.42],
+            [1.55,  0.50],
+            [1.20,  0.50],
+            [1.08,  0.45],
+            [1.05,  0.42],
+        ];
+        segs.forEach(p => tireProfile.push(new THREE.Vector2(p[0], p[1])));
+        const tireGeo = new THREE.LatheGeometry(tireProfile, 96);
         const tireMat = new THREE.MeshStandardMaterial({
-            color: 0x0a0a0a, roughness: 0.85, metalness: 0.15
+            color: 0x0c0c0c, roughness: 0.95, metalness: 0.0
         });
         const tire = new THREE.Mesh(tireGeo, tireMat);
+        tire.rotation.x = Math.PI / 2; // align so tire faces camera (axis = Z)
         wheel.add(tire);
 
-        // Tire tread (subtle ring of small boxes around the outside)
+        // ===== TREAD BLOCKS (raised pattern around the contact patch) =====
         const treadGroup = new THREE.Group();
-        const treadCount = 60;
+        const treadCount = 48;
+        const blockMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 1, metalness: 0 });
+        const grooveMat = new THREE.MeshStandardMaterial({ color: 0x040404, roughness: 1, metalness: 0 });
         for (let i = 0; i < treadCount; i++) {
-            const g = new THREE.BoxGeometry(0.06, 0.18, 0.5);
-            const m = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 1, metalness: 0 });
-            const b = new THREE.Mesh(g, m);
-            const a = (i / treadCount) * Math.PI * 2;
-            b.position.set(Math.cos(a) * 1.6, Math.sin(a) * 1.6, 0);
-            b.rotation.z = a;
-            treadGroup.add(b);
+            // Two rows of staggered tread blocks
+            for (let row = 0; row < 2; row++) {
+                const a = (i / treadCount) * Math.PI * 2 + (row * Math.PI / treadCount);
+                const block = new THREE.Mesh(
+                    new THREE.BoxGeometry(0.14, 0.06, 0.36),
+                    blockMat
+                );
+                block.position.set(Math.cos(a) * 1.66, Math.sin(a) * 1.66, row === 0 ? 0.2 : -0.2);
+                block.rotation.z = a;
+                treadGroup.add(block);
+            }
+            // Center groove sipe
+            if (i % 2 === 0) {
+                const a = (i / treadCount) * Math.PI * 2;
+                const sipe = new THREE.Mesh(
+                    new THREE.BoxGeometry(0.16, 0.08, 0.05),
+                    grooveMat
+                );
+                sipe.position.set(Math.cos(a) * 1.65, Math.sin(a) * 1.65, 0);
+                sipe.rotation.z = a;
+                treadGroup.add(sipe);
+            }
         }
         wheel.add(treadGroup);
 
-        // Outer rim ring (chrome metallic)
-        const rimRingGeo = new THREE.TorusGeometry(1.18, 0.08, 24, 80);
+        // Sidewall lettering ring (subtle raised band — fakes "tire brand" embossing)
+        const sidewallBandGeo = new THREE.TorusGeometry(1.35, 0.012, 8, 80);
+        const sidewallMat = new THREE.MeshStandardMaterial({ color: 0x202020, roughness: 0.7, metalness: 0.1 });
+        const sidewallFront = new THREE.Mesh(sidewallBandGeo, sidewallMat);
+        sidewallFront.position.z = 0.48;
+        wheel.add(sidewallFront);
+        const sidewallBack = new THREE.Mesh(sidewallBandGeo, sidewallMat);
+        sidewallBack.position.z = -0.48;
+        wheel.add(sidewallBack);
+
+        // ===== BRAKE DISC (vented + drilled) =====
+        const discMat = new THREE.MeshStandardMaterial({
+            color: 0x6a6a6a, metalness: 0.9, roughness: 0.45, envMap, envMapIntensity: 1
+        });
+        // Outer ring
+        const discOuter = new THREE.Mesh(
+            new THREE.CylinderGeometry(1.05, 1.05, 0.12, 96, 1, true),
+            new THREE.MeshStandardMaterial({ color: 0x4a4a4a, metalness: 0.9, roughness: 0.55, side: THREE.DoubleSide })
+        );
+        discOuter.rotation.x = Math.PI / 2;
+        discOuter.position.z = -0.18;
+        wheel.add(discOuter);
+        // Disc face (front)
+        const discFace = new THREE.Mesh(
+            new THREE.RingGeometry(0.55, 1.05, 96),
+            discMat
+        );
+        discFace.position.z = -0.12;
+        wheel.add(discFace);
+        // Disc face (back)
+        const discFaceBack = new THREE.Mesh(
+            new THREE.RingGeometry(0.55, 1.05, 96),
+            discMat
+        );
+        discFaceBack.position.z = -0.24;
+        discFaceBack.rotation.y = Math.PI;
+        wheel.add(discFaceBack);
+        // Drilled holes in disc (small dark cylinders punched through visually)
+        const holeMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+        const holeRings = [
+            { r: 0.78, count: 16 },
+            { r: 0.92, count: 22 },
+        ];
+        holeRings.forEach(ring => {
+            for (let i = 0; i < ring.count; i++) {
+                const a = (i / ring.count) * Math.PI * 2;
+                const hole = new THREE.Mesh(new THREE.CircleGeometry(0.045, 16), holeMat);
+                hole.position.set(Math.cos(a) * ring.r, Math.sin(a) * ring.r, -0.115);
+                wheel.add(hole);
+            }
+        });
+
+        // ===== RIM (5 Y-spokes — sport alloy style) =====
         const chromeMat = new THREE.MeshStandardMaterial({
-            color: 0xdadada, metalness: 1, roughness: 0.18, envMapIntensity: 1.5
+            color: 0xe8e8e8, metalness: 1.0, roughness: 0.18,
+            envMap, envMapIntensity: 1.4
         });
-        const rimRing = new THREE.Mesh(rimRingGeo, chromeMat);
-        wheel.add(rimRing);
+        const rimMat = new THREE.MeshStandardMaterial({
+            color: 0xb8b8b8, metalness: 0.95, roughness: 0.28,
+            envMap, envMapIntensity: 1.2
+        });
+        const rimDarkMat = new THREE.MeshStandardMaterial({
+            color: 0x2a2a2a, metalness: 0.8, roughness: 0.45,
+            envMap, envMapIntensity: 0.6
+        });
 
-        // Rim disc (slightly recessed)
-        const rimDiscGeo = new THREE.CylinderGeometry(1.18, 1.18, 0.08, 64);
-        const rimDiscMat = new THREE.MeshStandardMaterial({
-            color: 0x111111, metalness: 0.9, roughness: 0.3
-        });
-        const rimDisc = new THREE.Mesh(rimDiscGeo, rimDiscMat);
-        rimDisc.rotation.x = Math.PI / 2;
-        rimDisc.position.z = -0.05;
-        wheel.add(rimDisc);
+        // Outer rim lip (the chrome edge)
+        const rimLipGeo = new THREE.TorusGeometry(1.05, 0.06, 24, 96);
+        const rimLip = new THREE.Mesh(rimLipGeo, chromeMat);
+        wheel.add(rimLip);
 
-        // 5 spokes (Y-shaped style)
-        const spokeMat = new THREE.MeshStandardMaterial({
-            color: 0xc8c8c8, metalness: 0.95, roughness: 0.22
-        });
-        for (let i = 0; i < 5; i++) {
-            const angle = (i / 5) * Math.PI * 2;
-            // Main spoke (tapered box)
-            const spokeGeo = new THREE.BoxGeometry(0.18, 1.0, 0.12);
-            const spoke = new THREE.Mesh(spokeGeo, spokeMat);
-            spoke.position.set(Math.cos(angle - Math.PI/2) * 0.55, Math.sin(angle - Math.PI/2) * 0.55, 0.04);
-            spoke.rotation.z = angle;
-            wheel.add(spoke);
+        // Inner barrel (dark, behind the rim lip — gives depth)
+        const rimBarrelGeo = new THREE.CylinderGeometry(1.0, 1.0, 0.5, 64, 1, true);
+        const rimBarrel = new THREE.Mesh(rimBarrelGeo,
+            new THREE.MeshStandardMaterial({ color: 0x101010, metalness: 0.7, roughness: 0.5, side: THREE.DoubleSide })
+        );
+        rimBarrel.rotation.x = Math.PI / 2;
+        wheel.add(rimBarrel);
+
+        // 5 Y-spokes — each spoke is built from 3 boxes arranged in a Y shape
+        const spokeCount = 5;
+        for (let i = 0; i < spokeCount; i++) {
+            const angle = (i / spokeCount) * Math.PI * 2;
+            const spokeGroup = new THREE.Group();
+
+            // Main central trunk (from hub outward)
+            const trunkLen = 0.55;
+            const trunk = new THREE.Mesh(
+                new THREE.BoxGeometry(0.2, trunkLen, 0.18),
+                rimMat
+            );
+            trunk.position.y = trunkLen / 2 + 0.05;
+            spokeGroup.add(trunk);
+
+            // Y-branch left
+            const branchLen = 0.55;
+            const branchL = new THREE.Mesh(
+                new THREE.BoxGeometry(0.12, branchLen, 0.16),
+                rimMat
+            );
+            branchL.position.set(-0.18, trunkLen + branchLen/2 + 0.05, 0);
+            branchL.rotation.z = 0.42; // splay outward
+            spokeGroup.add(branchL);
+
+            // Y-branch right
+            const branchR = new THREE.Mesh(
+                new THREE.BoxGeometry(0.12, branchLen, 0.16),
+                rimMat
+            );
+            branchR.position.set(0.18, trunkLen + branchLen/2 + 0.05, 0);
+            branchR.rotation.z = -0.42;
+            spokeGroup.add(branchR);
+
+            // Bevel highlight on top of trunk (chrome strip running down the middle)
+            const bevel = new THREE.Mesh(
+                new THREE.BoxGeometry(0.05, trunkLen * 0.95, 0.02),
+                chromeMat
+            );
+            bevel.position.set(0, trunkLen / 2 + 0.05, 0.10);
+            spokeGroup.add(bevel);
+
+            spokeGroup.rotation.z = angle;
+            spokeGroup.position.z = 0.05;
+            wheel.add(spokeGroup);
         }
 
-        // Center hub
-        const hubGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.18, 32);
-        const hub = new THREE.Mesh(hubGeo, chromeMat);
-        hub.rotation.x = Math.PI / 2;
-        hub.position.z = 0.1;
-        wheel.add(hub);
+        // ===== CENTER HUB =====
+        // Hub base (dark recess)
+        const hubBase = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.35, 0.35, 0.18, 32),
+            rimDarkMat
+        );
+        hubBase.rotation.x = Math.PI / 2;
+        hubBase.position.z = 0.03;
+        wheel.add(hubBase);
 
-        // Center cap (with a glowing TURBI dot)
-        const capGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.04, 32);
-        const capMat = new THREE.MeshStandardMaterial({
-            color: 0xff004d, emissive: 0xff004d, emissiveIntensity: 1.3, metalness: 0.5, roughness: 0.2
+        // Hub center cap (chrome)
+        const hubCap = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.28, 0.32, 0.12, 32),
+            chromeMat
+        );
+        hubCap.rotation.x = Math.PI / 2;
+        hubCap.position.z = 0.16;
+        wheel.add(hubCap);
+
+        // Center logo dot (TURBI red, glowing)
+        const logoDotMat = new THREE.MeshStandardMaterial({
+            color: 0xff004d, emissive: 0xff004d, emissiveIntensity: 1.4,
+            metalness: 0.4, roughness: 0.25
         });
-        const cap = new THREE.Mesh(capGeo, capMat);
-        cap.rotation.x = Math.PI / 2;
-        cap.position.z = 0.18;
-        wheel.add(cap);
+        const logoDot = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.16, 0.16, 0.04, 32),
+            logoDotMat
+        );
+        logoDot.rotation.x = Math.PI / 2;
+        logoDot.position.z = 0.23;
+        wheel.add(logoDot);
 
-        // Brake disc (behind, glowing)
-        const discGeo = new THREE.RingGeometry(0.95, 1.15, 64);
-        const discMat = new THREE.MeshBasicMaterial({
-            color: 0xff5e00, transparent: true, opacity: 0.85, side: THREE.DoubleSide
+        // ===== 5 LUG NUTS (between spokes / on hub) =====
+        const lugMat = new THREE.MeshStandardMaterial({
+            color: 0x202020, metalness: 0.95, roughness: 0.3, envMap, envMapIntensity: 0.9
         });
-        const disc = new THREE.Mesh(discGeo, discMat);
-        disc.position.z = -0.18;
-        wheel.add(disc);
+        const lugCount = 5;
+        const lugRadius = 0.5;
+        for (let i = 0; i < lugCount; i++) {
+            const a = (i / lugCount) * Math.PI * 2 + Math.PI / lugCount; // offset between spokes
+            const lug = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.06, 0.07, 0.08, 6),
+                lugMat
+            );
+            lug.position.set(Math.cos(a) * lugRadius, Math.sin(a) * lugRadius, 0.18);
+            lug.rotation.x = Math.PI / 2;
+            wheel.add(lug);
+        }
 
-        // Brake caliper (small box on the rim, top-right area)
-        const caliperGeo = new THREE.BoxGeometry(0.45, 0.25, 0.35);
-        const caliperMat = new THREE.MeshStandardMaterial({
-            color: 0xff004d, metalness: 0.4, roughness: 0.3, emissive: 0x440011, emissiveIntensity: 0.8
+        // ===== BRAKE CALIPER (sport, 4-piston style, on top-right) =====
+        const caliperGroup = new THREE.Group();
+        const caliperBodyMat = new THREE.MeshStandardMaterial({
+            color: 0xff004d, metalness: 0.55, roughness: 0.35,
+            emissive: 0x330011, emissiveIntensity: 0.6,
+            envMap, envMapIntensity: 0.8
         });
-        const caliper = new THREE.Mesh(caliperGeo, caliperMat);
-        caliper.position.set(0.85, 0.85, -0.05);
-        wheel.add(caliper);
+        // Main body - curved would be ideal, use a thicker box
+        const caliperBody = new THREE.Mesh(
+            new THREE.BoxGeometry(0.55, 0.32, 0.42),
+            caliperBodyMat
+        );
+        caliperGroup.add(caliperBody);
+        // 2 visible piston nubs
+        const pistonMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, metalness: 0.9, roughness: 0.3 });
+        for (let p = -1; p <= 1; p += 2) {
+            const piston = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.06, 0.06, 0.12, 16),
+                pistonMat
+            );
+            piston.rotation.x = Math.PI / 2;
+            piston.position.set(p * 0.15, 0, 0.2);
+            caliperGroup.add(piston);
+        }
+        // Brand stripe on caliper (white-ish accent)
+        const stripe = new THREE.Mesh(
+            new THREE.BoxGeometry(0.4, 0.06, 0.01),
+            new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.3, roughness: 0.4 })
+        );
+        stripe.position.set(0, 0.08, 0.215);
+        caliperGroup.add(stripe);
+        // Position caliper at "10 o'clock" position over the disc
+        caliperGroup.position.set(-0.78, 0.78, -0.14);
+        wheel.add(caliperGroup);
 
-        // Initial tilt
-        wheel.rotation.x = 0.18;
-        wheel.rotation.y = -0.25;
-        scene.add(wheel);
+        // Initial pose
+        wheel.rotation.x = 0.16;
+        wheel.rotation.y = -0.22;
 
-        // Mouse parallax
+        // ---------- INTERACTION ----------
         let mx = 0, my = 0;
         canvas.addEventListener('mousemove', (e) => {
             const r = canvas.getBoundingClientRect();
@@ -1108,7 +1331,7 @@
         });
         canvas.addEventListener('mouseleave', () => { mx = 0; my = 0; });
 
-        // Resize
+        // ---------- RESIZE ----------
         const onResize = () => {
             width = wrap.clientWidth;
             height = wrap.clientHeight;
@@ -1118,29 +1341,29 @@
         };
         window.addEventListener('resize', onResize);
 
-        // Animate
+        // ---------- ANIMATE ----------
         const clock = new THREE.Clock();
         function animate() {
             const t = clock.getElapsedTime();
-            // Continuous spin (only the wheel tread/rim — keep caliper world-static feel by counter-rotating it)
-            wheel.rotation.z -= 0.012;
 
-            // Counter-rotate the caliper so it appears stationary (like real life — caliper doesn't spin)
-            caliper.rotation.z = -wheel.rotation.z;
-            // Same for brake disc backdrop visual stability
-            // (disc spins with wheel which is realistic)
+            // Continuous spin of everything wheel-side
+            wheel.rotation.z -= 0.014;
 
-            // Subtle hover/parallax
-            wheel.rotation.x = 0.18 + my;
-            const targetY = -0.25 + mx;
+            // Counter-rotate the caliper so it stays "fixed" on the suspension (real life)
+            caliperGroup.rotation.z = -wheel.rotation.z;
+            // Same for the logo cap (logo doesn't spin with the wheel)
+            logoDot.rotation.z = -wheel.rotation.z;
+
+            // Parallax tilt
+            wheel.rotation.x = 0.16 + my;
+            const targetY = -0.22 + mx;
             wheel.rotation.y += (targetY - wheel.rotation.y) * 0.05;
 
             // Float
-            wheel.position.y = Math.sin(t * 1.2) * 0.06;
+            wheel.position.y = Math.sin(t * 1.2) * 0.05;
 
-            // Pulse the cap
-            const pulse = 1 + Math.sin(t * 3) * 0.4;
-            capMat.emissiveIntensity = pulse;
+            // Pulse the logo dot
+            logoDotMat.emissiveIntensity = 1.1 + Math.sin(t * 2.5) * 0.4;
 
             renderer.render(scene, camera);
             requestAnimationFrame(animate);
