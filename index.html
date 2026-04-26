@@ -286,7 +286,7 @@
                 <button class="hidden md:inline-flex text-sm font-semibold text-white/80 hover:text-white transition px-4 py-2">
                     Iniciar sesión
                 </button>
-                <button class="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold">
+                <button data-shop-cta class="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold">
                     Soy una tienda
                     <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
                 </button>
@@ -335,7 +335,7 @@
                     <i data-lucide="smartphone" class="w-5 h-5"></i>
                     Unirme a la lista de espera
                 </button>
-                <button class="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-white/90">
+                <button data-shop-cta class="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-white/90">
                     <i data-lucide="store" class="w-5 h-5"></i>
                     Registrar mi tienda
                 </button>
@@ -701,7 +701,7 @@
                     <li class="flex items-center gap-3 text-white/40 line-through"><i data-lucide="x" class="w-4 h-4"></i> Sello verificado</li>
                     <li class="flex items-center gap-3 text-white/40 line-through"><i data-lucide="x" class="w-4 h-4"></i> Posicionamiento destacado</li>
                 </ul>
-                <button class="btn-ghost w-full py-3 rounded-full font-bold">Comenzar gratis</button>
+                <button data-shop-cta class="btn-ghost w-full py-3 rounded-full font-bold">Comenzar gratis</button>
             </div>
 
             <!-- PRO -->
@@ -727,7 +727,7 @@
                         <li class="flex items-center gap-3 text-white"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Métricas avanzadas de leads</li>
                         <li class="flex items-center gap-3 text-white"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Soporte prioritario</li>
                     </ul>
-                    <button class="btn-primary w-full py-3 rounded-full font-bold text-white">Obtener plan PRO</button>
+                    <button data-shop-cta class="btn-primary w-full py-3 rounded-full font-bold text-white">Obtener plan PRO</button>
                 </div>
             </div>
         </div>
@@ -818,16 +818,70 @@
                 <div class="chip mb-6 mx-auto"><i data-lucide="rocket" class="w-3.5 h-3.5"></i> Próximamente en App Store y Google Play</div>
                 <h2 class="display text-5xl md:text-7xl mb-4 leading-none">SÉ DE LOS <span class="grad-text">PRIMEROS</span></h2>
                 <p class="text-white/65 text-lg max-w-xl mx-auto mb-8">Déjanos tu correo y te avisamos el día del lanzamiento. Bonus si te unes desde Caracas.</p>
-                <form class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto" onsubmit="event.preventDefault(); this.querySelector('button').textContent='✓ Listo, te avisamos';">
-                    <input type="email" required placeholder="tu@correo.com" class="flex-1 px-6 py-4 rounded-full bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/30 text-white">
+                <form id="waitlist-form" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+                    <input type="hidden" name="_subject" value="🔥 Nuevo registro waitlist TURBI">
+                    <input type="hidden" name="tipo" value="waitlist-conductor">
+                    <input type="email" name="email" required placeholder="tu@correo.com" class="flex-1 px-6 py-4 rounded-full bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/30 text-white">
                     <button type="submit" class="btn-primary px-7 py-4 rounded-full font-bold text-white whitespace-nowrap">
                         Avísame
                     </button>
                 </form>
+                <p id="waitlist-msg" class="text-sm mt-3 hidden"></p>
             </div>
         </div>
     </div>
 </section>
+
+<!-- ===== MODAL: REGISTRO DE TIENDA ===== -->
+<div id="shop-modal" class="fixed inset-0 z-[80] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md" role="dialog" aria-modal="true">
+    <div class="relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl border border-white/10 bg-ink-900 p-8 shadow-2xl">
+        <button id="close-shop" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center" aria-label="Cerrar">
+            <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <div class="chip mb-4"><i data-lucide="store" class="w-3.5 h-3.5"></i> Registro de tienda</div>
+        <h3 class="display text-4xl mb-2">ÚNETE COMO <span class="grad-text">TIENDA</span></h3>
+        <p class="text-white/60 text-sm mb-6">Te contactamos en menos de 24h para verificar tu negocio.</p>
+
+        <form id="shop-form" class="space-y-4">
+            <input type="hidden" name="_subject" value="🏪 Nueva tienda TURBI - Solicitud de registro">
+            <input type="hidden" name="tipo" value="registro-tienda">
+
+            <div>
+                <label class="block text-xs uppercase tracking-widest text-white/50 mb-1.5">Nombre del negocio</label>
+                <input type="text" name="nombre_negocio" required placeholder="Repuestos La Pista C.A." class="w-full px-4 py-3 rounded-xl bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/25 text-white text-sm">
+            </div>
+
+            <div>
+                <label class="block text-xs uppercase tracking-widest text-white/50 mb-1.5">Representante legal</label>
+                <input type="text" name="representante_legal" required placeholder="Nombre y apellido" class="w-full px-4 py-3 rounded-xl bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/25 text-white text-sm">
+            </div>
+
+            <div>
+                <label class="block text-xs uppercase tracking-widest text-white/50 mb-1.5">RIF</label>
+                <input type="text" name="rif" required placeholder="J-12345678-9" pattern="[JGVEPjgvep]-?\d{8,9}-?\d?" class="w-full px-4 py-3 rounded-xl bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/25 text-white text-sm uppercase">
+            </div>
+
+            <div>
+                <label class="block text-xs uppercase tracking-widest text-white/50 mb-1.5">Correo</label>
+                <input type="email" name="email" required placeholder="contacto@tutienda.com" class="w-full px-4 py-3 rounded-xl bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/25 text-white text-sm">
+            </div>
+
+            <div>
+                <label class="block text-xs uppercase tracking-widest text-white/50 mb-1.5">Teléfono / WhatsApp</label>
+                <input type="tel" name="telefono" required placeholder="+58 414-1234567" class="w-full px-4 py-3 rounded-xl bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/25 text-white text-sm">
+            </div>
+
+            <button type="submit" id="shop-submit" class="btn-primary w-full py-4 rounded-full font-bold text-white mt-2 inline-flex items-center justify-center gap-2">
+                <span>Enviar solicitud</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+
+            <p id="shop-msg" class="text-sm text-center hidden"></p>
+            <p class="text-xs text-white/35 text-center pt-2">Al enviar, aceptas que TURBI te contacte para verificar tu negocio.</p>
+        </form>
+    </div>
+</div>
 
 <!-- ===== FOOTER ===== -->
 <footer class="bg-ink-950 border-t border-white/5 pt-16 pb-8">
@@ -906,6 +960,80 @@
     document.getElementById('open-menu').addEventListener('click', () => menu.classList.add('open'));
     document.getElementById('close-menu').addEventListener('click', () => menu.classList.remove('open'));
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+    // ============ FORMSPREE INTEGRATION ============
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xyklvrjv';
+
+    // Generic AJAX submit helper for Formspree
+    async function submitToFormspree(form, msgEl, btnEl, successText) {
+        const originalBtnHTML = btnEl.innerHTML;
+        btnEl.disabled = true;
+        btnEl.innerHTML = 'Enviando...';
+        msgEl.classList.add('hidden');
+
+        try {
+            const data = new FormData(form);
+            const res = await fetch(FORMSPREE_ENDPOINT, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+            if (res.ok) {
+                form.reset();
+                msgEl.textContent = successText;
+                msgEl.className = 'text-sm mt-3 text-emerald-400 text-center';
+                msgEl.classList.remove('hidden');
+                btnEl.innerHTML = '✓ ¡Listo!';
+                setTimeout(() => { btnEl.innerHTML = originalBtnHTML; btnEl.disabled = false; }, 4000);
+            } else {
+                throw new Error('Server error');
+            }
+        } catch (err) {
+            msgEl.textContent = 'Hubo un error. Intenta de nuevo o escríbenos por WhatsApp.';
+            msgEl.className = 'text-sm mt-3 text-red-400 text-center';
+            msgEl.classList.remove('hidden');
+            btnEl.innerHTML = originalBtnHTML;
+            btnEl.disabled = false;
+        }
+    }
+
+    // Waitlist (hero email)
+    const waitForm = document.getElementById('waitlist-form');
+    if (waitForm) {
+        waitForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitToFormspree(
+                waitForm,
+                document.getElementById('waitlist-msg'),
+                waitForm.querySelector('button[type="submit"]'),
+                '¡Listo! Te avisaremos el día del lanzamiento. 🚀'
+            );
+        });
+    }
+
+    // Shop modal open/close
+    const shopModal = document.getElementById('shop-modal');
+    const openShop = () => { shopModal.classList.remove('hidden'); shopModal.classList.add('flex'); document.body.style.overflow = 'hidden'; };
+    const closeShop = () => { shopModal.classList.add('hidden'); shopModal.classList.remove('flex'); document.body.style.overflow = ''; };
+    document.querySelectorAll('[data-shop-cta]').forEach(b => b.addEventListener('click', openShop));
+    document.getElementById('close-shop').addEventListener('click', closeShop);
+    shopModal.addEventListener('click', (e) => { if (e.target === shopModal) closeShop(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !shopModal.classList.contains('hidden')) closeShop(); });
+
+    // Shop registration form
+    const shopForm = document.getElementById('shop-form');
+    if (shopForm) {
+        shopForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            submitToFormspree(
+                shopForm,
+                document.getElementById('shop-msg'),
+                document.getElementById('shop-submit'),
+                '¡Recibido! Te contactaremos en menos de 24h. 🏁'
+            );
+        });
+    }
+    // ============ END FORMSPREE ============
 
     // Scroll reveal
     const io = new IntersectionObserver((entries) => {
