@@ -283,9 +283,9 @@
             </div>
             <!-- CTAs -->
             <div class="flex items-center gap-3">
-                <button class="hidden md:inline-flex text-sm font-semibold text-white/80 hover:text-white transition px-4 py-2">
+                <a data-stores-panel href="#" target="_self" class="hidden md:inline-flex text-sm font-semibold text-white/80 hover:text-white transition px-4 py-2">
                     Iniciar sesión
-                </button>
+                </a>
                 <button data-shop-cta class="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold">
                     Soy una tienda
                     <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
@@ -949,6 +949,16 @@
 
 <!-- ===== SCRIPTS ===== -->
 <script>
+    // ============ TURBI CONFIG ============
+    // Cuando vayas a producción, cambia esta URL una sola vez aqui.
+    // Ej: 'https://tiendas.turbi.com.ve'
+    const STORES_PANEL_URL = 'https://tiendas.turbi.com.ve/';
+
+    // Inyecta el href en cualquier <a data-stores-panel> de la landing.
+    document.querySelectorAll('[data-stores-panel]').forEach((el) => {
+      el.href = STORES_PANEL_URL;
+    });
+
     // Lucide
     lucide.createIcons();
 
