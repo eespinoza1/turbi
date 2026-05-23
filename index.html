@@ -286,6 +286,10 @@
             </div>
             <!-- CTAs -->
             <div class="flex items-center gap-3">
+                <a data-users-app href="#" target="_self" class="hidden lg:inline-flex items-center gap-1.5 text-sm font-medium text-white/60 hover:text-white transition whitespace-nowrap">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                    Buscar repuestos
+                </a>
                 <a data-stores-panel href="#" target="_self" class="btn-ghost inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-white/90 whitespace-nowrap">
                     <i data-lucide="log-in" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
                     Iniciar sesión tienda
@@ -312,6 +316,10 @@
         <a href="#beneficios" class="border-b border-white/10 pb-4">BENEFICIOS</a>
         <a href="#como-funciona" class="border-b border-white/10 pb-4">CÓMO FUNCIONA</a>
         <a href="#precios" class="border-b border-white/10 pb-4">PRECIOS</a>
+        <a data-users-app href="#" target="_self" class="mt-6 pt-6 border-t border-white/10 inline-flex items-center gap-3 text-brand-red">
+            <i data-lucide="search" class="w-6 h-6"></i>
+            BUSCAR REPUESTOS
+        </a>
     </div>
 </div>
 
@@ -335,10 +343,10 @@
                 Encuentra repuestos en segundos. Vende sin fricción.
             </p>
             <div class="flex flex-col sm:flex-row gap-3 mt-8">
-                <button class="btn-primary inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-white">
-                    <i data-lucide="smartphone" class="w-5 h-5"></i>
-                    Unirme a la lista de espera
-                </button>
+                <a data-users-app href="#" target="_self" class="btn-primary inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-white">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                    Buscar mi repuesto
+                </a>
                 <button data-shop-cta class="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-white/90">
                     <i data-lucide="store" class="w-5 h-5"></i>
                     Registrar mi tienda
@@ -594,6 +602,10 @@
                             </div>
                         </li>
                     </ul>
+                    <a data-users-app href="#" target="_self" class="inline-flex items-center gap-2 mt-8 text-brand-red font-bold hover:gap-3 transition-all">
+                        Entrar a la app
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
                 </div>
             </div>
 
@@ -638,6 +650,10 @@
                             </div>
                         </li>
                     </ul>
+                    <a data-shop-cta href="#" class="inline-flex items-center gap-2 mt-8 text-brand-orange font-bold hover:gap-3 transition-all cursor-pointer">
+                        Registrar mi tienda
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -821,7 +837,7 @@
             <div class="relative">
                 <div class="chip mb-6 mx-auto"><i data-lucide="rocket" class="w-3.5 h-3.5"></i> Próximamente en App Store y Google Play</div>
                 <h2 class="display text-5xl md:text-7xl mb-4 leading-none">SÉ DE LOS <span class="grad-text">PRIMEROS</span></h2>
-                <p class="text-white/65 text-lg max-w-xl mx-auto mb-8">Déjanos tu correo y te avisamos el día del lanzamiento. Bonus si te unes desde Caracas.</p>
+                <p class="text-white/65 text-lg max-w-xl mx-auto mb-8">Déjanos tu correo y recibe novedades y ofertas de TURBI. Bonus si te unes desde Caracas.</p>
                 <form id="waitlist-form" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
                     <input type="hidden" name="_subject" value="🔥 Nuevo registro waitlist TURBI">
                     <input type="hidden" name="tipo" value="waitlist-conductor">
@@ -917,7 +933,8 @@
                     <li><a href="#categorias" class="hover:text-brand-red transition">Categorías</a></li>
                     <li><a href="#como-funciona" class="hover:text-brand-red transition">Cómo funciona</a></li>
                     <li><a href="#precios" class="hover:text-brand-red transition">Precios</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition">Tiendas</a></li>
+                    <li><a data-users-app href="#" target="_self" class="hover:text-brand-red transition">Buscar repuestos</a></li>
+                    <li><a data-stores-panel href="#" target="_self" class="hover:text-brand-red transition">Tiendas</a></li>
                 </ul>
             </div>
             <div>
@@ -957,10 +974,14 @@
     // Cuando vayas a producción, cambia esta URL una sola vez aqui.
     // Ej: 'https://tiendas.turbi.com.ve'
     const STORES_PANEL_URL = 'https://tiendas.turbi.com.ve/';
+    const USERS_APP_URL = 'https://usuarios.turbi.com.ve/';
 
     // Inyecta el href en cualquier <a data-stores-panel> de la landing.
     document.querySelectorAll('[data-stores-panel]').forEach((el) => {
       el.href = STORES_PANEL_URL;
+    });
+    document.querySelectorAll('[data-users-app]').forEach((el) => {
+      el.href = USERS_APP_URL;
     });
 
     // Lucide
@@ -1020,7 +1041,7 @@
                 waitForm,
                 document.getElementById('waitlist-msg'),
                 waitForm.querySelector('button[type="submit"]'),
-                '¡Listo! Te avisaremos el día del lanzamiento. 🚀'
+                '¡Listo! Te enviaremos novedades y ofertas de TURBI. 🚀'
             );
         });
     }
@@ -1029,7 +1050,7 @@
     const shopModal = document.getElementById('shop-modal');
     const openShop = () => { shopModal.classList.remove('hidden'); shopModal.classList.add('flex'); document.body.style.overflow = 'hidden'; };
     const closeShop = () => { shopModal.classList.add('hidden'); shopModal.classList.remove('flex'); document.body.style.overflow = ''; };
-    document.querySelectorAll('[data-shop-cta]').forEach(b => b.addEventListener('click', openShop));
+    document.querySelectorAll('[data-shop-cta]').forEach(b => b.addEventListener('click', (e) => { e.preventDefault(); openShop(); }));
     document.getElementById('close-shop').addEventListener('click', closeShop);
     shopModal.addEventListener('click', (e) => { if (e.target === shopModal) closeShop(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !shopModal.classList.contains('hidden')) closeShop(); });
