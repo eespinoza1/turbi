@@ -1,1118 +1,1565 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TURBI · La primera plataforma de Venezuela que conecta conductores con tiendas de autopartes verificadas. Más rápido. Más seguro. Más TURBI.">
-    <title>TURBI — Acelera la búsqueda. Encuentra tu repuesto.</title>
+
+    <!-- ============ SEO ============ -->
+    <title>TURBI — Repuestos y autopartes en Venezuela | App y web para conductores y tiendas</title>
+    <meta name="description" content="TURBI conecta conductores con tiendas de autopartes verificadas en Venezuela. Busca repuestos por marca, modelo y año desde la web o la app (iOS y Android). Tiendas: publica tu inventario y recibe clientes.">
+    <link rel="canonical" href="https://turbi.com.ve/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#050505">
+    <meta name="author" content="TURBI">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="TURBI">
+    <meta property="og:locale" content="es_VE">
+    <meta property="og:url" content="https://turbi.com.ve/">
+    <meta property="og:title" content="TURBI — Encuentra el repuesto que tu auto necesita, ahora">
+    <meta property="og:description" content="El ecosistema que conecta conductores con tiendas de autopartes verificadas en Venezuela. Web + app móvil para iOS y Android.">
+    <meta property="og:image" content="https://turbi.com.ve/logo.jpeg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="TURBI — Repuestos y autopartes en Venezuela">
+    <meta name="twitter:description" content="Busca repuestos en tiendas verificadas. Web + app para conductores y tiendas.">
+    <meta name="twitter:image" content="https://turbi.com.ve/logo.jpeg">
 
     <link rel="icon" type="image/jpeg" href="logo.jpeg">
     <link rel="apple-touch-icon" href="logo.jpeg">
 
-    <!-- Fonts -->
+    <!-- Fonts: solo 2 familias, pesos mínimos, swap para no bloquear render -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        display: ['"Bebas Neue"', 'sans-serif'],
-                        accent: ['"Russo One"', 'sans-serif'],
-                        sans: ['Manrope', 'sans-serif'],
-                    },
-                    colors: {
-                        ink: { 950: '#050505', 900: '#0a0a0a', 800: '#111111', 700: '#181818', 600: '#222222' },
-                        steel: '#2a2a2a',
-                        brand: { red: '#FF004D', orange: '#FF5E00', amber: '#FFB800' },
-                    }
-                }
+    <!-- ============ DATOS ESTRUCTURADOS (JSON-LD) ============ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://turbi.com.ve/#org",
+          "name": "TURBI",
+          "url": "https://turbi.com.ve/",
+          "logo": "https://turbi.com.ve/logo.jpeg",
+          "description": "Plataforma venezolana que conecta conductores con tiendas de autopartes verificadas.",
+          "areaServed": { "@type": "Country", "name": "Venezuela" },
+          "sameAs": []
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://turbi.com.ve/#website",
+          "url": "https://turbi.com.ve/",
+          "name": "TURBI",
+          "inLanguage": "es-VE",
+          "publisher": { "@id": "https://turbi.com.ve/#org" }
+        },
+        {
+          "@type": "MobileApplication",
+          "name": "TURBI App",
+          "operatingSystem": "iOS, Android",
+          "applicationCategory": "ShoppingApplication",
+          "description": "App para buscar repuestos en tiendas verificadas y para que las tiendas gestionen su inventario y reciban clientes.",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "publisher": { "@id": "https://turbi.com.ve/#org" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "¿Qué es TURBI?",
+              "acceptedAnswer": { "@type": "Answer", "text": "TURBI es un ecosistema venezolano (web + app móvil para iOS y Android) que conecta conductores con tiendas de autopartes verificadas. Los conductores buscan repuestos por marca, modelo y año; las tiendas publican su inventario y reciben clientes." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cuánto cuesta usar TURBI como conductor?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Para los conductores TURBI es totalmente gratis: buscar repuestos, comparar tiendas y contactarlas por chat o WhatsApp no tiene ningún costo." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿Cómo registro mi tienda de repuestos en TURBI?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Completa el formulario de registro con el nombre del negocio, RIF y datos de contacto. Nuestro equipo te contacta en menos de 24 horas para verificar tu negocio y activar tu panel de tienda." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿TURBI tiene app móvil?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Sí. TURBI tendrá app para iOS y Android, tanto para conductores como para tiendas. Mientras tanto, ya puedes usar la versión web para buscar repuestos y el portal web para gestionar tu tienda." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿En qué ciudades está disponible TURBI?",
+              "acceptedAnswer": { "@type": "Answer", "text": "El lanzamiento oficial es en Caracas, con expansión progresiva al resto de Venezuela. Únete a la lista de espera para enterarte cuando llegue a tu ciudad." }
+            },
+            {
+              "@type": "Question",
+              "name": "¿TURBI vende los repuestos directamente?",
+              "acceptedAnswer": { "@type": "Answer", "text": "No. TURBI conecta conductores con tiendas de autopartes verificadas con RIF validado. La compra se acuerda directamente con la tienda, por chat interno o WhatsApp." }
             }
+          ]
         }
+      ]
+    }
     </script>
 
-    <!-- Lucide icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- Three.js for 3D wheel -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
     <style>
+        /* ============ RESET + TOKENS ============ */
+        *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
         :root{
             --red:#FF004D;
             --orange:#FF5E00;
             --amber:#FFB800;
+            --green:#22c55e;
             --ink-950:#050505;
             --ink-900:#0a0a0a;
             --ink-800:#111111;
+            --ink-700:#181818;
+            --line:rgba(255,255,255,.07);
+            --txt:#ffffff;
+            --txt-2:rgba(255,255,255,.65);
+            --txt-3:rgba(255,255,255,.45);
+            --grad:linear-gradient(95deg,#FF004D 0%,#FF5E00 60%,#FFB800 100%);
+            --radius:1.5rem;
+            --font-d:'Bebas Neue',Impact,sans-serif;
+            --font-s:'Manrope',system-ui,-apple-system,sans-serif;
         }
-        html, body { background:#050505; color:#fff; font-family:'Manrope', sans-serif; }
-        ::selection { background:#FF004D; color:#fff; }
+        html{ scroll-behavior:smooth; }
+        body{
+            background:var(--ink-950); color:var(--txt);
+            font-family:var(--font-s); line-height:1.6;
+            -webkit-font-smoothing:antialiased; overflow-x:hidden;
+        }
+        ::selection{ background:var(--red); color:#fff; }
+        img{ max-width:100%; display:block; }
+        a{ color:inherit; text-decoration:none; }
+        button{ font:inherit; color:inherit; background:none; border:none; cursor:pointer; }
+        ul{ list-style:none; }
+        ::-webkit-scrollbar{ width:10px; }
+        ::-webkit-scrollbar-track{ background:var(--ink-950); }
+        ::-webkit-scrollbar-thumb{ background:linear-gradient(180deg,var(--red),var(--orange)); border-radius:99px; }
 
-        /* ------ Grid background ------ */
+        .icon{ width:1.25em; height:1.25em; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; vertical-align:-.22em; }
+
+        /* ============ LAYOUT ============ */
+        .wrap{ max-width:80rem; margin-inline:auto; padding-inline:1rem; }
+        @media(min-width:640px){ .wrap{ padding-inline:1.5rem; } }
+        @media(min-width:1024px){ .wrap{ padding-inline:2rem; } }
+        section{ padding-block:5.5rem; position:relative; }
+
+        /* ============ TIPOGRAFÍA ============ */
+        .display{ font-family:var(--font-d); font-weight:400; letter-spacing:.01em; line-height:.9; }
+        .grad-text{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+        .section-title{ font-family:var(--font-d); font-weight:400; font-size:clamp(2.2rem,5vw,4.2rem); line-height:.95; }
+        .section-head{ text-align:center; margin-bottom:3.5rem; }
+        .section-head p{ color:var(--txt-2); margin-top:1rem; max-width:38rem; margin-inline:auto; }
+
+        .chip{
+            display:inline-flex; align-items:center; gap:.5rem;
+            padding:.4rem .9rem; border-radius:999px;
+            background:rgba(255,0,77,.08); border:1px solid rgba(255,0,77,.25);
+            color:#FF8AAD; font-weight:600; font-size:.72rem;
+            letter-spacing:.12em; text-transform:uppercase; margin-bottom:1rem;
+        }
+        .pulse-dot{
+            width:.5rem; height:.5rem; border-radius:999px; background:var(--red);
+            animation:pulse 1.6s infinite;
+        }
+        @keyframes pulse{
+            0%{ box-shadow:0 0 0 0 rgba(255,0,77,.7); }
+            70%{ box-shadow:0 0 0 10px rgba(255,0,77,0); }
+            100%{ box-shadow:0 0 0 0 rgba(255,0,77,0); }
+        }
+
+        /* ============ BOTONES ============ */
+        .btn{
+            display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+            padding:.9rem 1.8rem; border-radius:999px; font-weight:700; font-size:.95rem;
+            transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+            white-space:nowrap;
+        }
+        .btn-primary{
+            background:linear-gradient(95deg,var(--red),var(--orange)); color:#fff;
+            box-shadow:0 10px 40px -10px rgba(255,0,77,.6), inset 0 1px 0 rgba(255,255,255,.2);
+        }
+        .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 16px 50px -10px rgba(255,0,77,.8); }
+        .btn-ghost{
+            background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0));
+            border:1px solid rgba(255,255,255,.14); color:rgba(255,255,255,.9);
+        }
+        .btn-ghost:hover{ border-color:var(--red); box-shadow:0 0 0 4px rgba(255,0,77,.08); }
+        .btn-sm{ padding:.6rem 1.25rem; font-size:.85rem; }
+        .link-arrow{
+            display:inline-flex; align-items:center; gap:.5rem; font-weight:700;
+            transition:gap .2s ease;
+        }
+        .link-arrow:hover{ gap:.8rem; }
+
+        /* ============ CARDS ============ */
+        .card{
+            background:linear-gradient(180deg,#0d0d0d 0%,#060606 100%);
+            border:1px solid var(--line); border-radius:var(--radius);
+            position:relative; overflow:hidden;
+            transition:transform .35s ease, border-color .35s ease;
+        }
+        .card:hover{ transform:translateY(-4px); border-color:rgba(255,0,77,.35); }
+
+        /* ============ FONDOS ============ */
         .grid-bg{
+            position:absolute; inset:0; pointer-events:none;
             background-image:
-                linear-gradient(rgba(255,0,77,0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,0,77,0.06) 1px, transparent 1px);
-            background-size: 56px 56px;
-            mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+                linear-gradient(rgba(255,0,77,.06) 1px,transparent 1px),
+                linear-gradient(90deg,rgba(255,0,77,.06) 1px,transparent 1px);
+            background-size:56px 56px;
+            -webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
+            mask-image:radial-gradient(ellipse at center,black 30%,transparent 75%);
         }
-
-        /* Carbon-fiber texture (CSS only, no external dep) */
         .carbon{
             background-color:#0a0a0a;
             background-image:
-              radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0),
-              linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%),
-              linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%);
-            background-size: 4px 4px, 6px 6px, 6px 6px;
-            background-position: 0 0, 0 0, 3px 3px;
+                radial-gradient(circle at 1px 1px,rgba(255,255,255,.04) 1px,transparent 0);
+            background-size:4px 4px;
+        }
+        .blobs{ position:fixed; inset:0; z-index:-1; pointer-events:none; }
+        .blobs i{ position:absolute; border-radius:50%; filter:blur(120px); }
+        .blobs i:nth-child(1){ top:-10rem; left:-10rem; width:34rem; height:34rem; background:rgba(255,0,77,.16); }
+        .blobs i:nth-child(2){ top:34%; right:-10rem; width:34rem; height:34rem; background:rgba(255,94,0,.12); }
+        .blobs i:nth-child(3){ bottom:0; left:33%; width:26rem; height:26rem; background:rgba(255,184,0,.08); }
+        .race-tape{ height:8px; background:repeating-linear-gradient(45deg,var(--red),var(--red) 14px,var(--ink-900) 14px,var(--ink-900) 28px); }
+
+        /* ============ TOP BAR + NAV ============ */
+        .topbar{
+            background:var(--ink-950); border-bottom:1px solid var(--line);
+            font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--txt-2);
+        }
+        .topbar .wrap{ display:flex; align-items:center; justify-content:center; gap:.75rem; padding-block:.5rem; }
+
+        .nav{
+            position:sticky; top:0; z-index:50;
+            backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+            background:rgba(5,5,5,.72); border-bottom:1px solid var(--line);
+        }
+        .nav .wrap{ display:flex; align-items:center; justify-content:space-between; gap:1rem; height:5rem; }
+        .nav-logo img{ height:3.25rem; width:auto; border-radius:.6rem; }
+        .nav-links{ display:none; gap:2.2rem; font-size:.9rem; font-weight:600; color:var(--txt-2); }
+        .nav-links a:hover{ color:#fff; }
+        .nav-ctas{ display:flex; align-items:center; gap:.6rem; }
+        .nav-search{ display:none; align-items:center; gap:.4rem; font-size:.88rem; font-weight:600; color:var(--txt-2); }
+        .nav-search:hover{ color:#fff; }
+        .nav-shopcta{ display:none; }
+        .hamb{ display:inline-flex; padding:.5rem; border:1px solid rgba(255,255,255,.12); border-radius:.6rem; }
+        @media(min-width:768px){
+            .nav-links{ display:flex; }
+            .hamb{ display:none; }
+        }
+        @media(max-width:479px){
+            .nav .wrap{ height:4.25rem; gap:.5rem; }
+            .nav-logo img{ height:2.5rem; }
+            .nav-ctas{ gap:.4rem; }
+            .nav-ctas .btn-sm{ padding:.5rem .8rem; font-size:.72rem; }
+        }
+        @media(min-width:1024px){
+            .nav-search{ display:inline-flex; }
+            .nav-shopcta{ display:inline-flex; }
         }
 
-        /* Noise overlay */
-        .noise::after{
-            content:"";
-            position:absolute; inset:0; pointer-events:none;
-            background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-            opacity:.06; mix-blend-mode:overlay;
+        .mobile-menu{
+            position:fixed; inset:0; z-index:55; background:rgba(5,5,5,.96);
+            backdrop-filter:blur(16px); padding:6rem 2rem 2rem;
+            transform:translateX(100%); transition:transform .3s ease;
         }
+        .mobile-menu.open{ transform:translateX(0); }
+        .mobile-menu nav{ display:flex; flex-direction:column; gap:1.4rem; font-family:var(--font-d); font-size:1.6rem; }
+        .mobile-menu nav a{ border-bottom:1px solid var(--line); padding-bottom:1rem; }
+        .mobile-menu .close-btn{ position:absolute; top:1.5rem; right:1.5rem; padding:.5rem; border:1px solid rgba(255,255,255,.12); border-radius:.6rem; }
+        @media(min-width:768px){ .mobile-menu{ display:none; } }
 
-        /* Fancy headline */
-        .display{
-            font-family:'Bebas Neue', sans-serif;
-            letter-spacing:.01em;
-            line-height:.88;
+        /* ============ HERO ============ */
+        .hero{ overflow:hidden; }
+        .hero .wrap{
+            display:grid; gap:3rem; align-items:center;
+            padding-block:3rem 5rem; position:relative;
         }
-        .accent { font-family:'Russo One', sans-serif; }
+        @media(min-width:1024px){ .hero .wrap{ grid-template-columns:1.1fr 1fr; padding-block:4.5rem 7rem; } }
+        .hero h1{ font-size:clamp(3.6rem,11vw,8.5rem); }
+        .hero-sub{ color:var(--txt-2); font-size:clamp(1.05rem,1.6vw,1.25rem); margin-top:1.5rem; max-width:34rem; }
+        .hero-sub strong{ color:#fff; }
+        .hero-ctas{ display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2rem; }
+        .trust-row{ margin-top:2.4rem; display:flex; flex-wrap:wrap; gap:1.4rem; font-size:.88rem; color:var(--txt-3); }
+        .trust-row span{ display:inline-flex; align-items:center; gap:.5rem; }
+        .trust-row .icon{ color:var(--red); }
 
-        /* Gradient text */
-        .grad-text{
-            background:linear-gradient(95deg, #FF004D 0%, #FF5E00 60%, #FFB800 100%);
-            -webkit-background-clip:text; background-clip:text;
-            color:transparent;
+        /* Rueda SVG animada (reemplaza Three.js: 0 KB de JS) */
+        .wheel-wrap{ position:relative; max-width:30rem; margin-inline:auto; width:100%; }
+        .wheel-wrap::before{
+            content:""; position:absolute; inset:10%;
+            background:radial-gradient(circle at center,rgba(255,0,77,.5),rgba(255,94,0,.22) 35%,transparent 65%);
+            filter:blur(40px);
         }
-        .grad-fire{
-            background: radial-gradient(ellipse at center, rgba(255,94,0,.35), transparent 60%),
-                        radial-gradient(ellipse at 30% 70%, rgba(255,0,77,.35), transparent 55%);
+        .wheel-wrap svg{ position:relative; width:100%; height:auto; }
+        .spin{ transform-origin:130px 130px; animation:rot 9s linear infinite; }
+        @keyframes rot{ to{ transform:rotate(360deg); } }
+        .float-card{
+            position:absolute; display:none; align-items:center; gap:.7rem;
+            background:rgba(17,17,17,.85); border:1px solid rgba(255,255,255,.1);
+            backdrop-filter:blur(8px); border-radius:1rem; padding:.7rem .9rem;
+            box-shadow:0 18px 40px -16px rgba(0,0,0,.8);
         }
+        @media(min-width:768px){ .float-card{ display:flex; } }
+        .float-card.tl{ top:-.4rem; right:-.4rem; }
+        .float-card.bl{ bottom:-.4rem; left:-.4rem; }
+        .float-card .ico{ width:2.4rem; height:2.4rem; border-radius:.8rem; display:flex; align-items:center; justify-content:center; }
+        .float-card small{ display:block; font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; color:var(--txt-3); }
+        .float-card b{ font-family:var(--font-d); font-size:1.2rem; font-weight:400; }
 
-        /* Marquee */
-        .marquee{ display:flex; overflow:hidden; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);}
-        .marquee__track{ display:flex; gap:3rem; animation: scroll 40s linear infinite; white-space:nowrap; }
-        @keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+        /* ============ MARQUEE ============ */
+        .marquee-band{ border-block:1px solid var(--line); background:var(--ink-950); padding-block:1.4rem; overflow:hidden; }
+        .marquee{
+            display:flex; overflow:hidden;
+            -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+            mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+        }
+        .marquee-track{
+            display:flex; gap:3rem; white-space:nowrap; align-items:center;
+            font-family:var(--font-d); font-size:clamp(1.6rem,3vw,2.2rem); color:rgba(255,255,255,.3);
+            animation:scroll 40s linear infinite;
+        }
+        .marquee-track i{ color:var(--red); font-style:normal; }
+        @keyframes scroll{ to{ transform:translateX(-50%); } }
 
-        /* Buttons */
-        .btn-primary{
-            background:linear-gradient(95deg, #FF004D 0%, #FF5E00 100%);
-            box-shadow: 0 10px 40px -10px rgba(255,0,77,.6), inset 0 1px 0 rgba(255,255,255,.2);
-            transition: transform .2s ease, box-shadow .2s ease;
+        /* ============ ECOSISTEMA ============ */
+        .eco-grid{ display:grid; gap:1.25rem; }
+        @media(min-width:768px){ .eco-grid{ grid-template-columns:repeat(3,1fr); } }
+        .eco-card{ padding:2.2rem; display:flex; flex-direction:column; }
+        .eco-card .ico{
+            width:3.2rem; height:3.2rem; border-radius:1rem; margin-bottom:1.4rem;
+            display:flex; align-items:center; justify-content:center; font-size:1.3rem;
         }
-        .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 16px 50px -10px rgba(255,0,77,.8), inset 0 1px 0 rgba(255,255,255,.25);}
-        .btn-ghost{
-            background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
-            border:1px solid rgba(255,255,255,.12);
-            backdrop-filter: blur(8px);
-            transition: all .2s ease;
+        .eco-card h3{ font-family:var(--font-d); font-size:1.9rem; font-weight:400; margin-bottom:.3rem; }
+        .eco-card .who{ font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--txt-3); margin-bottom:.8rem; }
+        .eco-card p{ color:var(--txt-2); font-size:.95rem; flex:1; }
+        .eco-card .cta-line{ margin-top:1.6rem; }
+        .eco-badges{ display:flex; gap:.5rem; margin-top:1.6rem; flex-wrap:wrap; }
+        .store-badge{
+            display:inline-flex; align-items:center; gap:.55rem;
+            border:1px solid rgba(255,255,255,.15); border-radius:.8rem;
+            padding:.5rem .9rem; background:rgba(255,255,255,.03); font-size:.7rem; line-height:1.2;
+            transition:border-color .2s ease;
         }
-        .btn-ghost:hover{ border-color:#FF004D; color:#fff; box-shadow: 0 0 0 4px rgba(255,0,77,.08);}
+        .store-badge:hover{ border-color:rgba(255,255,255,.4); }
+        .store-badge svg{ width:1.4rem; height:1.4rem; }
+        .store-badge b{ display:block; font-size:.82rem; }
+        .store-badge small{ color:var(--txt-3); }
 
-        /* Cards */
-        .card{
-            background:linear-gradient(180deg, #0d0d0d 0%, #060606 100%);
-            border:1px solid rgba(255,255,255,.06);
-            position:relative;
-            overflow:hidden;
-            transition: transform .35s ease, border-color .35s ease;
-        }
-        .card:hover{ transform: translateY(-4px); border-color: rgba(255,0,77,.35); }
-        .card::before{
-            content:""; position:absolute; inset:0;
-            background: radial-gradient(600px circle at var(--mx,50%) var(--my,50%), rgba(255,0,77,.08), transparent 40%);
-            opacity:0; transition:opacity .3s ease; pointer-events:none;
-        }
-        .card:hover::before{ opacity:1; }
-
-        /* Step number with racing flag vibe */
-        .step-num{
-            font-family:'Bebas Neue', sans-serif;
-            background:linear-gradient(180deg, #FF5E00, #FF004D);
-            -webkit-background-clip:text; background-clip:text;
-            color:transparent;
-        }
-
-        /* Tag chip */
-        .chip{
-            display:inline-flex; align-items:center; gap:.5rem;
-            padding:.4rem .9rem; border-radius:9999px;
-            background:rgba(255,0,77,.08);
-            border:1px solid rgba(255,0,77,.25);
-            color:#FF8AAD; font-weight:600; font-size:.78rem;
-            letter-spacing:.12em; text-transform:uppercase;
-        }
-        .pulse-dot{
-            width:.5rem; height:.5rem; border-radius:9999px;
-            background:#FF004D; box-shadow: 0 0 0 0 rgba(255,0,77,.7);
-            animation: pulse 1.6s infinite;
-        }
-        @keyframes pulse {
-            0%{ box-shadow: 0 0 0 0 rgba(255,0,77,.7); }
-            70%{ box-shadow: 0 0 0 12px rgba(255,0,77,0); }
-            100%{ box-shadow: 0 0 0 0 rgba(255,0,77,0); }
-        }
-
-        /* Reveal animation on scroll */
-        .reveal { opacity:0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
-        .reveal.visible { opacity:1; transform: translateY(0); }
-
-        /* Hero canvas */
-        #wheel-canvas{ width:100%; height:100%; display:block; }
-        .canvas-wrap{
-            position:relative; aspect-ratio:1/1; max-width:560px; margin:0 auto;
-        }
-        .canvas-wrap::before{
-            content:""; position:absolute; inset:8%;
-            background: radial-gradient(circle at center, rgba(255,0,77,.55), rgba(255,94,0,.25) 30%, transparent 60%);
-            filter: blur(40px); z-index:0;
-        }
-        .canvas-wrap::after{
-            content:""; position:absolute; inset:auto 0 -2%; height:24px;
-            background: radial-gradient(ellipse at center, rgba(0,0,0,.7), transparent 70%);
-            filter: blur(8px);
-        }
-
-        /* Stat number */
-        .stat-num{
-            font-family:'Bebas Neue', sans-serif;
-            font-size: clamp(3.2rem, 7vw, 6rem);
-            line-height:.95;
-            letter-spacing:-.01em;
-        }
-
-        /* Big section title */
-        .section-title{
-            font-family:'Bebas Neue', sans-serif;
-            font-size: clamp(2.2rem, 5vw, 4.5rem);
-            line-height:.95;
-            letter-spacing:.005em;
-        }
-
-        /* Glow ring for pricing PRO */
-        .glow-ring{
-            position:absolute; inset:-1px; border-radius: inherit; pointer-events:none;
-            background: conic-gradient(from var(--ang,0deg), #FF004D, #FF5E00, #FFB800, #FF004D);
-            filter: blur(14px); opacity:.45; z-index:-1;
-            animation: spin 8s linear infinite;
-        }
-        @keyframes spin { to{ --ang: 360deg; transform: rotate(360deg);} }
-
-        /* Speed lines decorative */
-        .speed-lines{
-            background-image: repeating-linear-gradient(
-                90deg,
-                rgba(255,255,255,0) 0,
-                rgba(255,255,255,0) 22px,
-                rgba(255,0,77,0.18) 22px,
-                rgba(255,0,77,0.18) 24px
-            );
-        }
-
-        /* Diagonal stripe band (racing tape) */
-        .race-tape{
-            background: repeating-linear-gradient(45deg, #FF004D, #FF004D 14px, #0a0a0a 14px, #0a0a0a 28px);
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar{ width:10px; height:10px; }
-        ::-webkit-scrollbar-track{ background:#050505; }
-        ::-webkit-scrollbar-thumb{ background:linear-gradient(180deg,#FF004D,#FF5E00); border-radius:99px; }
-
-        /* Mobile nav */
-        .mobile-menu { transform: translateX(100%); transition: transform .3s ease; }
-        .mobile-menu.open { transform: translateX(0); }
-
-        /* Floating WhatsApp */
-        .fab{
-            position:fixed; bottom:20px; right:20px; z-index:60;
-            width:56px; height:56px; border-radius:9999px;
-            background: linear-gradient(135deg,#25D366,#128C7E);
+        /* ============ CATEGORÍAS ============ */
+        .cat-head{ display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:3rem; }
+        .cat-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+        @media(min-width:768px){ .cat-grid{ grid-template-columns:repeat(3,1fr); } }
+        @media(min-width:1024px){ .cat-grid{ grid-template-columns:repeat(4,1fr); } }
+        .cat-card{ padding:1.5rem; }
+        .cat-card .ico{
+            width:3rem; height:3rem; border-radius:.9rem; margin-bottom:1.2rem;
             display:flex; align-items:center; justify-content:center;
-            box-shadow: 0 12px 30px -8px rgba(37,211,102,.5);
-            animation: float 3s ease-in-out infinite;
         }
-        @keyframes float { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
+        .cat-card small{ display:block; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--txt-3); margin-bottom:.2rem; }
+        .cat-card h3{ font-family:var(--font-d); font-weight:400; font-size:1.5rem; margin-bottom:.2rem; }
+        .cat-card p{ font-size:.85rem; color:var(--txt-3); }
+        .ico-red{ background:rgba(255,0,77,.1); border:1px solid rgba(255,0,77,.2); color:var(--red); }
+        .ico-orange{ background:rgba(255,94,0,.1); border:1px solid rgba(255,94,0,.2); color:var(--orange); }
+        .ico-amber{ background:rgba(255,184,0,.1); border:1px solid rgba(255,184,0,.2); color:var(--amber); }
+        .ico-green{ background:rgba(34,197,94,.1); border:1px solid rgba(34,197,94,.2); color:#4ade80; }
+        .ico-blue{ background:rgba(59,130,246,.1); border:1px solid rgba(59,130,246,.2); color:#60a5fa; }
+        .ico-purple{ background:rgba(168,85,247,.1); border:1px solid rgba(168,85,247,.2); color:#c084fc; }
+        .ico-pink{ background:rgba(236,72,153,.1); border:1px solid rgba(236,72,153,.2); color:#f472b6; }
+        .ico-cyan{ background:rgba(6,182,212,.1); border:1px solid rgba(6,182,212,.2); color:#22d3ee; }
 
-        /* tilt on hover (cat cards) */
-        .tilt { transition: transform .35s cubic-bezier(.2,.7,.2,1); transform-style: preserve-3d; }
+        /* ============ CÓMO FUNCIONA ============ */
+        .how-grid{ display:grid; gap:2.5rem; }
+        @media(min-width:1024px){ .how-grid{ grid-template-columns:1fr 1fr; } }
+        .how-col-title{
+            display:flex; align-items:center; gap:.9rem; margin-bottom:1.5rem;
+        }
+        .how-col-title .ico{ width:3rem; height:3rem; border-radius:1rem; display:flex; align-items:center; justify-content:center; color:#fff; }
+        .how-col-title h3{ font-family:var(--font-d); font-weight:400; font-size:2rem; }
+        .how-col-title small{ display:block; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--txt-3); font-family:var(--font-s); }
+        .step{ display:flex; gap:1.3rem; padding:1.5rem; margin-bottom:1rem; }
+        .step-num{
+            font-family:var(--font-d); font-size:2.8rem; line-height:1;
+            background:linear-gradient(180deg,var(--orange),var(--red));
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            min-width:3rem;
+        }
+        .step h4{ font-size:1.05rem; margin-bottom:.3rem; display:flex; align-items:center; gap:.5rem; }
+        .step h4 .icon{ color:var(--red); }
+        .step p{ color:var(--txt-2); font-size:.92rem; }
+
+        /* ============ BENEFICIOS ============ */
+        .ben-grid{ display:grid; gap:1.25rem; }
+        @media(min-width:1024px){ .ben-grid{ grid-template-columns:1fr 1fr; } }
+        .ben-card{ padding:2.5rem; }
+        .ben-card .halo{ position:absolute; width:18rem; height:18rem; border-radius:50%; filter:blur(60px); }
+        .ben-card .inner{ position:relative; }
+        .ben-tag{ display:flex; align-items:center; gap:.8rem; margin-bottom:1.4rem; }
+        .ben-tag .ico{ width:3rem; height:3rem; border-radius:.9rem; display:flex; align-items:center; justify-content:center; color:#fff; }
+        .ben-tag span{ font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--txt-3); }
+        .ben-card h3{ font-family:var(--font-d); font-weight:400; font-size:2.6rem; margin-bottom:.6rem; }
+        .ben-card>.inner>p{ color:var(--txt-2); margin-bottom:1.8rem; }
+        .ben-list li{ display:flex; gap:1rem; align-items:flex-start; margin-bottom:1.1rem; }
+        .ben-list .ico{
+            width:2rem; height:2rem; border-radius:.6rem; flex-shrink:0; margin-top:.15rem;
+            display:flex; align-items:center; justify-content:center; font-size:.85rem;
+        }
+        .ben-list b{ display:block; font-size:.95rem; }
+        .ben-list span{ font-size:.85rem; color:var(--txt-3); }
+
+        /* ============ STATS ============ */
+        .stats{ border-block:1px solid var(--line); }
+        .stats-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; text-align:center; }
+        @media(min-width:768px){ .stats-grid{ grid-template-columns:repeat(4,1fr); } }
+        .stat-num{ font-family:var(--font-d); font-size:clamp(3rem,6.5vw,5.2rem); line-height:.95; }
+        .stats-grid small{ display:block; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--txt-3); margin-top:.5rem; }
+
+        /* ============ APP MÓVIL ============ */
+        .app-grid{ display:grid; gap:3rem; align-items:center; }
+        @media(min-width:1024px){ .app-grid{ grid-template-columns:1fr 1fr; } }
+        .phone{
+            width:min(17rem,72vw); margin-inline:auto; aspect-ratio:9/19;
+            border-radius:2.6rem; border:6px solid #1c1c1c; background:#0c0c0c;
+            box-shadow:0 30px 80px -20px rgba(255,0,77,.35), inset 0 0 0 2px #000;
+            position:relative; overflow:hidden; padding:1.1rem .9rem;
+        }
+        .phone::before{
+            content:""; position:absolute; top:.55rem; left:50%; transform:translateX(-50%);
+            width:6rem; height:1.3rem; background:#000; border-radius:999px;
+        }
+        .p-search{
+            margin-top:1.6rem; display:flex; align-items:center; gap:.5rem;
+            background:#161616; border:1px solid rgba(255,255,255,.08);
+            border-radius:.9rem; padding:.6rem .8rem; font-size:.72rem; color:var(--txt-3);
+        }
+        .p-chiprow{ display:flex; gap:.4rem; margin-top:.7rem; flex-wrap:wrap; }
+        .p-chip{ font-size:.58rem; padding:.25rem .6rem; border-radius:999px; border:1px solid rgba(255,255,255,.1); color:var(--txt-3); }
+        .p-chip.on{ background:rgba(255,0,77,.15); border-color:rgba(255,0,77,.4); color:#FF8AAD; }
+        .p-item{
+            display:flex; gap:.6rem; align-items:center; margin-top:.7rem;
+            background:#121212; border:1px solid rgba(255,255,255,.06);
+            border-radius:.9rem; padding:.6rem;
+        }
+        .p-item .thumb{ width:2.4rem; height:2.4rem; border-radius:.6rem; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+        .p-item b{ display:block; font-size:.66rem; }
+        .p-item small{ font-size:.56rem; color:var(--txt-3); display:flex; align-items:center; gap:.3rem; }
+        .p-item .price{ margin-left:auto; font-family:var(--font-d); color:var(--amber); font-size:.95rem; }
+        .p-verified{ color:#4ade80; display:inline-flex; align-items:center; gap:.2rem; }
+        .app-feat{ display:flex; gap:1rem; margin-bottom:1.3rem; align-items:flex-start; }
+        .app-feat .ico{ width:2.6rem; height:2.6rem; border-radius:.8rem; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+        .app-feat b{ display:block; }
+        .app-feat span{ font-size:.9rem; color:var(--txt-3); }
+
+        /* ============ PRECIOS ============ */
+        .promo-banner{
+            border-radius:var(--radius); overflow:hidden; position:relative;
+            background:linear-gradient(90deg,var(--red),var(--orange),var(--amber));
+            padding:2.5rem 1.5rem; text-align:center; margin-bottom:3rem;
+        }
+        .promo-banner h3{ font-family:var(--font-d); font-weight:400; font-size:clamp(2rem,4.5vw,3.2rem); }
+        .promo-banner p{ color:rgba(255,255,255,.88); margin-top:.4rem; }
+        .promo-banner .tag{
+            position:absolute; top:1rem; right:1rem;
+            font-size:.62rem; letter-spacing:.12em; padding:.35rem .8rem; border-radius:999px;
+            background:rgba(0,0,0,.3); border:1px solid rgba(255,255,255,.3); font-weight:700;
+        }
+        .price-grid{ display:grid; gap:1.5rem; align-items:stretch; }
+        @media(min-width:768px){ .price-grid{ grid-template-columns:1fr 1fr; } }
+        .price-card{ padding:2rem; display:flex; flex-direction:column; }
+        .price-card .top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
+        .price-card h3{ font-family:var(--font-d); font-weight:400; font-size:1.9rem; }
+        .price-card .desc{ color:var(--txt-2); font-size:.9rem; }
+        .price-num{ font-family:var(--font-d); font-size:4.5rem; line-height:1; margin-top:1.4rem; }
+        .price-per{ color:var(--txt-3); font-size:.85rem; margin-bottom:1.8rem; }
+        .feat-list{ flex:1; margin-bottom:1.8rem; }
+        .feat-list li{ display:flex; align-items:center; gap:.7rem; margin-bottom:.7rem; font-size:.92rem; }
+        .feat-list .no{ color:var(--txt-3); text-decoration:line-through; }
+        .feat-list .icon{ width:1rem; height:1rem; }
+        .pro-wrap{ position:relative; }
+        .pro-wrap::before{
+            content:""; position:absolute; inset:-2px; border-radius:var(--radius); z-index:-1;
+            background:conic-gradient(from 0deg,var(--red),var(--orange),var(--amber),var(--red));
+            filter:blur(14px); opacity:.45;
+        }
+        .pro-card{ background:linear-gradient(180deg,#150506,#0a0405); border-color:rgba(255,0,77,.4); height:100%; }
+        .pro-badge{
+            position:absolute; top:-0.8rem; left:2rem;
+            background:linear-gradient(95deg,var(--red),var(--orange));
+            font-size:.66rem; font-weight:800; letter-spacing:.1em;
+            padding:.35rem .9rem; border-radius:999px;
+        }
+
+        /* ============ TESTIMONIOS ============ */
+        .testi-grid{ display:grid; gap:1.25rem; }
+        @media(min-width:768px){ .testi-grid{ grid-template-columns:repeat(3,1fr); } }
+        .testi-card{ padding:2rem; }
+        .stars{ display:flex; gap:.2rem; color:var(--amber); margin-bottom:1rem; }
+        .stars svg{ width:1rem; height:1rem; fill:currentColor; stroke:none; }
+        .testi-card blockquote{ color:rgba(255,255,255,.8); margin-bottom:1.4rem; font-size:.95rem; }
+        .testi-who{ display:flex; align-items:center; gap:.8rem; }
+        .avatar{
+            width:2.6rem; height:2.6rem; border-radius:50%; flex-shrink:0;
+            display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.85rem; color:#fff;
+        }
+        .testi-who b{ display:block; font-size:.88rem; }
+        .testi-who small{ font-size:.74rem; color:var(--txt-3); }
+
+        /* ============ FAQ ============ */
+        .faq-list{ max-width:46rem; margin-inline:auto; }
+        .faq-item{
+            border:1px solid var(--line); border-radius:1rem; margin-bottom:.8rem;
+            background:linear-gradient(180deg,#0d0d0d,#070707); overflow:hidden;
+        }
+        .faq-item summary{
+            cursor:pointer; padding:1.2rem 1.4rem; font-weight:700; font-size:.98rem;
+            display:flex; align-items:center; justify-content:space-between; gap:1rem;
+            list-style:none;
+        }
+        .faq-item summary::-webkit-details-marker{ display:none; }
+        .faq-item summary::after{
+            content:"+"; font-family:var(--font-d); font-size:1.5rem; color:var(--red); transition:transform .2s ease;
+        }
+        .faq-item[open] summary::after{ transform:rotate(45deg); }
+        .faq-item div{ padding:0 1.4rem 1.3rem; color:var(--txt-2); font-size:.92rem; }
+
+        /* ============ CTA FINAL ============ */
+        .final-cta .card{ padding:3rem 1.5rem; text-align:center; }
+        @media(min-width:768px){ .final-cta .card{ padding:3.5rem; } }
+        .final-cta h2{ font-family:var(--font-d); font-weight:400; font-size:clamp(2.6rem,6vw,4.5rem); margin-bottom:1rem; }
+        .final-cta p{ color:var(--txt-2); max-width:34rem; margin:0 auto 2rem; }
+        .wait-form{ display:flex; flex-direction:column; gap:.8rem; max-width:30rem; margin-inline:auto; }
+        @media(min-width:640px){ .wait-form{ flex-direction:row; } }
+        .wait-form input[type=email]{
+            flex:1; padding:1rem 1.5rem; border-radius:999px;
+            background:var(--ink-800); border:1px solid rgba(255,255,255,.1);
+            color:#fff; font:inherit; outline:none;
+        }
+        .wait-form input[type=email]:focus{ border-color:var(--red); }
+        .form-msg{ font-size:.88rem; margin-top:.8rem; display:none; }
+        .form-msg.ok{ display:block; color:#4ade80; }
+        .form-msg.err{ display:block; color:#f87171; }
+
+        /* ============ MODAL ============ */
+        .modal{
+            position:fixed; inset:0; z-index:80; display:none;
+            align-items:center; justify-content:center; padding:1rem;
+            background:rgba(0,0,0,.72); backdrop-filter:blur(10px);
+        }
+        .modal.open{ display:flex; }
+        .modal-box{
+            width:100%; max-width:30rem; max-height:92vh; overflow-y:auto;
+            background:var(--ink-900); border:1px solid rgba(255,255,255,.1);
+            border-radius:var(--radius); padding:2rem; position:relative;
+        }
+        .modal-close{
+            position:absolute; top:1rem; right:1rem; width:2.5rem; height:2.5rem;
+            border-radius:50%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+            display:flex; align-items:center; justify-content:center;
+        }
+        .modal-box h3{ font-family:var(--font-d); font-weight:400; font-size:2.2rem; margin-bottom:.4rem; }
+        .modal-box .sub{ color:var(--txt-2); font-size:.88rem; margin-bottom:1.5rem; }
+        .field{ margin-bottom:1rem; }
+        .field label{ display:block; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--txt-3); margin-bottom:.4rem; }
+        .field input{
+            width:100%; padding:.8rem 1rem; border-radius:.8rem;
+            background:var(--ink-800); border:1px solid rgba(255,255,255,.1);
+            color:#fff; font:inherit; font-size:.9rem; outline:none;
+        }
+        .field input:focus{ border-color:var(--red); }
+        .legal-note{ font-size:.72rem; color:var(--txt-3); text-align:center; margin-top:1rem; }
+
+        /* ============ FOOTER ============ */
+        footer{ background:var(--ink-950); border-top:1px solid var(--line); padding:4rem 0 2rem; }
+        .foot-grid{ display:grid; gap:2.5rem; margin-bottom:3rem; }
+        @media(min-width:768px){ .foot-grid{ grid-template-columns:2fr 1fr 1fr 1fr; } }
+        .foot-brand p{ color:var(--txt-2); max-width:22rem; margin-top:1.2rem; }
+        .foot-social{ display:flex; gap:.7rem; margin-top:1.4rem; }
+        .foot-social a{
+            width:2.5rem; height:2.5rem; border-radius:50%;
+            background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+            display:flex; align-items:center; justify-content:center;
+            transition:border-color .2s ease, background .2s ease;
+        }
+        .foot-social a:hover{ background:rgba(255,0,77,.15); border-color:rgba(255,0,77,.4); }
+        .foot-col h4{ font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; color:var(--txt-3); margin-bottom:1.1rem; }
+        .foot-col li{ margin-bottom:.55rem; }
+        .foot-col a{ color:rgba(255,255,255,.7); font-size:.92rem; }
+        .foot-col a:hover{ color:var(--red); }
+        .foot-bottom{
+            border-top:1px solid var(--line); padding-top:2rem;
+            display:flex; flex-direction:column; gap:.8rem; align-items:center; justify-content:space-between;
+            font-size:.8rem; color:var(--txt-3);
+        }
+        @media(min-width:768px){ .foot-bottom{ flex-direction:row; } }
+
+        /* ============ WHATSAPP FAB ============ */
+        .fab{
+            position:fixed; bottom:1.25rem; right:1.25rem; z-index:60;
+            width:3.5rem; height:3.5rem; border-radius:50%;
+            background:linear-gradient(135deg,#25D366,#128C7E);
+            display:flex; align-items:center; justify-content:center;
+            box-shadow:0 12px 30px -8px rgba(37,211,102,.5);
+            animation:float 3s ease-in-out infinite;
+        }
+        @keyframes float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
+
+        /* ============ REVEAL ============ */
+        .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+        .reveal.visible{ opacity:1; transform:translateY(0); }
+
+        /* ============ ACCESIBILIDAD: reducir movimiento ============ */
+        @media (prefers-reduced-motion: reduce){
+            .spin, .marquee-track, .fab, .pulse-dot{ animation:none !important; }
+            .reveal{ opacity:1; transform:none; transition:none; }
+            html{ scroll-behavior:auto; }
+        }
     </style>
 </head>
-<body class="antialiased relative overflow-x-hidden">
+<body>
 
-<!-- Ambient gradient blobs (fixed) -->
-<div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-10">
-    <div class="absolute -top-40 -left-40 w-[36rem] h-[36rem] rounded-full bg-brand-red/20 blur-[140px]"></div>
-    <div class="absolute top-1/3 -right-40 w-[36rem] h-[36rem] rounded-full bg-brand-orange/15 blur-[140px]"></div>
-    <div class="absolute bottom-0 left-1/3 w-[28rem] h-[28rem] rounded-full bg-brand-amber/10 blur-[140px]"></div>
-</div>
+<!-- ============ SPRITE DE ICONOS (SVG inline, 0 requests) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+        <symbol id="i-store" viewBox="0 0 24 24"><path d="M3 9 4.5 4h15L21 9"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M9 20v-6h6v6"/></symbol>
+        <symbol id="i-login" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        <symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+        <symbol id="i-shield-plain" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+        <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+        <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+        <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+        <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 5-5"/></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5z"/><path d="m3 12 9 5 9-5"/><path d="m3 17 9 5 9-5"/></symbol>
+        <symbol id="i-arrow-r" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+        <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></symbol>
+        <symbol id="i-disc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/></symbol>
+        <symbol id="i-cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.2 2.2M16.9 16.9l2.2 2.2M19.1 4.9l-2.2 2.2M7.1 16.9l-2.2 2.2"/></symbol>
+        <symbol id="i-tire" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/></symbol>
+        <symbol id="i-battery" viewBox="0 0 24 24"><rect x="2" y="7" width="16" height="10" rx="2"/><path d="M22 11v2"/><path d="m11 9-3 3h4l-3 3"/></symbol>
+        <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4.3 12.5c.7.6 1.3 1.5 1.3 2.5v1h6v-1c0-1 .6-1.9 1.3-2.5A7 7 0 0 0 12 2z"/></symbol>
+        <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 2.7s6 6.3 6 10.8a6 6 0 0 1-12 0C6 9 12 2.7 12 2.7z"/></symbol>
+        <symbol id="i-cable" viewBox="0 0 24 24"><path d="M6 9V5h4v4"/><path d="M8 9v3a4 4 0 0 0 8 0V9"/><path d="M14 9V5h4v4"/><path d="M12 16v6"/></symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V3"/><path d="M4 4h14l-2.5 4L18 12H4"/></symbol>
+        <symbol id="i-package" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5V8z"/><path d="M3.3 7.5 12 12.5l8.7-5"/><path d="M12 22V12"/></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+        <symbol id="i-trend" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+        <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="m9 13.5-2 8.5 5-3 5 3-2-8.5"/></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></symbol>
+        <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M12 15c-1.2-1.2-2-2-3-3C10.2 7.5 14 3.5 21 3c-.5 7-4.5 10.8-9 12z"/><path d="M9 12c-1.5 0-3 .5-4 2l5 5c1.5-1 2-2.5 2-4"/><path d="M5.5 16.5 3 21l4.5-2.5"/></symbol>
+        <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4"/><path d="M12 8v13"/><path d="M5 12v9h14v-9"/><path d="M12 8c-2 0-5-.5-5-3a2 2 0 0 1 4-.5C11.5 6 12 8 12 8zm0 0c2 0 5-.5 5-3a2 2 0 0 0-4-.5C12.5 6 12 8 12 8z"/></symbol>
+        <symbol id="i-crown" viewBox="0 0 24 24"><path d="m3 17 2-10 5 5 2-7 2 7 5-5 2 10H3z"/><path d="M5 21h14"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+        <symbol id="i-quote" viewBox="0 0 24 24"><path d="M10 11H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v8a4 4 0 0 1-4 4"/><path d="M20 11h-4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v8a4 4 0 0 1-4 4"/></symbol>
+        <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3 6.6 7 .9-5.2 4.8L18.5 21 12 17.3 5.5 21l1.7-6.7L2 9.5l7-.9L12 2z"/></symbol>
+        <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14.5 14.5 0 0 1 0 18 14.5 14.5 0 0 1 0-18z"/></symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+        <symbol id="i-filter" viewBox="0 0 24 24"><path d="M22 3H2l8 9v6l4 3V12l8-9z"/></symbol>
+        <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4"/><path d="m6 10 6-6 6 6"/><path d="M4 20h16"/></symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10 21h4"/></symbol>
+        <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></symbol>
+        <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+        <symbol id="i-youtube" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 9 5 3-5 3V9z"/></symbol>
+        <symbol id="i-x-social" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"/></symbol>
+        <symbol id="i-apple" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M16.7 12.9c0-2.4 2-3.6 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.9-1.6 0-3.2.9-4.1 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.5 1.3-.1 1.8-.8 3.3-.8s2 .8 3.3.8c1.4 0 2.2-1.2 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.7-1-2.7-4.3zM14.4 5.6c.7-.8 1.1-2 1-3.1-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3 1.1.1 2.2-.6 2.9-1.4z"/></symbol>
+        <symbol id="i-gplay" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M3.6 1.8c-.4.4-.6 1-.6 1.8v16.8c0 .8.2 1.4.6 1.8l.1.1 9.4-9.4v-.2L3.7 1.7l-.1.1zm12.6 13.5-3.1-3.1v-.2l3.1-3.1 3.8 2.1c1.1.6 1.1 1.6 0 2.2l-3.8 2.1zm-3.3-3.1L3.6 21.6c.4.4 1 .4 1.8 0l10.8-6.1-3.3-3.3zm0-.4 3.3-3.3L5.4 2.4c-.8-.5-1.4-.4-1.8 0l9.3 9.4z"/></symbol>
+        <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0 0 20.885 3.488"/></symbol>
+    </defs>
+</svg>
 
-<!-- ===== TOP ANNOUNCEMENT BAR ===== -->
-<div class="race-tape h-2 w-full"></div>
-<div class="bg-ink-950 border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-3 text-xs">
+<!-- Blobs de fondo -->
+<div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<!-- ============ ANUNCIO ============ -->
+<div class="race-tape"></div>
+<div class="topbar">
+    <div class="wrap">
         <span class="pulse-dot"></span>
-        <span class="text-white/70 tracking-wider uppercase">EN VIVO · Lanzamiento oficial en Caracas — Lista de espera abierta</span>
+        <span>En vivo · Lanzamiento oficial en Caracas — Lista de espera abierta</span>
     </div>
 </div>
 
-<!-- ===== NAV ===== -->
-<nav class="sticky top-0 z-50 backdrop-blur-xl bg-ink-950/70 border-b border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-24">
-            <!-- Logo -->
-            <a href="#" class="flex items-center group relative shrink-0">
-                <div class="absolute -inset-2 rounded-xl bg-gradient-to-br from-brand-red to-brand-orange opacity-0 group-hover:opacity-30 blur-md transition"></div>
-                <img src="./logo.jpeg" alt="TURBI" class="relative h-12 sm:h-16 md:h-20 w-auto rounded-lg" />
+<!-- ============ NAV ============ -->
+<header class="nav">
+    <div class="wrap">
+        <a href="#" class="nav-logo" aria-label="TURBI — Inicio">
+            <img src="./logo.jpeg" alt="TURBI — repuestos y autopartes en Venezuela" width="160" height="80">
+        </a>
+        <nav class="nav-links" aria-label="Navegación principal">
+            <a href="#ecosistema">Ecosistema</a>
+            <a href="#categorias">Categorías</a>
+            <a href="#como-funciona">Cómo funciona</a>
+            <a href="#precios">Precios</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+        <div class="nav-ctas">
+            <a data-users-app href="#" class="nav-search">
+                <svg class="icon"><use href="#i-search"/></svg> Buscar repuestos
             </a>
-            <!-- Links -->
-            <div class="hidden md:flex items-center gap-10 text-sm font-medium text-white/70">
-                <a href="#categorias" class="hover:text-white transition">Categorías</a>
-                <a href="#beneficios" class="hover:text-white transition">Beneficios</a>
-                <a href="#como-funciona" class="hover:text-white transition">Cómo funciona</a>
-                <a href="#precios" class="hover:text-white transition">Precios</a>
-            </div>
-            <!-- CTAs -->
-            <div class="flex items-center gap-3">
-                <a data-users-app href="#" target="_self" class="hidden lg:inline-flex items-center gap-1.5 text-sm font-medium text-white/60 hover:text-white transition whitespace-nowrap">
-                    <i data-lucide="search" class="w-4 h-4"></i>
-                    Buscar repuestos
-                </a>
-                <a data-stores-panel href="#" target="_self" class="btn-ghost inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold text-white/90 whitespace-nowrap">
-                    <i data-lucide="log-in" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
-                    Iniciar sesión tienda
-                </a>
-                <button data-shop-cta class="btn-primary hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold">
-                    Soy una tienda
-                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-                </button>
-                <button id="open-menu" class="md:hidden p-2 rounded-lg border border-white/10">
-                    <i data-lucide="menu" class="w-5 h-5"></i>
-                </button>
-            </div>
+            <a data-stores-panel href="#" class="btn btn-ghost btn-sm">
+                <svg class="icon"><use href="#i-login"/></svg> Iniciar sesión tienda
+            </a>
+            <button data-shop-cta class="btn btn-primary btn-sm nav-shopcta">
+                Soy una tienda <svg class="icon"><use href="#i-arrow-ur"/></svg>
+            </button>
+            <button id="open-menu" class="hamb" aria-label="Abrir menú">
+                <svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-menu"/></svg>
+            </button>
         </div>
     </div>
-</nav>
+</header>
 
-<!-- Mobile menu -->
-<div id="mobile-menu" class="mobile-menu fixed inset-0 z-[55] bg-ink-950/95 backdrop-blur-xl md:hidden p-8 pt-24">
-    <button id="close-menu" class="absolute top-6 right-6 p-2 rounded-lg border border-white/10">
-        <i data-lucide="x" class="w-5 h-5"></i>
+<!-- Menú móvil -->
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <button id="close-menu" class="close-btn" aria-label="Cerrar menú">
+        <svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-close"/></svg>
     </button>
-    <div class="flex flex-col gap-6 text-2xl font-display">
-        <a href="#categorias" class="border-b border-white/10 pb-4">CATEGORÍAS</a>
-        <a href="#beneficios" class="border-b border-white/10 pb-4">BENEFICIOS</a>
-        <a href="#como-funciona" class="border-b border-white/10 pb-4">CÓMO FUNCIONA</a>
-        <a href="#precios" class="border-b border-white/10 pb-4">PRECIOS</a>
-        <a data-users-app href="#" target="_self" class="mt-6 pt-6 border-t border-white/10 inline-flex items-center gap-3 text-brand-red">
-            <i data-lucide="search" class="w-6 h-6"></i>
-            BUSCAR REPUESTOS
+    <nav aria-label="Menú móvil">
+        <a href="#ecosistema">ECOSISTEMA</a>
+        <a href="#categorias">CATEGORÍAS</a>
+        <a href="#como-funciona">CÓMO FUNCIONA</a>
+        <a href="#precios">PRECIOS</a>
+        <a href="#faq">FAQ</a>
+        <a data-users-app href="#" style="color:var(--red);border:none;display:inline-flex;align-items:center;gap:.7rem;margin-top:1rem">
+            <svg class="icon"><use href="#i-search"/></svg> BUSCAR REPUESTOS
         </a>
-    </div>
+    </nav>
 </div>
 
-<!-- ===== HERO ===== -->
-<section class="relative noise overflow-hidden">
-    <div class="absolute inset-0 grid-bg"></div>
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-20 lg:pt-20 lg:pb-32 grid lg:grid-cols-2 gap-10 items-center relative">
-        <!-- Left: copy -->
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" style="padding-block:0">
+    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="wrap">
         <div class="reveal">
-            <div class="chip mb-6">
-                <i data-lucide="flame" class="w-3.5 h-3.5"></i> Caracas · Venezuela
-            </div>
-            <h1 class="display text-[18vw] lg:text-[8.2rem] xl:text-[9.5rem] leading-[.85]">
+            <span class="chip"><svg class="icon"><use href="#i-flame"/></svg> Caracas · Venezuela</span>
+            <h1 class="display">
                 LO QUE TU AUTO<br>
                 <span class="grad-text">NECESITA,</span><br>
-                <span class="text-white">AHORA<span class="text-brand-red">.</span></span>
+                AHORA<span style="color:var(--red)">.</span>
             </h1>
-            <p class="text-white/65 text-lg md:text-xl mt-6 max-w-xl leading-relaxed">
-                La primera plataforma de Venezuela que conecta conductores con
-                <span class="text-white font-semibold">tiendas de autopartes verificadas</span>.
-                Encuentra repuestos en segundos. Vende sin fricción.
+            <p class="hero-sub">
+                El ecosistema que conecta conductores con <strong>tiendas de autopartes verificadas</strong> en Venezuela.
+                Busca tu repuesto en la web o en la app móvil. Vende sin fricción desde tu panel de tienda.
             </p>
-            <div class="flex flex-col sm:flex-row gap-3 mt-8">
-                <a data-users-app href="#" target="_self" class="btn-primary inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-white">
-                    <i data-lucide="search" class="w-5 h-5"></i>
-                    Buscar mi repuesto
+            <div class="hero-ctas">
+                <a data-users-app href="#" class="btn btn-primary">
+                    <svg class="icon"><use href="#i-search"/></svg> Buscar mi repuesto
                 </a>
-                <button data-shop-cta class="btn-ghost inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-bold text-white/90">
-                    <i data-lucide="store" class="w-5 h-5"></i>
-                    Registrar mi tienda
+                <button data-shop-cta class="btn btn-ghost">
+                    <svg class="icon"><use href="#i-store"/></svg> Registrar mi tienda
                 </button>
             </div>
-            <!-- Trust row -->
-            <div class="mt-10 flex flex-wrap items-center gap-6 text-sm text-white/55">
-                <div class="flex items-center gap-2"><i data-lucide="shield-check" class="w-4 h-4 text-brand-red"></i> RIF validado</div>
-                <div class="flex items-center gap-2"><i data-lucide="message-square" class="w-4 h-4 text-brand-red"></i> Chat + WhatsApp</div>
-                <div class="flex items-center gap-2"><i data-lucide="apple" class="w-4 h-4 text-brand-red"></i> iOS + Android</div>
+            <div class="trust-row">
+                <span><svg class="icon"><use href="#i-shield"/></svg> RIF validado</span>
+                <span><svg class="icon"><use href="#i-chat"/></svg> Chat + WhatsApp</span>
+                <span><svg class="icon"><use href="#i-phone"/></svg> Web · iOS · Android</span>
             </div>
         </div>
 
-        <!-- Right: 3D wheel -->
-        <div class="relative reveal">
-            <div class="canvas-wrap">
-                <canvas id="wheel-canvas"></canvas>
+        <!-- Rueda animada en SVG puro (antes: Three.js ~600 KB) -->
+        <div class="reveal" style="position:relative">
+            <div class="wheel-wrap" aria-hidden="true">
+                <svg viewBox="0 0 260 260" role="img" aria-label="Rueda deportiva TURBI">
+                    <defs>
+                        <radialGradient id="rim-g" cx="35%" cy="30%">
+                            <stop offset="0%" stop-color="#f5f5f5"/>
+                            <stop offset="55%" stop-color="#9a9a9a"/>
+                            <stop offset="100%" stop-color="#3c3c3c"/>
+                        </radialGradient>
+                        <radialGradient id="hub-g" cx="40%" cy="35%">
+                            <stop offset="0%" stop-color="#e8e8e8"/>
+                            <stop offset="100%" stop-color="#555"/>
+                        </radialGradient>
+                        <linearGradient id="cal-g" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#FF004D"/>
+                            <stop offset="100%" stop-color="#FF5E00"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Neumático -->
+                    <circle cx="130" cy="130" r="124" fill="#0b0b0b" stroke="#1d1d1d" stroke-width="3"/>
+                    <circle cx="130" cy="130" r="116" fill="none" stroke="#161616" stroke-width="10"/>
+
+                    <!-- Grupo giratorio -->
+                    <g class="spin">
+                        <!-- Marcas de banda de rodadura -->
+                        <circle cx="130" cy="130" r="120" fill="none" stroke="#222" stroke-width="5" stroke-dasharray="6 10"/>
+                        <!-- Aro cromado -->
+                        <circle cx="130" cy="130" r="86" fill="#0e0e0e" stroke="url(#rim-g)" stroke-width="7"/>
+                        <!-- Rayos (5 dobles en Y, rotación uniforme de 72°) -->
+                        <g stroke="url(#rim-g)" stroke-width="9" stroke-linecap="round">
+                            <path id="spoke" d="M130 130 116 52M130 130l14-78"/>
+                            <use href="#spoke" transform="rotate(72 130 130)"/>
+                            <use href="#spoke" transform="rotate(144 130 130)"/>
+                            <use href="#spoke" transform="rotate(216 130 130)"/>
+                            <use href="#spoke" transform="rotate(288 130 130)"/>
+                        </g>
+                        <!-- Tuercas -->
+                        <g fill="#cfcfcf">
+                            <circle cx="130" cy="103" r="3.4"/>
+                            <circle cx="155.7" cy="121.7" r="3.4"/>
+                            <circle cx="145.9" cy="151.8" r="3.4"/>
+                            <circle cx="114.1" cy="151.8" r="3.4"/>
+                            <circle cx="104.3" cy="121.7" r="3.4"/>
+                        </g>
+                    </g>
+
+                    <!-- Disco de freno + caliper (fijos, como en la vida real) -->
+                    <circle cx="130" cy="130" r="46" fill="none" stroke="#2e2e2e" stroke-width="14"/>
+                    <circle cx="130" cy="130" r="46" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-dasharray="2 7"/>
+                    <path d="M 92 88 A 56 56 0 0 1 130 72" fill="none" stroke="url(#cal-g)" stroke-width="17" stroke-linecap="round"/>
+
+                    <!-- Centro -->
+                    <circle cx="130" cy="130" r="22" fill="url(#hub-g)"/>
+                    <circle cx="130" cy="130" r="12" fill="#FF004D">
+                        <animate attributeName="opacity" values="1;.55;1" dur="2.4s" repeatCount="indefinite"/>
+                    </circle>
+                </svg>
             </div>
-            <!-- Floating UI cards -->
-            <div class="hidden md:flex absolute -top-2 -right-2 bg-ink-800/80 border border-white/10 backdrop-blur-md rounded-2xl p-3 items-center gap-3 shadow-2xl">
-                <div class="w-10 h-10 rounded-xl bg-brand-red/15 flex items-center justify-center">
-                    <i data-lucide="zap" class="w-5 h-5 text-brand-red"></i>
-                </div>
-                <div>
-                    <div class="text-[10px] uppercase tracking-widest text-white/50">Match en</div>
-                    <div class="accent text-white text-lg leading-none">2.4s</div>
-                </div>
+            <div class="float-card tl">
+                <div class="ico" style="background:rgba(255,0,77,.15);color:var(--red)"><svg class="icon"><use href="#i-zap"/></svg></div>
+                <div><small>Match en</small><b>2.4s</b></div>
             </div>
-            <div class="hidden md:flex absolute -bottom-2 -left-2 bg-ink-800/80 border border-white/10 backdrop-blur-md rounded-2xl p-3 items-center gap-3 shadow-2xl">
-                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center">
-                    <i data-lucide="badge-check" class="w-5 h-5 text-emerald-400"></i>
-                </div>
-                <div>
-                    <div class="text-[10px] uppercase tracking-widest text-white/50">Tiendas verificadas</div>
-                    <div class="accent text-white text-lg leading-none">+50</div>
-                </div>
+            <div class="float-card bl">
+                <div class="ico" style="background:rgba(34,197,94,.15);color:#4ade80"><svg class="icon"><use href="#i-badge"/></svg></div>
+                <div><small>Tiendas verificadas</small><b>+50</b></div>
             </div>
         </div>
     </div>
-
-    <!-- Speed lines bottom -->
-    <div class="absolute bottom-0 inset-x-0 h-1 speed-lines opacity-50"></div>
 </section>
 
-<!-- ===== MARQUEE: CATEGORÍAS ===== -->
-<section aria-label="Categorías" class="border-y border-white/5 bg-ink-950 py-6">
+<!-- ============ MARQUEE ============ -->
+<div class="marquee-band" aria-hidden="true">
     <div class="marquee">
-        <div class="marquee__track display text-3xl md:text-4xl text-white/30">
-            <span>FRENOS</span><span class="text-brand-red">·</span>
-            <span>SUSPENSIÓN</span><span class="text-brand-red">·</span>
-            <span>MOTOR</span><span class="text-brand-red">·</span>
-            <span>ELÉCTRICO</span><span class="text-brand-red">·</span>
-            <span>LLANTAS</span><span class="text-brand-red">·</span>
-            <span>ACEITES &amp; FILTROS</span><span class="text-brand-red">·</span>
-            <span>BATERÍAS</span><span class="text-brand-red">·</span>
-            <span>CARROCERÍA</span><span class="text-brand-red">·</span>
-            <span>TRANSMISIÓN</span><span class="text-brand-red">·</span>
-            <span>ILUMINACIÓN</span><span class="text-brand-red">·</span>
-            <!-- duplicate for seamless loop -->
-            <span>FRENOS</span><span class="text-brand-red">·</span>
-            <span>SUSPENSIÓN</span><span class="text-brand-red">·</span>
-            <span>MOTOR</span><span class="text-brand-red">·</span>
-            <span>ELÉCTRICO</span><span class="text-brand-red">·</span>
-            <span>LLANTAS</span><span class="text-brand-red">·</span>
-            <span>ACEITES &amp; FILTROS</span><span class="text-brand-red">·</span>
-            <span>BATERÍAS</span><span class="text-brand-red">·</span>
-            <span>CARROCERÍA</span><span class="text-brand-red">·</span>
-            <span>TRANSMISIÓN</span><span class="text-brand-red">·</span>
-            <span>ILUMINACIÓN</span><span class="text-brand-red">·</span>
+        <div class="marquee-track">
+            <span>FRENOS</span><i>·</i><span>SUSPENSIÓN</span><i>·</i><span>MOTOR</span><i>·</i><span>ELÉCTRICO</span><i>·</i><span>LLANTAS</span><i>·</i><span>ACEITES &amp; FILTROS</span><i>·</i><span>BATERÍAS</span><i>·</i><span>CARROCERÍA</span><i>·</i><span>TRANSMISIÓN</span><i>·</i><span>ILUMINACIÓN</span><i>·</i>
+            <span>FRENOS</span><i>·</i><span>SUSPENSIÓN</span><i>·</i><span>MOTOR</span><i>·</i><span>ELÉCTRICO</span><i>·</i><span>LLANTAS</span><i>·</i><span>ACEITES &amp; FILTROS</span><i>·</i><span>BATERÍAS</span><i>·</i><span>CARROCERÍA</span><i>·</i><span>TRANSMISIÓN</span><i>·</i><span>ILUMINACIÓN</span><i>·</i>
+        </div>
+    </div>
+</div>
+
+<!-- ============ ECOSISTEMA ============ -->
+<section id="ecosistema">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <span class="chip"><svg class="icon"><use href="#i-layers"/></svg> Un solo ecosistema</span>
+            <h2 class="section-title">TURBI ESTÁ DONDE <span class="grad-text">TÚ ESTÁS</span></h2>
+            <p>Web para buscar sin instalar nada, panel completo para tiendas y app móvil para llevarlo todo en el bolsillo.</p>
+        </div>
+
+        <div class="eco-grid reveal">
+            <!-- App móvil -->
+            <article class="card eco-card">
+                <div class="ico ico-red"><svg class="icon" style="width:1.5rem;height:1.5rem"><use href="#i-phone"/></svg></div>
+                <span class="who">Conductores y tiendas</span>
+                <h3>APP MÓVIL</h3>
+                <p>Busca repuestos, chatea con tiendas y recibe notificaciones al instante. Las tiendas gestionan inventario y leads desde el teléfono. iOS y Android.</p>
+                <div class="eco-badges">
+                    <a href="#" class="store-badge" aria-label="Próximamente en App Store">
+                        <svg viewBox="0 0 24 24"><use href="#i-apple"/></svg>
+                        <span><small>Próximamente en</small><b>App Store</b></span>
+                    </a>
+                    <a href="#" class="store-badge" aria-label="Próximamente en Google Play">
+                        <svg viewBox="0 0 24 24"><use href="#i-gplay"/></svg>
+                        <span><small>Próximamente en</small><b>Google Play</b></span>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Web usuarios -->
+            <article class="card eco-card">
+                <div class="ico ico-orange"><svg class="icon" style="width:1.5rem;height:1.5rem"><use href="#i-globe"/></svg></div>
+                <span class="who">Conductores</span>
+                <h3>WEB PARA BUSCAR</h3>
+                <p>Encuentra tu repuesto desde cualquier navegador, sin instalar nada. Filtra por marca, modelo y año, compara tiendas verificadas y contacta directo.</p>
+                <div class="cta-line">
+                    <a data-users-app href="#" class="link-arrow" style="color:var(--orange)">
+                        Buscar repuestos ahora <svg class="icon"><use href="#i-arrow-r"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Portal tiendas -->
+            <article class="card eco-card">
+                <div class="ico ico-amber"><svg class="icon" style="width:1.5rem;height:1.5rem"><use href="#i-monitor"/></svg></div>
+                <span class="who">Tiendas y vendedores</span>
+                <h3>PORTAL DE TIENDAS</h3>
+                <p>Tu panel de control: publica inventario con fotos y precios, recibe leads por chat o WhatsApp y mide todo con métricas claras.</p>
+                <div class="cta-line">
+                    <a data-stores-panel href="#" class="link-arrow" style="color:var(--amber)">
+                        Entrar a mi panel <svg class="icon"><use href="#i-arrow-r"/></svg>
+                    </a>
+                </div>
+            </article>
         </div>
     </div>
 </section>
 
-<!-- ===== CATEGORIES GRID ===== -->
-<section id="categorias" class="py-24 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-end justify-between flex-wrap gap-4 mb-12 reveal">
+<!-- ============ CATEGORÍAS ============ -->
+<section id="categorias" style="padding-top:2rem">
+    <div class="wrap">
+        <div class="cat-head reveal">
             <div>
-                <div class="chip mb-4"><i data-lucide="layers" class="w-3.5 h-3.5"></i> Lo que vas a encontrar</div>
+                <span class="chip"><svg class="icon"><use href="#i-layers"/></svg> Lo que vas a encontrar</span>
                 <h2 class="section-title">EXPLORA POR <span class="grad-text">CATEGORÍA</span></h2>
             </div>
-            <a href="#" class="text-sm text-white/60 hover:text-white inline-flex items-center gap-2">
-                Ver todas <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            <a data-users-app href="#" class="link-arrow" style="color:var(--txt-2);font-size:.9rem">
+                Ver todas <svg class="icon"><use href="#i-arrow-r"/></svg>
             </a>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 reveal">
-            <!-- Card template -->
-            <div class="card tilt rounded-2xl p-6 group cursor-pointer">
-                <div class="w-12 h-12 rounded-xl bg-brand-red/10 border border-brand-red/20 flex items-center justify-center mb-5">
-                    <i data-lucide="disc-3" class="w-6 h-6 text-brand-red"></i>
-                </div>
-                <div class="text-xs text-white/40 mb-1 tracking-wider uppercase">+1.2k productos</div>
-                <h3 class="display text-2xl text-white mb-1">FRENOS</h3>
-                <p class="text-sm text-white/50">Pastillas, discos, mordazas, líquidos.</p>
-            </div>
-            <div class="card tilt rounded-2xl p-6 group cursor-pointer">
-                <div class="w-12 h-12 rounded-xl bg-brand-orange/10 border border-brand-orange/20 flex items-center justify-center mb-5">
-                    <i data-lucide="cog" class="w-6 h-6 text-brand-orange"></i>
-                </div>
-                <div class="text-xs text-white/40 mb-1 tracking-wider uppercase">+980 productos</div>
-                <h3 class="display text-2xl text-white mb-1">MOTOR</h3>
-                <p class="text-sm text-white/50">Bujías, correas, juntas, kits.</p>
-            </div>
-            <div class="card tilt rounded-2xl p-6 group cursor-pointer">
-                <div class="w-12 h-12 rounded-xl bg-brand-amber/10 border border-brand-amber/20 flex items-center justify-center mb-5">
-                    <i data-lucide="circle-dot" class="w-6 h-6 text-brand-amber"></i>
-                </div>
-                <div class="text-xs text-white/40 mb-1 tracking-wider uppercase">+650 productos</div>
-                <h3 class="display text-2xl text-white mb-1">LLANTAS</h3>
-                <p class="text-sm text-white/50">Rin, cauchos, sensores TPMS.</p>
-            </div>
-            <div class="card tilt rounded-2xl p-6 group cursor-pointer">
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-5">
-                    <i data-lucide="battery-charging" class="w-6 h-6 text-emerald-400"></i>
-                </div>
-                <div class="text-xs text-white/40 mb-1 tracking-wider uppercase">+420 productos</div>
-                <h3 class="display text-2xl text-white mb-1">BATERÍAS</h3>
-                <p class="text-sm text-white/50">12V, 24V, AGM, libres mantenimiento.</p>
-            </div>
-            <div class="card tilt rounded-2xl p-6 group cursor-pointer">
-                <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-5">
-                    <i data-lucide="lightbulb" class="w-6 h-6 text-blue-400"></i>
-                </div>
-                <div class="text-xs text-white/40 mb-1 tracking-wider uppercase">+780 productos</div>
-                <h3 class="display text-2xl text-white mb-1">ILUMINACIÓN</h3>
-                <p class="text-sm text-white/50">LED, halógenas, faros, traseras.</p>
-            </div>
-            <div class="card tilt rounded-2xl p-6 group cursor-pointer">
-                <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-5">
-                    <i data-lucide="droplet" class="w-6 h-6 text-purple-400"></i>
-                </div>
-                <div class="text-xs text-white/40 mb-1 tracking-wider uppercase">+540 productos</div>
-                <h3 class="display text-2xl text-white mb-1">ACEITES &amp; FILTROS</h3>
-                <p class="text-sm text-white/50">Sintéticos, semis, aire, aceite.</p>
-            </div>
-            <div class="card tilt rounded-2xl p-6 group cursor-pointer">
-                <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center mb-5">
-                    <i data-lucide="shield" class="w-6 h-6 text-pink-400"></i>
-                </div>
-                <div class="text-xs text-white/40 mb-1 tracking-wider uppercase">+310 productos</div>
-                <h3 class="display text-2xl text-white mb-1">CARROCERÍA</h3>
-                <p class="text-sm text-white/50">Parachoques, espejos, paneles.</p>
-            </div>
-            <div class="card tilt rounded-2xl p-6 group cursor-pointer">
-                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-5">
-                    <i data-lucide="cable" class="w-6 h-6 text-cyan-400"></i>
-                </div>
-                <div class="text-xs text-white/40 mb-1 tracking-wider uppercase">+460 productos</div>
-                <h3 class="display text-2xl text-white mb-1">ELÉCTRICO</h3>
-                <p class="text-sm text-white/50">Alternadores, arranque, fusibles.</p>
-            </div>
+        <div class="cat-grid reveal">
+            <article class="card cat-card">
+                <div class="ico ico-red"><svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-disc"/></svg></div>
+                <small>+1.2k productos</small><h3>FRENOS</h3>
+                <p>Pastillas, discos, mordazas, líquidos.</p>
+            </article>
+            <article class="card cat-card">
+                <div class="ico ico-orange"><svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-cog"/></svg></div>
+                <small>+980 productos</small><h3>MOTOR</h3>
+                <p>Bujías, correas, juntas, kits.</p>
+            </article>
+            <article class="card cat-card">
+                <div class="ico ico-amber"><svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-tire"/></svg></div>
+                <small>+650 productos</small><h3>LLANTAS</h3>
+                <p>Rines, cauchos, sensores TPMS.</p>
+            </article>
+            <article class="card cat-card">
+                <div class="ico ico-green"><svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-battery"/></svg></div>
+                <small>+420 productos</small><h3>BATERÍAS</h3>
+                <p>12V, 24V, AGM, libres de mantenimiento.</p>
+            </article>
+            <article class="card cat-card">
+                <div class="ico ico-blue"><svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-bulb"/></svg></div>
+                <small>+780 productos</small><h3>ILUMINACIÓN</h3>
+                <p>LED, halógenas, faros, traseras.</p>
+            </article>
+            <article class="card cat-card">
+                <div class="ico ico-purple"><svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-droplet"/></svg></div>
+                <small>+540 productos</small><h3>ACEITES &amp; FILTROS</h3>
+                <p>Sintéticos, semis, aire, aceite.</p>
+            </article>
+            <article class="card cat-card">
+                <div class="ico ico-pink"><svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-shield-plain"/></svg></div>
+                <small>+310 productos</small><h3>CARROCERÍA</h3>
+                <p>Parachoques, espejos, paneles.</p>
+            </article>
+            <article class="card cat-card">
+                <div class="ico ico-cyan"><svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-cable"/></svg></div>
+                <small>+460 productos</small><h3>ELÉCTRICO</h3>
+                <p>Alternadores, arranque, fusibles.</p>
+            </article>
         </div>
     </div>
 </section>
 
-<!-- ===== HOW IT WORKS ===== -->
-<section id="como-funciona" class="py-24 carbon relative noise">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div class="text-center mb-16 reveal">
-            <div class="chip mb-4 mx-auto"><i data-lucide="flag" class="w-3.5 h-3.5"></i> Pit Stop en 3 pasos</div>
-            <h2 class="section-title">DEL <span class="grad-text">CLIC</span> AL <span class="grad-text">CIERRE</span></h2>
-            <p class="text-white/60 mt-4 max-w-xl mx-auto">Diseñado para que tiendas y conductores se encuentren sin perder tiempo.</p>
+<!-- ============ CÓMO FUNCIONA ============ -->
+<section id="como-funciona" class="carbon" style="border-block:1px solid var(--line)">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <span class="chip"><svg class="icon"><use href="#i-flag"/></svg> Guía rápida</span>
+            <h2 class="section-title">ASÍ FUNCIONA <span class="grad-text">TURBI</span></h2>
+            <p>Tres pasos para cada lado de la pista: si manejas, encuentra; si vendes, conecta.</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6 reveal">
-            <div class="card rounded-3xl p-8 relative">
-                <div class="step-num text-7xl mb-4">01</div>
-                <div class="flex items-center gap-3 mb-3">
-                    <i data-lucide="shield-check" class="w-5 h-5 text-brand-red"></i>
-                    <h4 class="text-xl font-bold text-white">Verificación</h4>
-                </div>
-                <p class="text-white/60 leading-relaxed">Registro con RIF, foto del local y video de validación. Obtén el sello de tienda confiable.</p>
-                <div class="absolute top-6 right-6 text-white/20">
-                    <i data-lucide="badge-check" class="w-8 h-8"></i>
-                </div>
-            </div>
-
-            <div class="card rounded-3xl p-8 relative">
-                <div class="step-num text-7xl mb-4">02</div>
-                <div class="flex items-center gap-3 mb-3">
-                    <i data-lucide="package" class="w-5 h-5 text-brand-red"></i>
-                    <h4 class="text-xl font-bold text-white">Publicación</h4>
-                </div>
-                <p class="text-white/60 leading-relaxed">Sube tu inventario con fotos, categorías, disponibilidad y precios en cuestión de minutos.</p>
-                <div class="absolute top-6 right-6 text-white/20">
-                    <i data-lucide="upload-cloud" class="w-8 h-8"></i>
-                </div>
-            </div>
-
-            <div class="card rounded-3xl p-8 relative">
-                <div class="step-num text-7xl mb-4">03</div>
-                <div class="flex items-center gap-3 mb-3">
-                    <i data-lucide="message-circle" class="w-5 h-5 text-brand-red"></i>
-                    <h4 class="text-xl font-bold text-white">Conexión</h4>
-                </div>
-                <p class="text-white/60 leading-relaxed">Recibe leads por chat interno o redirígelos directo a tu WhatsApp para cerrar ventas.</p>
-                <div class="absolute top-6 right-6 text-white/20">
-                    <i data-lucide="zap" class="w-8 h-8"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== BENEFITS SPLIT ===== -->
-<section id="beneficios" class="py-24 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 reveal">
-            <div class="chip mb-4 mx-auto"><i data-lucide="users" class="w-3.5 h-3.5"></i> Diseñado para los dos lados</div>
-            <h2 class="section-title">UNA APP, <span class="grad-text">DOS MUNDOS</span></h2>
-        </div>
-
-        <div class="grid lg:grid-cols-2 gap-6 reveal">
-            <!-- Drivers -->
-            <div class="card rounded-3xl p-10 relative overflow-hidden">
-                <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-brand-red/10 blur-3xl"></div>
-                <div class="relative">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-red to-brand-orange flex items-center justify-center">
-                            <i data-lucide="search" class="w-6 h-6 text-white"></i>
-                        </div>
-                        <span class="text-xs uppercase tracking-widest text-white/40">Conductor</span>
+        <div class="how-grid reveal">
+            <!-- Conductores -->
+            <div>
+                <div class="how-col-title">
+                    <div class="ico" style="background:linear-gradient(135deg,var(--red),var(--orange))">
+                        <svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-search"/></svg>
                     </div>
-                    <h3 class="display text-5xl text-white mb-3">PARA TI<br>QUE MANEJAS</h3>
-                    <p class="text-white/55 mb-8">Encuentra exactamente el repuesto que tu carro pide.</p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-4">
-                            <div class="w-8 h-8 rounded-lg bg-brand-red/10 border border-brand-red/30 flex items-center justify-center shrink-0 mt-0.5">
-                                <i data-lucide="filter" class="w-4 h-4 text-brand-red"></i>
-                            </div>
-                            <div>
-                                <div class="text-white font-semibold">Búsqueda inteligente</div>
-                                <div class="text-white/50 text-sm">Marca · modelo · año · versión. Sin perder tiempo.</div>
-                            </div>
+                    <div><small>Si manejas</small><h3>PARA CONDUCTORES</h3></div>
+                </div>
+                <div class="card step">
+                    <div class="step-num">01</div>
+                    <div>
+                        <h4><svg class="icon"><use href="#i-filter"/></svg> Busca tu repuesto</h4>
+                        <p>Entra desde la web o la app y filtra por marca, modelo, año y categoría. Sin llamadas, sin vueltas.</p>
+                    </div>
+                </div>
+                <div class="card step">
+                    <div class="step-num">02</div>
+                    <div>
+                        <h4><svg class="icon"><use href="#i-badge"/></svg> Compara tiendas verificadas</h4>
+                        <p>Revisa precios, disponibilidad, reputación y ubicación. Solo negocios con RIF validado y sello TURBI.</p>
+                    </div>
+                </div>
+                <div class="card step">
+                    <div class="step-num">03</div>
+                    <div>
+                        <h4><svg class="icon"><use href="#i-chat"/></svg> Contacta y coordina</h4>
+                        <p>Escríbele a la tienda por chat interno o WhatsApp y acuerda la compra directamente. Gratis para ti, siempre.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tiendas -->
+            <div>
+                <div class="how-col-title">
+                    <div class="ico" style="background:linear-gradient(135deg,var(--orange),var(--amber))">
+                        <svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-store"/></svg>
+                    </div>
+                    <div><small>Si vendes</small><h3>PARA TIENDAS</h3></div>
+                </div>
+                <div class="card step">
+                    <div class="step-num">01</div>
+                    <div>
+                        <h4><svg class="icon"><use href="#i-shield"/></svg> Verifica tu negocio</h4>
+                        <p>Regístrate con RIF, foto del local y video de validación. Obtén el sello de tienda confiable en menos de 24h.</p>
+                    </div>
+                </div>
+                <div class="card step">
+                    <div class="step-num">02</div>
+                    <div>
+                        <h4><svg class="icon"><use href="#i-upload"/></svg> Publica tu inventario</h4>
+                        <p>Sube productos con fotos, categorías, disponibilidad y precios desde tu panel web o la app, en minutos.</p>
+                    </div>
+                </div>
+                <div class="card step">
+                    <div class="step-num">03</div>
+                    <div>
+                        <h4><svg class="icon"><use href="#i-zap"/></svg> Recibe clientes y vende</h4>
+                        <p>Los conductores que buscan lo que vendes te encuentran. Recibe leads por chat o directo a tu WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ BENEFICIOS ============ -->
+<section id="beneficios">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <span class="chip"><svg class="icon"><use href="#i-users"/></svg> Diseñado para los dos lados</span>
+            <h2 class="section-title">UNA PLATAFORMA, <span class="grad-text">DOS MUNDOS</span></h2>
+        </div>
+
+        <div class="ben-grid reveal">
+            <article class="card ben-card">
+                <div class="halo" style="top:-5rem;right:-5rem;background:rgba(255,0,77,.1)"></div>
+                <div class="inner">
+                    <div class="ben-tag">
+                        <div class="ico" style="background:linear-gradient(135deg,var(--red),var(--orange))">
+                            <svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-search"/></svg>
+                        </div>
+                        <span>Conductor</span>
+                    </div>
+                    <h3>PARA TI<br>QUE MANEJAS</h3>
+                    <p>Encuentra exactamente el repuesto que tu carro pide.</p>
+                    <ul class="ben-list">
+                        <li>
+                            <div class="ico ico-red"><svg class="icon"><use href="#i-filter"/></svg></div>
+                            <div><b>Búsqueda inteligente</b><span>Marca · modelo · año · versión. Sin perder tiempo.</span></div>
                         </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-8 h-8 rounded-lg bg-brand-red/10 border border-brand-red/30 flex items-center justify-center shrink-0 mt-0.5">
-                                <i data-lucide="badge-check" class="w-4 h-4 text-brand-red"></i>
-                            </div>
-                            <div>
-                                <div class="text-white font-semibold">Tiendas con sello verificado</div>
-                                <div class="text-white/50 text-sm">Solo negocios con RIF validado y reputación.</div>
-                            </div>
+                        <li>
+                            <div class="ico ico-red"><svg class="icon"><use href="#i-badge"/></svg></div>
+                            <div><b>Tiendas con sello verificado</b><span>Solo negocios con RIF validado y reputación.</span></div>
                         </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-8 h-8 rounded-lg bg-brand-red/10 border border-brand-red/30 flex items-center justify-center shrink-0 mt-0.5">
-                                <i data-lucide="message-square" class="w-4 h-4 text-brand-red"></i>
-                            </div>
-                            <div>
-                                <div class="text-white font-semibold">Chat directo o WhatsApp</div>
-                                <div class="text-white/50 text-sm">Tú decides el canal para cerrar la compra.</div>
-                            </div>
+                        <li>
+                            <div class="ico ico-red"><svg class="icon"><use href="#i-chat"/></svg></div>
+                            <div><b>Chat directo o WhatsApp</b><span>Tú decides el canal para cerrar la compra.</span></div>
                         </li>
                     </ul>
-                    <a data-users-app href="#" target="_self" class="inline-flex items-center gap-2 mt-8 text-brand-red font-bold hover:gap-3 transition-all">
-                        Entrar a la app
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    <a data-users-app href="#" class="link-arrow" style="color:var(--red);margin-top:1.4rem">
+                        Entrar a la app <svg class="icon"><use href="#i-arrow-r"/></svg>
+                    </a>
+                </div>
+            </article>
+
+            <article class="card ben-card">
+                <div class="halo" style="top:-5rem;left:-5rem;background:rgba(255,94,0,.1)"></div>
+                <div class="inner">
+                    <div class="ben-tag">
+                        <div class="ico" style="background:linear-gradient(135deg,var(--orange),var(--amber))">
+                            <svg class="icon" style="width:1.4rem;height:1.4rem"><use href="#i-store"/></svg>
+                        </div>
+                        <span>Tienda</span>
+                    </div>
+                    <h3>PARA LA<br>TIENDA</h3>
+                    <p>Llega a clientes que buscan exactamente lo que vendes.</p>
+                    <ul class="ben-list">
+                        <li>
+                            <div class="ico ico-orange"><svg class="icon"><use href="#i-trend"/></svg></div>
+                            <div><b>Escala tus ventas</b><span>Inventario digital + alcance instantáneo.</span></div>
+                        </li>
+                        <li>
+                            <div class="ico ico-orange"><svg class="icon"><use href="#i-award"/></svg></div>
+                            <div><b>Sello verificado</b><span>Destaca con perfil oficial y reseñas reales.</span></div>
+                        </li>
+                        <li>
+                            <div class="ico ico-orange"><svg class="icon"><use href="#i-chart"/></svg></div>
+                            <div><b>Métricas claras</b><span>Vistas, leads y clics directos a WhatsApp.</span></div>
+                        </li>
+                    </ul>
+                    <a data-shop-cta href="#" class="link-arrow" style="color:var(--orange);margin-top:1.4rem">
+                        Registrar mi tienda <svg class="icon"><use href="#i-arrow-r"/></svg>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats carbon">
+    <div class="wrap">
+        <div class="stats-grid reveal">
+            <div><div class="stat-num grad-text" data-count="50" data-suffix="+">0</div><small>Tiendas verificadas</small></div>
+            <div><div class="stat-num grad-text" data-count="1000" data-suffix="+">0</div><small>En lista de espera</small></div>
+            <div><div class="stat-num grad-text" data-count="12" data-suffix="">0</div><small>Categorías</small></div>
+            <div><div class="stat-num grad-text" data-count="98" data-suffix="%">0</div><small>Tasa de respuesta</small></div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ APP MÓVIL ============ -->
+<section id="app">
+    <div class="wrap">
+        <div class="app-grid">
+            <div class="reveal" style="order:2">
+                <div class="phone" aria-hidden="true">
+                    <div class="p-search"><svg class="icon"><use href="#i-search"/></svg> Pastillas de freno Aveo 2012…</div>
+                    <div class="p-chiprow">
+                        <span class="p-chip on">Chevrolet</span><span class="p-chip on">Aveo</span><span class="p-chip on">2012</span><span class="p-chip">Frenos</span>
+                    </div>
+                    <div class="p-item">
+                        <div class="thumb ico-red"><svg class="icon"><use href="#i-disc"/></svg></div>
+                        <div><b>Pastillas delanteras cerámicas</b>
+                        <small><span class="p-verified"><svg class="icon" style="width:.7rem;height:.7rem"><use href="#i-badge"/></svg> Repuestos Alfa</span> · 1.2 km</small></div>
+                        <span class="price">$18</span>
+                    </div>
+                    <div class="p-item">
+                        <div class="thumb ico-orange"><svg class="icon"><use href="#i-disc"/></svg></div>
+                        <div><b>Kit pastillas + discos</b>
+                        <small><span class="p-verified"><svg class="icon" style="width:.7rem;height:.7rem"><use href="#i-badge"/></svg> AutoMotor 2010</span> · 3.5 km</small></div>
+                        <span class="price">$52</span>
+                    </div>
+                    <div class="p-item">
+                        <div class="thumb ico-amber"><svg class="icon"><use href="#i-disc"/></svg></div>
+                        <div><b>Pastillas semi-metálicas</b>
+                        <small><span class="p-verified"><svg class="icon" style="width:.7rem;height:.7rem"><use href="#i-badge"/></svg> Frenos del Este</span> · 5 km</small></div>
+                        <span class="price">$14</span>
+                    </div>
+                    <div class="p-item" style="background:rgba(255,0,77,.1);border-color:rgba(255,0,77,.3);justify-content:center">
+                        <b style="font-size:.7rem;color:#FF8AAD">💬 3 tiendas respondieron tu búsqueda</b>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal" style="order:1">
+                <span class="chip"><svg class="icon"><use href="#i-phone"/></svg> iOS &amp; Android</span>
+                <h2 class="section-title">TODO EL TALLER<br>EN TU <span class="grad-text">BOLSILLO</span></h2>
+                <p style="color:var(--txt-2);margin:1.2rem 0 2rem;max-width:30rem">
+                    La app de TURBI lleva el ecosistema completo al teléfono: búsqueda, chat,
+                    notificaciones y, para las tiendas, gestión de inventario y leads en tiempo real.
+                </p>
+                <div class="app-feat">
+                    <div class="ico ico-red"><svg class="icon"><use href="#i-bell"/></svg></div>
+                    <div><b>Notificaciones al instante</b><span>Entérate apenas una tienda responde tu búsqueda.</span></div>
+                </div>
+                <div class="app-feat">
+                    <div class="ico ico-orange"><svg class="icon"><use href="#i-pin"/></svg></div>
+                    <div><b>Tiendas cerca de ti</b><span>Resultados ordenados por distancia y reputación.</span></div>
+                </div>
+                <div class="app-feat">
+                    <div class="ico ico-amber"><svg class="icon"><use href="#i-package"/></svg></div>
+                    <div><b>Modo tienda incluido</b><span>Publica productos y atiende leads desde el mismo teléfono.</span></div>
+                </div>
+                <div class="eco-badges" style="margin-top:2rem">
+                    <a href="#" class="store-badge" aria-label="Próximamente en App Store">
+                        <svg viewBox="0 0 24 24"><use href="#i-apple"/></svg>
+                        <span><small>Próximamente en</small><b>App Store</b></span>
+                    </a>
+                    <a href="#" class="store-badge" aria-label="Próximamente en Google Play">
+                        <svg viewBox="0 0 24 24"><use href="#i-gplay"/></svg>
+                        <span><small>Próximamente en</small><b>Google Play</b></span>
                     </a>
                 </div>
             </div>
-
-            <!-- Shops -->
-            <div class="card rounded-3xl p-10 relative overflow-hidden">
-                <div class="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-brand-orange/10 blur-3xl"></div>
-                <div class="relative">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-orange to-brand-amber flex items-center justify-center">
-                            <i data-lucide="store" class="w-6 h-6 text-white"></i>
-                        </div>
-                        <span class="text-xs uppercase tracking-widest text-white/40">Tienda</span>
-                    </div>
-                    <h3 class="display text-5xl text-white mb-3">PARA LA<br>TIENDA</h3>
-                    <p class="text-white/55 mb-8">Llega a clientes que buscan exactamente lo que vendes.</p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-4">
-                            <div class="w-8 h-8 rounded-lg bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center shrink-0 mt-0.5">
-                                <i data-lucide="trending-up" class="w-4 h-4 text-brand-orange"></i>
-                            </div>
-                            <div>
-                                <div class="text-white font-semibold">Escala tus ventas</div>
-                                <div class="text-white/50 text-sm">Inventario digital + alcance instantáneo.</div>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-8 h-8 rounded-lg bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center shrink-0 mt-0.5">
-                                <i data-lucide="award" class="w-4 h-4 text-brand-orange"></i>
-                            </div>
-                            <div>
-                                <div class="text-white font-semibold">Sello verificado</div>
-                                <div class="text-white/50 text-sm">Destaca con perfil oficial y reseñas reales.</div>
-                            </div>
-                        </li>
-                        <li class="flex items-start gap-4">
-                            <div class="w-8 h-8 rounded-lg bg-brand-orange/10 border border-brand-orange/30 flex items-center justify-center shrink-0 mt-0.5">
-                                <i data-lucide="bar-chart-3" class="w-4 h-4 text-brand-orange"></i>
-                            </div>
-                            <div>
-                                <div class="text-white font-semibold">Métricas claras</div>
-                                <div class="text-white/50 text-sm">Vistas, leads y clics directos a WhatsApp.</div>
-                            </div>
-                        </li>
-                    </ul>
-                    <a data-shop-cta href="#" class="inline-flex items-center gap-2 mt-8 text-brand-orange font-bold hover:gap-3 transition-all cursor-pointer">
-                        Registrar mi tienda
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
 </section>
 
-<!-- ===== STATS ===== -->
-<section class="py-24 carbon relative noise border-y border-white/5">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center reveal">
-            <div>
-                <div class="stat-num grad-text" data-count="50">0</div>
-                <div class="text-white/50 text-sm uppercase tracking-widest mt-2">Tiendas verificadas</div>
-            </div>
-            <div>
-                <div class="stat-num grad-text" data-count="1000">0</div>
-                <div class="text-white/50 text-sm uppercase tracking-widest mt-2">En lista de espera</div>
-            </div>
-            <div>
-                <div class="stat-num grad-text" data-count="12">0</div>
-                <div class="text-white/50 text-sm uppercase tracking-widest mt-2">Categorías</div>
-            </div>
-            <div>
-                <div class="stat-num grad-text" data-count="98">0</div>
-                <div class="text-white/50 text-sm uppercase tracking-widest mt-2">% Tasa de respuesta</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== PRICING ===== -->
-<section id="precios" class="py-24 relative">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12 reveal">
-            <div class="chip mb-4 mx-auto"><i data-lucide="rocket" class="w-3.5 h-3.5"></i> Empieza gratis</div>
+<!-- ============ PRECIOS ============ -->
+<section id="precios" class="carbon" style="border-block:1px solid var(--line)">
+    <div class="wrap" style="max-width:64rem">
+        <div class="section-head reveal">
+            <span class="chip"><svg class="icon"><use href="#i-rocket"/></svg> Empieza gratis</span>
             <h2 class="section-title">PLANES PARA <span class="grad-text">ACELERAR</span></h2>
         </div>
 
-        <!-- Launch banner -->
-        <div class="reveal relative rounded-3xl p-1 mb-12 overflow-hidden">
-            <div class="absolute inset-0 race-tape opacity-20"></div>
-            <div class="relative rounded-3xl bg-gradient-to-r from-brand-red via-brand-orange to-brand-amber p-8 text-center">
-                <div class="absolute top-4 right-4 chip" style="background:rgba(0,0,0,.25); border-color:rgba(255,255,255,.25); color:#fff;">EXCLUSIVO CARACAS</div>
-                <h3 class="display text-4xl md:text-5xl text-white">3 MESES GRATIS DEL PLAN PRO</h3>
-                <p class="text-white/85 mt-2">Asiste al evento oficial de lanzamiento y obtén el upgrade directo, sin compromiso.</p>
-            </div>
+        <div class="promo-banner reveal">
+            <span class="tag">EXCLUSIVO CARACAS</span>
+            <h3>3 MESES GRATIS DEL PLAN PRO</h3>
+            <p>Asiste al evento oficial de lanzamiento y obtén el upgrade directo, sin compromiso.</p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-6 items-stretch reveal">
-            <!-- Free -->
-            <div class="card rounded-3xl p-8 flex flex-col">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 class="display text-3xl">PLAN FREE</h3>
-                    <i data-lucide="gift" class="w-6 h-6 text-white/40"></i>
+        <div class="price-grid reveal">
+            <article class="card price-card">
+                <div class="top">
+                    <h3>PLAN FREE</h3>
+                    <svg class="icon" style="color:var(--txt-3);width:1.4rem;height:1.4rem"><use href="#i-gift"/></svg>
                 </div>
-                <p class="text-white/60 text-sm">Perfecto para conocer la plataforma.</p>
-                <div class="mt-6 mb-8">
-                    <div class="display text-7xl">$0</div>
-                    <div class="text-white/40 text-sm mt-1">primeros 30 días</div>
-                </div>
-                <ul class="space-y-3 mb-8 flex-1">
-                    <li class="flex items-center gap-3 text-white/80"><i data-lucide="check" class="w-4 h-4 text-white/40"></i> Perfil de tienda básico</li>
-                    <li class="flex items-center gap-3 text-white/80"><i data-lucide="check" class="w-4 h-4 text-white/40"></i> Publicación de productos</li>
-                    <li class="flex items-center gap-3 text-white/80"><i data-lucide="check" class="w-4 h-4 text-white/40"></i> Leads por chat y WhatsApp</li>
-                    <li class="flex items-center gap-3 text-white/40 line-through"><i data-lucide="x" class="w-4 h-4"></i> Sello verificado</li>
-                    <li class="flex items-center gap-3 text-white/40 line-through"><i data-lucide="x" class="w-4 h-4"></i> Posicionamiento destacado</li>
+                <p class="desc">Perfecto para conocer la plataforma.</p>
+                <div class="price-num">$0</div>
+                <div class="price-per">primeros 30 días</div>
+                <ul class="feat-list">
+                    <li><svg class="icon" style="color:var(--txt-3)"><use href="#i-check"/></svg> Perfil de tienda básico</li>
+                    <li><svg class="icon" style="color:var(--txt-3)"><use href="#i-check"/></svg> Publicación de productos</li>
+                    <li><svg class="icon" style="color:var(--txt-3)"><use href="#i-check"/></svg> Leads por chat y WhatsApp</li>
+                    <li class="no"><svg class="icon"><use href="#i-close"/></svg> Sello verificado</li>
+                    <li class="no"><svg class="icon"><use href="#i-close"/></svg> Posicionamiento destacado</li>
                 </ul>
-                <button data-shop-cta class="btn-ghost w-full py-3 rounded-full font-bold">Comenzar gratis</button>
-            </div>
+                <button data-shop-cta class="btn btn-ghost" style="width:100%">Comenzar gratis</button>
+            </article>
 
-            <!-- PRO -->
-            <div class="relative">
-                <div class="glow-ring rounded-3xl"></div>
-                <div class="card rounded-3xl p-8 flex flex-col relative" style="background:linear-gradient(180deg, #150506 0%, #0a0405 100%); border-color: rgba(255,0,77,.4);">
-                    <div class="absolute -top-3 left-8 chip" style="background:linear-gradient(95deg,#FF004D,#FF5E00); border:none; color:#fff;">
-                        🔥 MÁS POPULAR
+            <div class="pro-wrap">
+                <article class="card price-card pro-card">
+                    <span class="pro-badge">🔥 MÁS POPULAR</span>
+                    <div class="top" style="margin-top:.5rem">
+                        <h3>PLAN PRO</h3>
+                        <svg class="icon" style="color:var(--amber);width:1.4rem;height:1.4rem"><use href="#i-crown"/></svg>
                     </div>
-                    <div class="flex items-center justify-between mb-6 mt-2">
-                        <h3 class="display text-3xl text-white">PLAN PRO</h3>
-                        <i data-lucide="crown" class="w-6 h-6 text-brand-amber"></i>
-                    </div>
-                    <p class="text-white/60 text-sm">Para tiendas listas para escalar.</p>
-                    <div class="mt-6 mb-8 flex items-end gap-3">
-                        <div class="display text-7xl grad-text">$29.99</div>
-                        <div class="text-white/50 text-sm pb-3">/ mes</div>
-                    </div>
-                    <ul class="space-y-3 mb-8 flex-1">
-                        <li class="flex items-center gap-3 text-white"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Todo lo del plan Free</li>
-                        <li class="flex items-center gap-3 text-white"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Sello de tienda verificada</li>
-                        <li class="flex items-center gap-3 text-white"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Posicionamiento destacado</li>
-                        <li class="flex items-center gap-3 text-white"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Métricas avanzadas de leads</li>
-                        <li class="flex items-center gap-3 text-white"><i data-lucide="check" class="w-4 h-4 text-brand-red"></i> Soporte prioritario</li>
+                    <p class="desc">Para tiendas listas para escalar.</p>
+                    <div class="price-num grad-text">$29.99<span style="font-size:1rem;color:var(--txt-3);-webkit-text-fill-color:var(--txt-3)"> / mes</span></div>
+                    <div class="price-per">facturación mensual</div>
+                    <ul class="feat-list">
+                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Todo lo del plan Free</li>
+                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Sello de tienda verificada</li>
+                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Posicionamiento destacado</li>
+                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Métricas avanzadas de leads</li>
+                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Soporte prioritario</li>
                     </ul>
-                    <button data-shop-cta class="btn-primary w-full py-3 rounded-full font-bold text-white">Obtener plan PRO</button>
-                </div>
+                    <button data-shop-cta class="btn btn-primary" style="width:100%">Obtener plan PRO</button>
+                </article>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== TESTIMONIALS ===== -->
-<section class="py-24 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16 reveal">
-            <div class="chip mb-4 mx-auto"><i data-lucide="quote" class="w-3.5 h-3.5"></i> Lo que dicen los pilotos</div>
+<!-- ============ TESTIMONIOS ============ -->
+<section>
+    <div class="wrap">
+        <div class="section-head reveal">
+            <span class="chip"><svg class="icon"><use href="#i-quote"/></svg> Lo que dicen los pilotos</span>
             <h2 class="section-title">VOCES DE LA <span class="grad-text">PISTA</span></h2>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6 reveal">
-            <div class="card rounded-3xl p-8">
-                <div class="flex gap-1 mb-4">
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
+        <div class="testi-grid reveal">
+            <article class="card testi-card">
+                <div class="stars" aria-label="5 de 5 estrellas">
+                    <svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg>
                 </div>
-                <p class="text-white/80 leading-relaxed mb-6">
-                    "Encontré las pastillas de freno de mi Aveo en menos de 5 minutos. Antes me tomaba toda la mañana llamando tiendas."
-                </p>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-red to-brand-orange flex items-center justify-center font-bold text-white">JM</div>
-                    <div>
-                        <div class="font-semibold text-white text-sm">José M.</div>
-                        <div class="text-xs text-white/40">Conductor · Caracas</div>
-                    </div>
+                <blockquote>"Encontré las pastillas de freno de mi Aveo en menos de 5 minutos. Antes me tomaba toda la mañana llamando tiendas."</blockquote>
+                <div class="testi-who">
+                    <div class="avatar" style="background:linear-gradient(135deg,var(--red),var(--orange))">JM</div>
+                    <div><b>José M.</b><small>Conductor · Caracas</small></div>
                 </div>
-            </div>
-
-            <div class="card rounded-3xl p-8">
-                <div class="flex gap-1 mb-4">
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
+            </article>
+            <article class="card testi-card">
+                <div class="stars" aria-label="5 de 5 estrellas">
+                    <svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg>
                 </div>
-                <p class="text-white/80 leading-relaxed mb-6">
-                    "Las métricas son oro puro. Sé exactamente qué productos están moviendo más leads y ajusto mi inventario rápido."
-                </p>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-orange to-brand-amber flex items-center justify-center font-bold text-white">RA</div>
-                    <div>
-                        <div class="font-semibold text-white text-sm">Repuestos Alfa</div>
-                        <div class="text-xs text-white/40">Tienda PRO · El Cementerio</div>
-                    </div>
+                <blockquote>"Las métricas son oro puro. Sé exactamente qué productos están moviendo más leads y ajusto mi inventario rápido."</blockquote>
+                <div class="testi-who">
+                    <div class="avatar" style="background:linear-gradient(135deg,var(--orange),var(--amber))">RA</div>
+                    <div><b>Repuestos Alfa</b><small>Tienda PRO · El Cementerio</small></div>
                 </div>
-            </div>
-
-            <div class="card rounded-3xl p-8">
-                <div class="flex gap-1 mb-4">
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
-                    <i data-lucide="star" class="w-4 h-4 fill-brand-amber text-brand-amber"></i>
+            </article>
+            <article class="card testi-card">
+                <div class="stars" aria-label="5 de 5 estrellas">
+                    <svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg>
                 </div>
-                <p class="text-white/80 leading-relaxed mb-6">
-                    "El sello verificado nos diferenció en una semana. Triplicamos los mensajes vs. nuestro Marketplace."
-                </p>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-amber to-brand-red flex items-center justify-center font-bold text-white">AM</div>
-                    <div>
-                        <div class="font-semibold text-white text-sm">AutoMotor 2010</div>
-                        <div class="text-xs text-white/40">Tienda PRO · La Yaguara</div>
-                    </div>
+                <blockquote>"El sello verificado nos diferenció en una semana. Triplicamos los mensajes vs. nuestro Marketplace."</blockquote>
+                <div class="testi-who">
+                    <div class="avatar" style="background:linear-gradient(135deg,var(--amber),var(--red))">AM</div>
+                    <div><b>AutoMotor 2010</b><small>Tienda PRO · La Yaguara</small></div>
                 </div>
-            </div>
+            </article>
         </div>
     </div>
 </section>
 
-<!-- ===== FINAL CTA ===== -->
-<section class="py-20 relative overflow-hidden">
-    <div class="absolute inset-0 grad-fire"></div>
-    <div class="absolute inset-0 grid-bg opacity-40"></div>
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div class="card rounded-3xl p-10 md:p-14 text-center relative overflow-hidden noise">
-            <div class="absolute -top-20 -left-20 w-72 h-72 rounded-full bg-brand-red/30 blur-3xl"></div>
-            <div class="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-brand-orange/30 blur-3xl"></div>
-            <div class="relative">
-                <div class="chip mb-6 mx-auto"><i data-lucide="rocket" class="w-3.5 h-3.5"></i> Próximamente en App Store y Google Play</div>
-                <h2 class="display text-5xl md:text-7xl mb-4 leading-none">SÉ DE LOS <span class="grad-text">PRIMEROS</span></h2>
-                <p class="text-white/65 text-lg max-w-xl mx-auto mb-8">Déjanos tu correo y recibe novedades y ofertas de TURBI. Bonus si te unes desde Caracas.</p>
-                <form id="waitlist-form" class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+<!-- ============ FAQ ============ -->
+<section id="faq" class="carbon" style="border-top:1px solid var(--line)">
+    <div class="wrap">
+        <div class="section-head reveal">
+            <span class="chip"><svg class="icon"><use href="#i-chat"/></svg> Preguntas frecuentes</span>
+            <h2 class="section-title">¿DUDAS? <span class="grad-text">AQUÍ VAN</span></h2>
+        </div>
+
+        <div class="faq-list reveal">
+            <details class="faq-item">
+                <summary>¿Qué es TURBI?</summary>
+                <div>TURBI es un ecosistema venezolano (web + app móvil para iOS y Android) que conecta conductores con tiendas de autopartes verificadas. Los conductores buscan repuestos por marca, modelo y año; las tiendas publican su inventario y reciben clientes.</div>
+            </details>
+            <details class="faq-item">
+                <summary>¿Cuánto cuesta usar TURBI como conductor?</summary>
+                <div>Para los conductores TURBI es totalmente gratis: buscar repuestos, comparar tiendas y contactarlas por chat o WhatsApp no tiene ningún costo.</div>
+            </details>
+            <details class="faq-item">
+                <summary>¿Cómo registro mi tienda de repuestos en TURBI?</summary>
+                <div>Completa el formulario de registro con el nombre del negocio, RIF y datos de contacto. Nuestro equipo te contacta en menos de 24 horas para verificar tu negocio y activar tu panel de tienda.</div>
+            </details>
+            <details class="faq-item">
+                <summary>¿TURBI tiene app móvil?</summary>
+                <div>Sí. TURBI tendrá app para iOS y Android, tanto para conductores como para tiendas. Mientras tanto, ya puedes usar la versión web para buscar repuestos y el portal web para gestionar tu tienda.</div>
+            </details>
+            <details class="faq-item">
+                <summary>¿En qué ciudades está disponible TURBI?</summary>
+                <div>El lanzamiento oficial es en Caracas, con expansión progresiva al resto de Venezuela. Únete a la lista de espera para enterarte cuando llegue a tu ciudad.</div>
+            </details>
+            <details class="faq-item">
+                <summary>¿TURBI vende los repuestos directamente?</summary>
+                <div>No. TURBI conecta conductores con tiendas de autopartes verificadas con RIF validado. La compra se acuerda directamente con la tienda, por chat interno o WhatsApp.</div>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="final-cta">
+    <div class="grid-bg" aria-hidden="true" style="opacity:.5"></div>
+    <div class="wrap" style="max-width:56rem;position:relative">
+        <div class="card reveal">
+            <div class="halo" style="position:absolute;top:-5rem;left:-5rem;width:18rem;height:18rem;border-radius:50%;filter:blur(60px);background:rgba(255,0,77,.25)"></div>
+            <div class="halo" style="position:absolute;bottom:-5rem;right:-5rem;width:18rem;height:18rem;border-radius:50%;filter:blur(60px);background:rgba(255,94,0,.25)"></div>
+            <div style="position:relative">
+                <span class="chip"><svg class="icon"><use href="#i-rocket"/></svg> Próximamente en App Store y Google Play</span>
+                <h2>SÉ DE LOS <span class="grad-text">PRIMEROS</span></h2>
+                <p>Déjanos tu correo y recibe novedades y ofertas de TURBI. Bonus si te unes desde Caracas.</p>
+                <form id="waitlist-form" class="wait-form">
                     <input type="hidden" name="_subject" value="🔥 Nuevo registro waitlist TURBI">
                     <input type="hidden" name="tipo" value="waitlist-conductor">
-                    <input type="email" name="email" required placeholder="tu@correo.com" class="flex-1 px-6 py-4 rounded-full bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/30 text-white">
-                    <button type="submit" class="btn-primary px-7 py-4 rounded-full font-bold text-white whitespace-nowrap">
-                        Avísame
-                    </button>
+                    <input type="email" name="email" required placeholder="tu@correo.com" autocomplete="email" aria-label="Tu correo electrónico">
+                    <button type="submit" class="btn btn-primary">Avísame</button>
                 </form>
-                <p id="waitlist-msg" class="text-sm mt-3 hidden"></p>
+                <p id="waitlist-msg" class="form-msg" role="status"></p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== MODAL: REGISTRO DE TIENDA ===== -->
-<div id="shop-modal" class="fixed inset-0 z-[80] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md" role="dialog" aria-modal="true">
-    <div class="relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl border border-white/10 bg-ink-900 p-8 shadow-2xl">
-        <button id="close-shop" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center" aria-label="Cerrar">
-            <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
+</main>
 
-        <div class="chip mb-4"><i data-lucide="store" class="w-3.5 h-3.5"></i> Registro de tienda</div>
-        <h3 class="display text-4xl mb-2">ÚNETE COMO <span class="grad-text">TIENDA</span></h3>
-        <p class="text-white/60 text-sm mb-6">Te contactamos en menos de 24h para verificar tu negocio.</p>
-
-        <form id="shop-form" class="space-y-4">
-            <input type="hidden" name="_subject" value="🏪 Nueva tienda TURBI - Solicitud de registro">
-            <input type="hidden" name="tipo" value="registro-tienda">
-
-            <div>
-                <label class="block text-xs uppercase tracking-widest text-white/50 mb-1.5">Nombre del negocio</label>
-                <input type="text" name="nombre_negocio" required placeholder="Repuestos La Pista C.A." class="w-full px-4 py-3 rounded-xl bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/25 text-white text-sm">
-            </div>
-
-            <div>
-                <label class="block text-xs uppercase tracking-widest text-white/50 mb-1.5">Representante legal</label>
-                <input type="text" name="representante_legal" required placeholder="Nombre y apellido" class="w-full px-4 py-3 rounded-xl bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/25 text-white text-sm">
-            </div>
-
-            <div>
-                <label class="block text-xs uppercase tracking-widest text-white/50 mb-1.5">RIF</label>
-                <input type="text" name="rif" required placeholder="J-12345678-9" pattern="[JGVEPjgvep]-?\d{8,9}-?\d?" class="w-full px-4 py-3 rounded-xl bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/25 text-white text-sm uppercase">
-            </div>
-
-            <div>
-                <label class="block text-xs uppercase tracking-widest text-white/50 mb-1.5">Correo</label>
-                <input type="email" name="email" required placeholder="contacto@tutienda.com" class="w-full px-4 py-3 rounded-xl bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/25 text-white text-sm">
-            </div>
-
-            <div>
-                <label class="block text-xs uppercase tracking-widest text-white/50 mb-1.5">Teléfono / WhatsApp</label>
-                <input type="tel" name="telefono" required placeholder="+58 414-1234567" class="w-full px-4 py-3 rounded-xl bg-ink-800 border border-white/10 focus:border-brand-red focus:outline-none placeholder:text-white/25 text-white text-sm">
-            </div>
-
-            <button type="submit" id="shop-submit" class="btn-primary w-full py-4 rounded-full font-bold text-white mt-2 inline-flex items-center justify-center gap-2">
-                <span>Enviar solicitud</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </button>
-
-            <p id="shop-msg" class="text-sm text-center hidden"></p>
-            <p class="text-xs text-white/35 text-center pt-2">Al enviar, aceptas que TURBI te contacte para verificar tu negocio.</p>
-        </form>
-    </div>
-</div>
-
-<!-- ===== FOOTER ===== -->
-<footer class="bg-ink-950 border-t border-white/5 pt-16 pb-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-5 gap-10 mb-12">
-            <div class="md:col-span-2">
-                <a href="#" class="inline-flex items-center mb-5">
-                    <img src="./logo.jpeg" alt="TURBI" class="h-12 w-auto rounded-lg" />
+<!-- ============ FOOTER ============ -->
+<footer>
+    <div class="wrap">
+        <div class="foot-grid">
+            <div class="foot-brand">
+                <a href="#" aria-label="TURBI — Inicio">
+                    <img src="./logo.jpeg" alt="TURBI" width="120" height="60" loading="lazy" style="height:3rem;width:auto;border-radius:.6rem">
                 </a>
-                <p class="text-white/55 max-w-sm">Conectando conductores con tiendas de autopartes verificadas. Hecho en Venezuela 🇻🇪</p>
-                <div class="flex gap-3 mt-6">
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-brand-red/20 border border-white/10 hover:border-brand-red/40 transition flex items-center justify-center">
-                        <i data-lucide="instagram" class="w-4 h-4"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-brand-red/20 border border-white/10 hover:border-brand-red/40 transition flex items-center justify-center">
-                        <i data-lucide="twitter" class="w-4 h-4"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-brand-red/20 border border-white/10 hover:border-brand-red/40 transition flex items-center justify-center">
-                        <i data-lucide="facebook" class="w-4 h-4"></i>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-brand-red/20 border border-white/10 hover:border-brand-red/40 transition flex items-center justify-center">
-                        <i data-lucide="youtube" class="w-4 h-4"></i>
-                    </a>
+                <p>Conectando conductores con tiendas de autopartes verificadas. Web, iOS y Android. Hecho en Venezuela 🇻🇪</p>
+                <div class="foot-social">
+                    <a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a>
+                    <a href="#" aria-label="X (Twitter)"><svg class="icon"><use href="#i-x-social"/></svg></a>
+                    <a href="#" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a>
+                    <a href="#" aria-label="YouTube"><svg class="icon"><use href="#i-youtube"/></svg></a>
                 </div>
             </div>
-            <div>
-                <h4 class="text-xs uppercase tracking-widest text-white/40 mb-4">Plataforma</h4>
-                <ul class="space-y-2 text-white/70">
-                    <li><a href="#categorias" class="hover:text-brand-red transition">Categorías</a></li>
-                    <li><a href="#como-funciona" class="hover:text-brand-red transition">Cómo funciona</a></li>
-                    <li><a href="#precios" class="hover:text-brand-red transition">Precios</a></li>
-                    <li><a data-users-app href="#" target="_self" class="hover:text-brand-red transition">Buscar repuestos</a></li>
-                    <li><a data-stores-panel href="#" target="_self" class="hover:text-brand-red transition">Tiendas</a></li>
+            <div class="foot-col">
+                <h4>Plataforma</h4>
+                <ul>
+                    <li><a href="#ecosistema">Ecosistema</a></li>
+                    <li><a href="#categorias">Categorías</a></li>
+                    <li><a href="#como-funciona">Cómo funciona</a></li>
+                    <li><a href="#precios">Precios</a></li>
+                    <li><a data-users-app href="#">Buscar repuestos</a></li>
+                    <li><a data-stores-panel href="#">Portal de tiendas</a></li>
                 </ul>
             </div>
-            <div>
-                <h4 class="text-xs uppercase tracking-widest text-white/40 mb-4">Empresa</h4>
-                <ul class="space-y-2 text-white/70">
-                    <li><a href="#" class="hover:text-brand-red transition">Sobre TURBI</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition">Blog</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition">Carreras</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition">Prensa</a></li>
+            <div class="foot-col">
+                <h4>Empresa</h4>
+                <ul>
+                    <li><a href="#">Sobre TURBI</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Carreras</a></li>
+                    <li><a href="#">Prensa</a></li>
                 </ul>
             </div>
-            <div>
-                <h4 class="text-xs uppercase tracking-widest text-white/40 mb-4">Legal</h4>
-                <ul class="space-y-2 text-white/70">
-                    <li><a href="#" class="hover:text-brand-red transition">Términos</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition">Privacidad</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition">Cookies</a></li>
-                    <li><a href="#" class="hover:text-brand-red transition">Soporte</a></li>
+            <div class="foot-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Términos</a></li>
+                    <li><a href="#">Privacidad</a></li>
+                    <li><a href="#">Cookies</a></li>
+                    <li><a href="#">Soporte</a></li>
                 </ul>
             </div>
         </div>
-        <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p class="text-white/40 text-sm">© <span id="year"></span> TURBI App · Todos los derechos reservados.</p>
-            <p class="text-white/40 text-xs uppercase tracking-widest">Built with <span class="text-brand-red">♥</span> en Caracas</p>
+        <div class="foot-bottom">
+            <p>© <span id="year">2026</span> TURBI App · Todos los derechos reservados.</p>
+            <p style="text-transform:uppercase;letter-spacing:.12em;font-size:.7rem">Built with <span style="color:var(--red)">♥</span> en Caracas</p>
         </div>
     </div>
 </footer>
 
-<!-- Floating WhatsApp -->
-<a href="#" class="fab" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" class="w-7 h-7 text-white" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/></svg>
+<!-- ============ MODAL: REGISTRO DE TIENDA ============ -->
+<div id="shop-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="shop-modal-title">
+    <div class="modal-box">
+        <button id="close-shop" class="modal-close" aria-label="Cerrar">
+            <svg class="icon"><use href="#i-close"/></svg>
+        </button>
+        <span class="chip"><svg class="icon"><use href="#i-store"/></svg> Registro de tienda</span>
+        <h3 id="shop-modal-title">ÚNETE COMO <span class="grad-text">TIENDA</span></h3>
+        <p class="sub">Te contactamos en menos de 24h para verificar tu negocio.</p>
+
+        <form id="shop-form">
+            <input type="hidden" name="_subject" value="🏪 Nueva tienda TURBI - Solicitud de registro">
+            <input type="hidden" name="tipo" value="registro-tienda">
+            <div class="field">
+                <label for="f-negocio">Nombre del negocio</label>
+                <input id="f-negocio" type="text" name="nombre_negocio" required placeholder="Repuestos La Pista C.A.">
+            </div>
+            <div class="field">
+                <label for="f-rep">Representante legal</label>
+                <input id="f-rep" type="text" name="representante_legal" required placeholder="Nombre y apellido">
+            </div>
+            <div class="field">
+                <label for="f-rif">RIF</label>
+                <input id="f-rif" type="text" name="rif" required placeholder="J-12345678-9" pattern="[JGVEPjgvep]-?\d{8,9}-?\d?" style="text-transform:uppercase">
+            </div>
+            <div class="field">
+                <label for="f-email">Correo</label>
+                <input id="f-email" type="email" name="email" required placeholder="contacto@tutienda.com" autocomplete="email">
+            </div>
+            <div class="field">
+                <label for="f-tel">Teléfono / WhatsApp</label>
+                <input id="f-tel" type="tel" name="telefono" required placeholder="+58 414-1234567" autocomplete="tel">
+            </div>
+            <button type="submit" id="shop-submit" class="btn btn-primary" style="width:100%;margin-top:.5rem">
+                <span>Enviar solicitud</span> <svg class="icon"><use href="#i-arrow-r"/></svg>
+            </button>
+            <p id="shop-msg" class="form-msg" style="text-align:center" role="status"></p>
+            <p class="legal-note">Al enviar, aceptas que TURBI te contacte para verificar tu negocio.</p>
+        </form>
+    </div>
+</div>
+
+<!-- WhatsApp flotante -->
+<a href="#" class="fab" aria-label="Escríbenos por WhatsApp">
+    <svg class="icon" style="width:1.7rem;height:1.7rem;color:#fff"><use href="#i-whatsapp"/></svg>
 </a>
 
-<!-- ===== SCRIPTS ===== -->
+<!-- ============ SCRIPT (vanilla, sin dependencias) ============ -->
 <script>
-    // ============ TURBI CONFIG ============
-    // Cuando vayas a producción, cambia esta URL una sola vez aqui.
-    // Ej: 'https://tiendas.turbi.com.ve'
+(function(){
+    'use strict';
+
+    // ============ CONFIG ============
+    // Cuando vayas a producción, cambia estas URLs una sola vez aquí.
     const STORES_PANEL_URL = 'https://tiendas.turbi.com.ve/';
     const USERS_APP_URL = 'https://usuarios.turbi.com.ve/';
-
-    // Inyecta el href en cualquier <a data-stores-panel> de la landing.
-    document.querySelectorAll('[data-stores-panel]').forEach((el) => {
-      el.href = STORES_PANEL_URL;
-    });
-    document.querySelectorAll('[data-users-app]').forEach((el) => {
-      el.href = USERS_APP_URL;
-    });
-
-    // Lucide
-    lucide.createIcons();
-
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Mobile menu
-    const menu = document.getElementById('mobile-menu');
-    document.getElementById('open-menu').addEventListener('click', () => menu.classList.add('open'));
-    document.getElementById('close-menu').addEventListener('click', () => menu.classList.remove('open'));
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
-
-    // ============ FORMSPREE INTEGRATION ============
     const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xyklvrjv';
 
-    // Generic AJAX submit helper for Formspree
-    async function submitToFormspree(form, msgEl, btnEl, successText) {
-        const originalBtnHTML = btnEl.innerHTML;
-        btnEl.disabled = true;
-        btnEl.innerHTML = 'Enviando...';
-        msgEl.classList.add('hidden');
+    document.querySelectorAll('[data-stores-panel]').forEach(el => { el.href = STORES_PANEL_URL; });
+    document.querySelectorAll('[data-users-app]').forEach(el => { el.href = USERS_APP_URL; });
 
+    // Año
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ============ MENÚ MÓVIL ============
+    const menu = document.getElementById('mobile-menu');
+    document.getElementById('open-menu').addEventListener('click', () => {
+        menu.classList.add('open'); menu.setAttribute('aria-hidden','false');
+    });
+    const closeMenu = () => { menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); };
+    document.getElementById('close-menu').addEventListener('click', closeMenu);
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+    // ============ MODAL TIENDA ============
+    const shopModal = document.getElementById('shop-modal');
+    const openShop = () => { shopModal.classList.add('open'); document.body.style.overflow = 'hidden'; };
+    const closeShop = () => { shopModal.classList.remove('open'); document.body.style.overflow = ''; };
+    document.querySelectorAll('[data-shop-cta]').forEach(b =>
+        b.addEventListener('click', e => { e.preventDefault(); openShop(); }));
+    document.getElementById('close-shop').addEventListener('click', closeShop);
+    shopModal.addEventListener('click', e => { if (e.target === shopModal) closeShop(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShop(); });
+
+    // ============ FORMSPREE ============
+    async function submitToFormspree(form, msgEl, btnEl, successText){
+        const originalHTML = btnEl.innerHTML;
+        btnEl.disabled = true;
+        btnEl.textContent = 'Enviando…';
+        msgEl.className = 'form-msg';
         try {
-            const data = new FormData(form);
             const res = await fetch(FORMSPREE_ENDPOINT, {
                 method: 'POST',
-                body: data,
+                body: new FormData(form),
                 headers: { 'Accept': 'application/json' }
             });
-            if (res.ok) {
-                form.reset();
-                msgEl.textContent = successText;
-                msgEl.className = 'text-sm mt-3 text-emerald-400 text-center';
-                msgEl.classList.remove('hidden');
-                btnEl.innerHTML = '✓ ¡Listo!';
-                setTimeout(() => { btnEl.innerHTML = originalBtnHTML; btnEl.disabled = false; }, 4000);
-            } else {
-                throw new Error('Server error');
-            }
-        } catch (err) {
+            if (!res.ok) throw new Error('server');
+            form.reset();
+            msgEl.textContent = successText;
+            msgEl.classList.add('ok');
+            btnEl.textContent = '✓ ¡Listo!';
+            setTimeout(() => { btnEl.innerHTML = originalHTML; btnEl.disabled = false; }, 4000);
+        } catch (_) {
             msgEl.textContent = 'Hubo un error. Intenta de nuevo o escríbenos por WhatsApp.';
-            msgEl.className = 'text-sm mt-3 text-red-400 text-center';
-            msgEl.classList.remove('hidden');
-            btnEl.innerHTML = originalBtnHTML;
+            msgEl.classList.add('err');
+            btnEl.innerHTML = originalHTML;
             btnEl.disabled = false;
         }
     }
 
-    // Waitlist (hero email)
     const waitForm = document.getElementById('waitlist-form');
-    if (waitForm) {
-        waitForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            submitToFormspree(
-                waitForm,
-                document.getElementById('waitlist-msg'),
-                waitForm.querySelector('button[type="submit"]'),
-                '¡Listo! Te enviaremos novedades y ofertas de TURBI. 🚀'
-            );
-        });
-    }
+    waitForm.addEventListener('submit', e => {
+        e.preventDefault();
+        submitToFormspree(waitForm, document.getElementById('waitlist-msg'),
+            waitForm.querySelector('button[type=submit]'),
+            '¡Listo! Te enviaremos novedades y ofertas de TURBI. 🚀');
+    });
 
-    // Shop modal open/close
-    const shopModal = document.getElementById('shop-modal');
-    const openShop = () => { shopModal.classList.remove('hidden'); shopModal.classList.add('flex'); document.body.style.overflow = 'hidden'; };
-    const closeShop = () => { shopModal.classList.add('hidden'); shopModal.classList.remove('flex'); document.body.style.overflow = ''; };
-    document.querySelectorAll('[data-shop-cta]').forEach(b => b.addEventListener('click', (e) => { e.preventDefault(); openShop(); }));
-    document.getElementById('close-shop').addEventListener('click', closeShop);
-    shopModal.addEventListener('click', (e) => { if (e.target === shopModal) closeShop(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !shopModal.classList.contains('hidden')) closeShop(); });
-
-    // Shop registration form
     const shopForm = document.getElementById('shop-form');
-    if (shopForm) {
-        shopForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            submitToFormspree(
-                shopForm,
-                document.getElementById('shop-msg'),
-                document.getElementById('shop-submit'),
-                '¡Recibido! Te contactaremos en menos de 24h. 🏁'
-            );
-        });
+    shopForm.addEventListener('submit', e => {
+        e.preventDefault();
+        submitToFormspree(shopForm, document.getElementById('shop-msg'),
+            document.getElementById('shop-submit'),
+            '¡Recibido! Te contactaremos en menos de 24h. 🏁');
+    });
+
+    // ============ REVEAL ON SCROLL ============
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(en => {
+                if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    } else {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     }
-    // ============ END FORMSPREE ============
 
-    // Scroll reveal
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    // Card spotlight
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const r = card.getBoundingClientRect();
-            card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-            card.style.setProperty('--my', `${e.clientY - r.top}px`);
-        });
-    });
-
-    // Tilt cards
-    document.querySelectorAll('.tilt').forEach(el => {
-        el.addEventListener('mousemove', (e) => {
-            const r = el.getBoundingClientRect();
-            const x = (e.clientX - r.left) / r.width - .5;
-            const y = (e.clientY - r.top) / r.height - .5;
-            el.style.transform = `perspective(800px) rotateX(${(-y*8).toFixed(2)}deg) rotateY(${(x*8).toFixed(2)}deg) translateY(-4px)`;
-        });
-        el.addEventListener('mouseleave', () => { el.style.transform = ''; });
-    });
-
-    // Animated stat counters
-    const statObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (!e.isIntersecting) return;
-            const el = e.target;
+    // ============ CONTADORES ============
+    const statObs = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+            if (!en.isIntersecting) return;
+            const el = en.target;
             const target = parseInt(el.dataset.count, 10);
-            const duration = 1400;
-            const start = performance.now();
-            const fmt = (v) => {
-                const isPercent = el.parentElement.querySelector('div:last-child').textContent.includes('%');
-                const suffix = target >= 1000 ? '+' : (isPercent ? '%' : '+');
-                return Math.round(v).toLocaleString('es-VE') + suffix;
-            };
-            const tick = (now) => {
+            const suffix = el.dataset.suffix || '';
+            if (reduceMotion) { el.textContent = target.toLocaleString('es-VE') + suffix; statObs.unobserve(el); return; }
+            const duration = 1400, start = performance.now();
+            const tick = now => {
                 const t = Math.min(1, (now - start) / duration);
                 const eased = 1 - Math.pow(1 - t, 3);
-                el.textContent = fmt(target * eased);
+                el.textContent = Math.round(target * eased).toLocaleString('es-VE') + suffix;
                 if (t < 1) requestAnimationFrame(tick);
             };
             requestAnimationFrame(tick);
@@ -1120,419 +1567,7 @@
         });
     }, { threshold: 0.4 });
     document.querySelectorAll('[data-count]').forEach(el => statObs.observe(el));
-
-    // ============ THREE.JS WHEEL (REALISTIC) ============
-    (function initWheel() {
-        const canvas = document.getElementById('wheel-canvas');
-        if (!canvas || !window.THREE) return;
-
-        const wrap = canvas.parentElement;
-        let width = wrap.clientWidth;
-        let height = wrap.clientHeight;
-
-        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setSize(width, height, false);
-        renderer.outputEncoding = THREE.sRGBEncoding;
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1.05;
-
-        const scene = new THREE.Scene();
-
-        const camera = new THREE.PerspectiveCamera(32, width / height, 0.1, 100);
-        camera.position.set(0.6, 0.5, 5.8);
-        camera.lookAt(0, 0, 0);
-
-        // ---------- ENVIRONMENT (fake studio for chrome reflections) ----------
-        // Build a small cube texture procedurally so chrome surfaces actually reflect something.
-        function buildEnvTexture() {
-            const size = 128;
-            const faces = [];
-            const colors = [
-                ['#1a1a1a', '#0a0a0a'], // +x
-                ['#1a1a1a', '#0a0a0a'], // -x
-                ['#3a3a3a', '#0a0a0a'], // +y (top - lighter)
-                ['#050505', '#000000'], // -y (bottom - darker)
-                ['#1a1a1a', '#0a0a0a'], // +z
-                ['#1a1a1a', '#0a0a0a'], // -z
-            ];
-            // Add red & orange "studio lights" on a couple faces
-            const accentFaces = {
-                0: { x: 0.7, y: 0.5, color: 'rgba(255,0,77,0.9)' },   // +x face: red glow
-                1: { x: 0.3, y: 0.5, color: 'rgba(255,94,0,0.85)' },  // -x face: orange glow
-                4: { x: 0.5, y: 0.3, color: 'rgba(255,255,255,0.4)' },// +z face: white top highlight
-            };
-            for (let i = 0; i < 6; i++) {
-                const c = document.createElement('canvas');
-                c.width = c.height = size;
-                const ctx = c.getContext('2d');
-                const grad = ctx.createLinearGradient(0, 0, 0, size);
-                grad.addColorStop(0, colors[i][0]);
-                grad.addColorStop(1, colors[i][1]);
-                ctx.fillStyle = grad; ctx.fillRect(0, 0, size, size);
-                if (accentFaces[i]) {
-                    const a = accentFaces[i];
-                    const rg = ctx.createRadialGradient(a.x*size, a.y*size, 0, a.x*size, a.y*size, size*0.5);
-                    rg.addColorStop(0, a.color);
-                    rg.addColorStop(1, 'rgba(0,0,0,0)');
-                    ctx.fillStyle = rg; ctx.fillRect(0, 0, size, size);
-                }
-                faces.push(c);
-            }
-            const tex = new THREE.CubeTexture(faces);
-            tex.needsUpdate = true;
-            tex.encoding = THREE.sRGBEncoding;
-            return tex;
-        }
-        const envMap = buildEnvTexture();
-        scene.environment = envMap;
-
-        // ---------- LIGHTS ----------
-        scene.add(new THREE.AmbientLight(0x404040, 0.5));
-
-        const keyLight = new THREE.DirectionalLight(0xffffff, 1.6);
-        keyLight.position.set(3, 5, 4);
-        scene.add(keyLight);
-
-        const rimLightRed = new THREE.PointLight(0xff004d, 6, 14, 2);
-        rimLightRed.position.set(-3.5, 0.8, -1);
-        scene.add(rimLightRed);
-
-        const rimLightOrange = new THREE.PointLight(0xff5e00, 4, 12, 2);
-        rimLightOrange.position.set(3.5, -0.5, -0.5);
-        scene.add(rimLightOrange);
-
-        const topLight = new THREE.PointLight(0xffffff, 1.2, 10, 2);
-        topLight.position.set(0, 4, 3);
-        scene.add(topLight);
-
-        const fillLight = new THREE.DirectionalLight(0x88aaff, 0.25);
-        fillLight.position.set(-2, -2, 3);
-        scene.add(fillLight);
-
-        // ---------- WHEEL GROUP ----------
-        const wheel = new THREE.Group();
-        scene.add(wheel);
-
-        // ===== TIRE (LatheGeometry — realistic cross-section with sidewall bulge) =====
-        // Profile points: x = radius from axle, y = depth. Total tire depth ~1.0
-        const tireProfile = [];
-        const segs = [
-            [1.05, -0.42],   // bead seat back
-            [1.08, -0.45],
-            [1.20, -0.50],   // sidewall transition
-            [1.55, -0.50],   // sidewall bulge
-            [1.62, -0.42],   // shoulder back
-            [1.64, -0.30],   // tread shoulder
-            [1.64,  0.30],   // tread shoulder front
-            [1.62,  0.42],
-            [1.55,  0.50],
-            [1.20,  0.50],
-            [1.08,  0.45],
-            [1.05,  0.42],
-        ];
-        segs.forEach(p => tireProfile.push(new THREE.Vector2(p[0], p[1])));
-        const tireGeo = new THREE.LatheGeometry(tireProfile, 96);
-        const tireMat = new THREE.MeshStandardMaterial({
-            color: 0x0c0c0c, roughness: 0.95, metalness: 0.0
-        });
-        const tire = new THREE.Mesh(tireGeo, tireMat);
-        tire.rotation.x = Math.PI / 2; // align so tire faces camera (axis = Z)
-        wheel.add(tire);
-
-        // ===== TREAD BLOCKS (raised pattern around the contact patch) =====
-        const treadGroup = new THREE.Group();
-        const treadCount = 48;
-        const blockMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 1, metalness: 0 });
-        const grooveMat = new THREE.MeshStandardMaterial({ color: 0x040404, roughness: 1, metalness: 0 });
-        for (let i = 0; i < treadCount; i++) {
-            // Two rows of staggered tread blocks
-            for (let row = 0; row < 2; row++) {
-                const a = (i / treadCount) * Math.PI * 2 + (row * Math.PI / treadCount);
-                const block = new THREE.Mesh(
-                    new THREE.BoxGeometry(0.14, 0.06, 0.36),
-                    blockMat
-                );
-                block.position.set(Math.cos(a) * 1.66, Math.sin(a) * 1.66, row === 0 ? 0.2 : -0.2);
-                block.rotation.z = a;
-                treadGroup.add(block);
-            }
-            // Center groove sipe
-            if (i % 2 === 0) {
-                const a = (i / treadCount) * Math.PI * 2;
-                const sipe = new THREE.Mesh(
-                    new THREE.BoxGeometry(0.16, 0.08, 0.05),
-                    grooveMat
-                );
-                sipe.position.set(Math.cos(a) * 1.65, Math.sin(a) * 1.65, 0);
-                sipe.rotation.z = a;
-                treadGroup.add(sipe);
-            }
-        }
-        wheel.add(treadGroup);
-
-        // Sidewall lettering ring (subtle raised band — fakes "tire brand" embossing)
-        const sidewallBandGeo = new THREE.TorusGeometry(1.35, 0.012, 8, 80);
-        const sidewallMat = new THREE.MeshStandardMaterial({ color: 0x202020, roughness: 0.7, metalness: 0.1 });
-        const sidewallFront = new THREE.Mesh(sidewallBandGeo, sidewallMat);
-        sidewallFront.position.z = 0.48;
-        wheel.add(sidewallFront);
-        const sidewallBack = new THREE.Mesh(sidewallBandGeo, sidewallMat);
-        sidewallBack.position.z = -0.48;
-        wheel.add(sidewallBack);
-
-        // ===== BRAKE DISC (vented + drilled) =====
-        const discMat = new THREE.MeshStandardMaterial({
-            color: 0x6a6a6a, metalness: 0.9, roughness: 0.45, envMap, envMapIntensity: 1
-        });
-        // Outer ring
-        const discOuter = new THREE.Mesh(
-            new THREE.CylinderGeometry(1.05, 1.05, 0.12, 96, 1, true),
-            new THREE.MeshStandardMaterial({ color: 0x4a4a4a, metalness: 0.9, roughness: 0.55, side: THREE.DoubleSide })
-        );
-        discOuter.rotation.x = Math.PI / 2;
-        discOuter.position.z = -0.18;
-        wheel.add(discOuter);
-        // Disc face (front)
-        const discFace = new THREE.Mesh(
-            new THREE.RingGeometry(0.55, 1.05, 96),
-            discMat
-        );
-        discFace.position.z = -0.12;
-        wheel.add(discFace);
-        // Disc face (back)
-        const discFaceBack = new THREE.Mesh(
-            new THREE.RingGeometry(0.55, 1.05, 96),
-            discMat
-        );
-        discFaceBack.position.z = -0.24;
-        discFaceBack.rotation.y = Math.PI;
-        wheel.add(discFaceBack);
-        // Drilled holes in disc (small dark cylinders punched through visually)
-        const holeMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
-        const holeRings = [
-            { r: 0.78, count: 16 },
-            { r: 0.92, count: 22 },
-        ];
-        holeRings.forEach(ring => {
-            for (let i = 0; i < ring.count; i++) {
-                const a = (i / ring.count) * Math.PI * 2;
-                const hole = new THREE.Mesh(new THREE.CircleGeometry(0.045, 16), holeMat);
-                hole.position.set(Math.cos(a) * ring.r, Math.sin(a) * ring.r, -0.115);
-                wheel.add(hole);
-            }
-        });
-
-        // ===== RIM (5 Y-spokes — sport alloy style) =====
-        const chromeMat = new THREE.MeshStandardMaterial({
-            color: 0xe8e8e8, metalness: 1.0, roughness: 0.18,
-            envMap, envMapIntensity: 1.4
-        });
-        const rimMat = new THREE.MeshStandardMaterial({
-            color: 0xb8b8b8, metalness: 0.95, roughness: 0.28,
-            envMap, envMapIntensity: 1.2
-        });
-        const rimDarkMat = new THREE.MeshStandardMaterial({
-            color: 0x2a2a2a, metalness: 0.8, roughness: 0.45,
-            envMap, envMapIntensity: 0.6
-        });
-
-        // Outer rim lip (the chrome edge)
-        const rimLipGeo = new THREE.TorusGeometry(1.05, 0.06, 24, 96);
-        const rimLip = new THREE.Mesh(rimLipGeo, chromeMat);
-        wheel.add(rimLip);
-
-        // Inner barrel (dark, behind the rim lip — gives depth)
-        const rimBarrelGeo = new THREE.CylinderGeometry(1.0, 1.0, 0.5, 64, 1, true);
-        const rimBarrel = new THREE.Mesh(rimBarrelGeo,
-            new THREE.MeshStandardMaterial({ color: 0x101010, metalness: 0.7, roughness: 0.5, side: THREE.DoubleSide })
-        );
-        rimBarrel.rotation.x = Math.PI / 2;
-        wheel.add(rimBarrel);
-
-        // 5 Y-spokes — each spoke is built from 3 boxes arranged in a Y shape
-        const spokeCount = 5;
-        for (let i = 0; i < spokeCount; i++) {
-            const angle = (i / spokeCount) * Math.PI * 2;
-            const spokeGroup = new THREE.Group();
-
-            // Main central trunk (from hub outward)
-            const trunkLen = 0.55;
-            const trunk = new THREE.Mesh(
-                new THREE.BoxGeometry(0.2, trunkLen, 0.18),
-                rimMat
-            );
-            trunk.position.y = trunkLen / 2 + 0.05;
-            spokeGroup.add(trunk);
-
-            // Y-branch left
-            const branchLen = 0.55;
-            const branchL = new THREE.Mesh(
-                new THREE.BoxGeometry(0.12, branchLen, 0.16),
-                rimMat
-            );
-            branchL.position.set(-0.18, trunkLen + branchLen/2 + 0.05, 0);
-            branchL.rotation.z = 0.42; // splay outward
-            spokeGroup.add(branchL);
-
-            // Y-branch right
-            const branchR = new THREE.Mesh(
-                new THREE.BoxGeometry(0.12, branchLen, 0.16),
-                rimMat
-            );
-            branchR.position.set(0.18, trunkLen + branchLen/2 + 0.05, 0);
-            branchR.rotation.z = -0.42;
-            spokeGroup.add(branchR);
-
-            // Bevel highlight on top of trunk (chrome strip running down the middle)
-            const bevel = new THREE.Mesh(
-                new THREE.BoxGeometry(0.05, trunkLen * 0.95, 0.02),
-                chromeMat
-            );
-            bevel.position.set(0, trunkLen / 2 + 0.05, 0.10);
-            spokeGroup.add(bevel);
-
-            spokeGroup.rotation.z = angle;
-            spokeGroup.position.z = 0.05;
-            wheel.add(spokeGroup);
-        }
-
-        // ===== CENTER HUB =====
-        // Hub base (dark recess)
-        const hubBase = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.35, 0.35, 0.18, 32),
-            rimDarkMat
-        );
-        hubBase.rotation.x = Math.PI / 2;
-        hubBase.position.z = 0.03;
-        wheel.add(hubBase);
-
-        // Hub center cap (chrome)
-        const hubCap = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.28, 0.32, 0.12, 32),
-            chromeMat
-        );
-        hubCap.rotation.x = Math.PI / 2;
-        hubCap.position.z = 0.16;
-        wheel.add(hubCap);
-
-        // Center logo dot (TURBI red, glowing)
-        const logoDotMat = new THREE.MeshStandardMaterial({
-            color: 0xff004d, emissive: 0xff004d, emissiveIntensity: 1.4,
-            metalness: 0.4, roughness: 0.25
-        });
-        const logoDot = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.16, 0.16, 0.04, 32),
-            logoDotMat
-        );
-        logoDot.rotation.x = Math.PI / 2;
-        logoDot.position.z = 0.23;
-        wheel.add(logoDot);
-
-        // ===== 5 LUG NUTS (between spokes / on hub) =====
-        const lugMat = new THREE.MeshStandardMaterial({
-            color: 0x202020, metalness: 0.95, roughness: 0.3, envMap, envMapIntensity: 0.9
-        });
-        const lugCount = 5;
-        const lugRadius = 0.5;
-        for (let i = 0; i < lugCount; i++) {
-            const a = (i / lugCount) * Math.PI * 2 + Math.PI / lugCount; // offset between spokes
-            const lug = new THREE.Mesh(
-                new THREE.CylinderGeometry(0.06, 0.07, 0.08, 6),
-                lugMat
-            );
-            lug.position.set(Math.cos(a) * lugRadius, Math.sin(a) * lugRadius, 0.18);
-            lug.rotation.x = Math.PI / 2;
-            wheel.add(lug);
-        }
-
-        // ===== BRAKE CALIPER (sport, 4-piston style, on top-right) =====
-        const caliperGroup = new THREE.Group();
-        const caliperBodyMat = new THREE.MeshStandardMaterial({
-            color: 0xff004d, metalness: 0.55, roughness: 0.35,
-            emissive: 0x330011, emissiveIntensity: 0.6,
-            envMap, envMapIntensity: 0.8
-        });
-        // Main body - curved would be ideal, use a thicker box
-        const caliperBody = new THREE.Mesh(
-            new THREE.BoxGeometry(0.55, 0.32, 0.42),
-            caliperBodyMat
-        );
-        caliperGroup.add(caliperBody);
-        // 2 visible piston nubs
-        const pistonMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, metalness: 0.9, roughness: 0.3 });
-        for (let p = -1; p <= 1; p += 2) {
-            const piston = new THREE.Mesh(
-                new THREE.CylinderGeometry(0.06, 0.06, 0.12, 16),
-                pistonMat
-            );
-            piston.rotation.x = Math.PI / 2;
-            piston.position.set(p * 0.15, 0, 0.2);
-            caliperGroup.add(piston);
-        }
-        // Brand stripe on caliper (white-ish accent)
-        const stripe = new THREE.Mesh(
-            new THREE.BoxGeometry(0.4, 0.06, 0.01),
-            new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.3, roughness: 0.4 })
-        );
-        stripe.position.set(0, 0.08, 0.215);
-        caliperGroup.add(stripe);
-        // Position caliper at "10 o'clock" position over the disc
-        caliperGroup.position.set(-0.78, 0.78, -0.14);
-        wheel.add(caliperGroup);
-
-        // Initial pose
-        wheel.rotation.x = 0.16;
-        wheel.rotation.y = -0.22;
-
-        // ---------- INTERACTION ----------
-        let mx = 0, my = 0;
-        canvas.addEventListener('mousemove', (e) => {
-            const r = canvas.getBoundingClientRect();
-            mx = ((e.clientX - r.left) / r.width - 0.5) * 0.4;
-            my = ((e.clientY - r.top) / r.height - 0.5) * 0.4;
-        });
-        canvas.addEventListener('mouseleave', () => { mx = 0; my = 0; });
-
-        // ---------- RESIZE ----------
-        const onResize = () => {
-            width = wrap.clientWidth;
-            height = wrap.clientHeight;
-            renderer.setSize(width, height, false);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-        };
-        window.addEventListener('resize', onResize);
-
-        // ---------- ANIMATE ----------
-        const clock = new THREE.Clock();
-        function animate() {
-            const t = clock.getElapsedTime();
-
-            // Continuous spin of everything wheel-side
-            wheel.rotation.z -= 0.014;
-
-            // Counter-rotate the caliper so it stays "fixed" on the suspension (real life)
-            caliperGroup.rotation.z = -wheel.rotation.z;
-            // Same for the logo cap (logo doesn't spin with the wheel)
-            logoDot.rotation.z = -wheel.rotation.z;
-
-            // Parallax tilt
-            wheel.rotation.x = 0.16 + my;
-            const targetY = -0.22 + mx;
-            wheel.rotation.y += (targetY - wheel.rotation.y) * 0.05;
-
-            // Float
-            wheel.position.y = Math.sin(t * 1.2) * 0.05;
-
-            // Pulse the logo dot
-            logoDotMat.emissiveIntensity = 1.1 + Math.sin(t * 2.5) * 0.4;
-
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate);
-        }
-        animate();
-    })();
+})();
 </script>
 </body>
 </html>
