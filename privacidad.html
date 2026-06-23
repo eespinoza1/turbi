@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidad — TURBI</title>
+<meta name="description" content="Política de Privacidad de TURBI: qué datos recolectamos, cómo los usamos, con quién los compartimos y cómo ejercer tus derechos, incluido eliminar tu cuenta.">
+<link rel="canonical" href="https://turbi.com.ve/privacidad.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#050505">
+<link rel="icon" type="image/jpeg" href="logo.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+    :root{
+        --red:#FF004D; --orange:#FF5E00; --amber:#FFB800;
+        --ink-950:#050505; --ink-900:#0a0a0a; --ink-800:#111111;
+        --line:rgba(255,255,255,.07); --txt:#ffffff;
+        --txt-2:rgba(255,255,255,.72); --txt-3:rgba(255,255,255,.45);
+        --grad:linear-gradient(95deg,#FF004D 0%,#FF5E00 60%,#FFB800 100%);
+        --radius:1.2rem;
+        --font-d:'Bebas Neue',Impact,sans-serif;
+        --font-s:'Manrope',system-ui,-apple-system,sans-serif;
+    }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html{ scroll-behavior:smooth; }
+    body{ background:var(--ink-950); color:var(--txt); font-family:var(--font-s); line-height:1.7; -webkit-font-smoothing:antialiased; }
+    a{ color:var(--amber); text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+    .wrap{ width:min(820px,92vw); margin-inline:auto; }
+    header.top{ border-bottom:1px solid var(--line); background:rgba(5,5,5,.85); position:sticky; top:0; z-index:10; backdrop-filter:blur(8px); }
+    header.top .wrap{ display:flex; align-items:center; justify-content:space-between; padding:1rem 0; }
+    header.top img{ height:2.4rem; width:auto; border-radius:.5rem; }
+    header.top a.back{ font-family:var(--font-d); font-size:1.1rem; letter-spacing:.04em; color:var(--txt-2); }
+    .race-tape{ height:6px; background:repeating-linear-gradient(45deg,var(--red),var(--red) 14px,var(--ink-900) 14px,var(--ink-900) 28px); }
+    main{ padding:3rem 0 5rem; }
+    h1{ font-family:var(--font-d); font-weight:400; font-size:clamp(2.4rem,6vw,3.6rem); line-height:1; letter-spacing:.01em; }
+    h1 .grad{ background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .updated{ color:var(--txt-3); font-size:.85rem; margin-top:.6rem; text-transform:uppercase; letter-spacing:.1em; }
+    h2{ font-family:var(--font-d); font-weight:400; font-size:1.7rem; letter-spacing:.02em; margin:2.6rem 0 .8rem; color:#fff; }
+    h3{ font-size:1.05rem; font-weight:700; margin:1.4rem 0 .4rem; }
+    p, li{ color:var(--txt-2); font-size:1rem; margin-bottom:.8rem; }
+    ul, ol{ padding-left:1.3rem; margin-bottom:.8rem; }
+    li{ margin-bottom:.4rem; }
+    strong{ color:#fff; }
+    .lead{ font-size:1.1rem; color:var(--txt); border-left:3px solid var(--red); padding-left:1rem; margin:1.4rem 0; }
+    .box{ background:var(--ink-800); border:1px solid var(--line); border-radius:var(--radius); padding:1.2rem 1.4rem; margin:1.4rem 0; }
+    .box.warn{ border-color:rgba(255,0,77,.35); background:rgba(255,0,77,.06); }
+    .placeholder{ background:rgba(255,184,0,.12); border:1px dashed var(--amber); color:var(--amber); padding:.1rem .4rem; border-radius:.3rem; font-size:.92em; }
+    table{ width:100%; border-collapse:collapse; margin:1rem 0; font-size:.92rem; }
+    th, td{ text-align:left; padding:.7rem .8rem; border-bottom:1px solid var(--line); vertical-align:top; }
+    th{ font-family:var(--font-d); font-weight:400; letter-spacing:.04em; color:#fff; font-size:1.05rem; }
+    td{ color:var(--txt-2); }
+    .toc{ background:var(--ink-900); border:1px solid var(--line); border-radius:var(--radius); padding:1.2rem 1.4rem; margin:2rem 0; }
+    .toc h4{ font-family:var(--font-d); font-weight:400; font-size:1.2rem; letter-spacing:.04em; margin-bottom:.6rem; }
+    .toc ol{ columns:2; column-gap:2rem; }
+    .toc a{ color:var(--txt-2); font-size:.92rem; }
+    footer{ border-top:1px solid var(--line); padding:2.5rem 0; text-align:center; }
+    footer p{ color:var(--txt-3); font-size:.85rem; }
+    @media(max-width:560px){ .toc ol{ columns:1; } }
+</style>
+</head>
+<body>
+<div class="race-tape"></div>
+<header class="top">
+    <div class="wrap">
+        <a href="/index.html" aria-label="TURBI — Inicio"><img src="logo.jpeg" alt="TURBI"></a>
+        <a class="back" href="/index.html">← Volver a TURBI</a>
+    </div>
+</header>
+
+<main>
+<div class="wrap">
+    <h1>Política de <span class="grad">Privacidad</span></h1>
+    <p class="updated">Última actualización: 23 de junio de 2026</p>
+
+    <p class="lead">En TURBI respetamos tu privacidad. Esta política explica qué datos recolectamos, para qué los usamos, con quién los compartimos y cómo puedes controlarlos, incluido el derecho a <strong>eliminar tu cuenta</strong>. Aplica al sitio web, al portal de tiendas y a las apps de iOS y Android.</p>
+
+    <div class="toc">
+        <h4>Contenido</h4>
+        <ol>
+            <li><a href="#responsable">Responsable</a></li>
+            <li><a href="#datos">Qué datos recolectamos</a></li>
+            <li><a href="#uso">Para qué los usamos</a></li>
+            <li><a href="#permisos">Permisos del dispositivo</a></li>
+            <li><a href="#comparte">Con quién los compartimos</a></li>
+            <li><a href="#terceros">Proveedores y terceros</a></li>
+            <li><a href="#conservacion">Conservación</a></li>
+            <li><a href="#derechos">Tus derechos</a></li>
+            <li><a href="#eliminar">Eliminar tu cuenta</a></li>
+            <li><a href="#seguridad">Seguridad</a></li>
+            <li><a href="#menores">Menores de edad</a></li>
+            <li><a href="#cambios">Cambios</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ol>
+    </div>
+
+    <h2 id="responsable">1. Responsable del tratamiento</h2>
+    <p>El responsable de tus datos es <span class="placeholder">[RAZÓN SOCIAL, C.A. — RIF J-00000000-0, Caracas, Venezuela]</span>, operador de la plataforma TURBI. Contacto de privacidad: <a href="mailto:privacidad@turbi.com.ve">privacidad@turbi.com.ve</a>.</p>
+
+    <h2 id="datos">2. Qué datos recolectamos</h2>
+    <table>
+        <tr><th>Categoría</th><th>Datos</th><th>Origen</th></tr>
+        <tr><td>Cuenta</td><td>Nombre, correo electrónico, contraseña (cifrada), rol (conductor o tienda).</td><td>Tú, al registrarte.</td></tr>
+        <tr><td>Inicio de sesión con Google</td><td>Nombre, correo y foto de perfil de tu cuenta Google.</td><td>Google, si eliges ese método.</td></tr>
+        <tr><td>Perfil de tienda</td><td>Nombre del negocio, descripción, dirección, teléfono/WhatsApp, logo, inventario y precios.</td><td>La tienda.</td></tr>
+        <tr><td>Contacto</td><td>Teléfono y/o WhatsApp para coordinar una compra.</td><td>Tú. Solo se revela en el contexto de una negociación.</td></tr>
+        <tr><td>Actividad</td><td>Búsquedas, favoritos, calificaciones y reseñas que publicas.</td><td>Tu uso de la app.</td></tr>
+        <tr><td>Notificaciones</td><td>Identificador de dispositivo (token de notificaciones push).</td><td>Tu dispositivo, si autorizas notificaciones.</td></tr>
+        <tr><td>Técnicos</td><td>Tipo de dispositivo, versión de la app, registros de errores y diagnóstico.</td><td>Automático, para estabilidad y seguridad.</td></tr>
+    </table>
+    <p>No recolectamos datos bancarios ni de tarjetas, porque <strong>TURBI no procesa pagos</strong>.</p>
+
+    <h2 id="uso">3. Para qué usamos tus datos</h2>
+    <ul>
+        <li>Crear y administrar tu cuenta y autenticarte.</li>
+        <li>Mostrar tiendas, productos y resultados de búsqueda relevantes.</li>
+        <li>Permitir que un comprador y una tienda se contacten para concretar una compra.</li>
+        <li>Mostrar y ordenar tiendas según calificaciones y reseñas.</li>
+        <li>Enviarte notificaciones que autorizaste (novedades, respuestas, alertas).</li>
+        <li>Prevenir fraudes, abusos y garantizar la seguridad de la plataforma.</li>
+        <li>Cumplir obligaciones legales.</li>
+    </ul>
+
+    <h2 id="permisos">4. Permisos del dispositivo (app móvil)</h2>
+    <ul>
+        <li><strong>Cámara y fotos:</strong> solo para que las tiendas suban su logo o imágenes. Se solicita en el momento.</li>
+        <li><strong>Notificaciones:</strong> para enviarte avisos. Puedes desactivarlas desde los ajustes del sistema.</li>
+        <li><strong>Face ID / biometría:</strong> para que entres a la app sin escribir tu clave; el dato biométrico nunca sale de tu dispositivo.</li>
+    </ul>
+
+    <h2 id="comparte">5. Con quién los compartimos</h2>
+    <p>TURBI <strong>no vende tus datos personales</strong>. Compartimos información solo en estos casos:</p>
+    <ul>
+        <li><strong>Entre comprador y tienda:</strong> cuando inicias una negociación, se revelan los datos de contacto necesarios (por ejemplo, el WhatsApp de la tienda, o tu teléfono a la tienda) para que puedan comunicarse. A partir de ahí, ese intercambio ocurre fuera de TURBI.</li>
+        <li><strong>Información pública:</strong> el nombre de tu tienda, su inventario y las calificaciones que recibe son visibles para todos los usuarios.</li>
+        <li><strong>Proveedores tecnológicos</strong> que nos prestan servicios (ver sección 6).</li>
+        <li><strong>Autoridades</strong>, cuando la ley lo exija.</li>
+    </ul>
+    <div class="box warn">
+        <p style="margin-bottom:0">Como TURBI es solo un <strong>intermediario</strong>, no controlamos qué hace una tienda o un usuario con los datos de contacto que recibe durante una negociación. Te recomendamos compartir solo la información necesaria.</p>
+    </div>
+
+    <h2 id="terceros">6. Proveedores y terceros</h2>
+    <p>Usamos servicios de terceros que pueden procesar datos por nuestra cuenta:</p>
+    <ul>
+        <li><strong>Google Firebase</strong> (Google LLC): notificaciones push y autenticación con Google.</li>
+        <li><strong>Railway</strong>: alojamiento del servidor y la base de datos.</li>
+        <li><strong>Vercel</strong>: alojamiento de los sitios web.</li>
+        <li><strong>Sentry</strong>: registro de errores para mejorar la estabilidad.</li>
+    </ul>
+    <p>Cada proveedor trata los datos según sus propias políticas de privacidad y estándares de seguridad.</p>
+
+    <h2 id="conservacion">7. Conservación</h2>
+    <p>Conservamos tus datos mientras tu cuenta esté activa y durante el tiempo necesario para cumplir fines legales. Si eliminas tu cuenta, borramos o anonimizamos tus datos personales, salvo lo que debamos conservar por obligación legal.</p>
+
+    <h2 id="derechos">8. Tus derechos</h2>
+    <p>Puedes solicitar en cualquier momento: acceder a tus datos, corregirlos, actualizarlos, eliminarlos u oponerte a ciertos tratamientos. Escríbenos a <a href="mailto:privacidad@turbi.com.ve">privacidad@turbi.com.ve</a> y responderemos en un plazo razonable.</p>
+
+    <h2 id="eliminar">9. Cómo eliminar tu cuenta y tus datos</h2>
+    <div class="box">
+        <p style="margin-bottom:.4rem">Puedes eliminar tu cuenta y los datos asociados de dos formas:</p>
+        <ul style="margin-bottom:0">
+            <li><strong>Desde la app:</strong> entra a la pestaña <strong>Perfil</strong> y pulsa <strong>"Eliminar mi cuenta"</strong>.</li>
+            <li><strong>Por correo:</strong> envía tu solicitud desde el email de tu cuenta a <a href="mailto:privacidad@turbi.com.ve">privacidad@turbi.com.ve</a> con el asunto "Eliminar cuenta".</li>
+        </ul>
+    </div>
+    <p>Tras la eliminación, borramos tu perfil, tus reseñas y tus datos de contacto. La información que ya hayas compartido directamente con una tienda fuera de la plataforma no está bajo nuestro control.</p>
+
+    <h2 id="seguridad">10. Seguridad</h2>
+    <p>Aplicamos medidas técnicas razonables: cifrado de contraseñas, conexión segura (HTTPS), control de acceso y registros. Ningún sistema es 100% infalible, pero trabajamos para proteger tu información.</p>
+
+    <h2 id="menores">11. Menores de edad</h2>
+    <p>TURBI está dirigido a personas mayores de 18 años. No recolectamos conscientemente datos de menores. Si detectamos una cuenta de un menor, la eliminaremos.</p>
+
+    <h2 id="cambios">12. Cambios a esta política</h2>
+    <p>Podemos actualizar esta política. Publicaremos la versión vigente en esta página con su fecha. Si los cambios son importantes, te avisaremos por la app o por correo.</p>
+
+    <h2 id="contacto">13. Contacto</h2>
+    <p>Dudas sobre privacidad: <a href="mailto:privacidad@turbi.com.ve">privacidad@turbi.com.ve</a> · Soporte: <a href="mailto:soporte@turbi.com.ve">soporte@turbi.com.ve</a></p>
+    <p>Consulta también nuestros <a href="/terminos.html">Términos y Condiciones</a>.</p>
+</div>
+</main>
+
+<footer>
+    <div class="wrap">
+        <p>© 2026 TURBI App · Hecho en Venezuela 🇻🇪 · <a href="/privacidad.html">Privacidad</a> · <a href="/terminos.html">Términos</a></p>
+    </div>
+</footer>
+</body>
+</html>
