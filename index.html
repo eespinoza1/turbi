@@ -472,12 +472,13 @@
             background:rgba(0,0,0,.3); border:1px solid rgba(255,255,255,.3); font-weight:700;
         }
         .price-grid{ display:grid; gap:1.5rem; align-items:stretch; }
-        @media(min-width:768px){ .price-grid{ grid-template-columns:1fr 1fr; } }
+        @media(min-width:640px){ .price-grid{ grid-template-columns:1fr 1fr; } }
+        @media(min-width:960px){ .price-grid{ grid-template-columns:repeat(3,1fr); } }
         .price-card{ padding:2rem; display:flex; flex-direction:column; }
         .price-card .top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
         .price-card h3{ font-family:var(--font-d); font-weight:400; font-size:1.9rem; }
         .price-card .desc{ color:var(--txt-2); font-size:.9rem; }
-        .price-num{ font-family:var(--font-d); font-size:4.5rem; line-height:1; margin-top:1.4rem; }
+        .price-num{ font-family:var(--font-d); font-size:3.4rem; line-height:1; margin-top:1.4rem; }
         .price-per{ color:var(--txt-3); font-size:.85rem; margin-bottom:1.8rem; }
         .feat-list{ flex:1; margin-bottom:1.8rem; }
         .feat-list li{ display:flex; align-items:center; gap:.7rem; margin-bottom:.7rem; font-size:.92rem; }
@@ -1205,27 +1206,27 @@
 
         <div class="promo-banner reveal">
             <span class="tag">PRIMERAS 50 TIENDAS · EXCLUSIVO CARACAS</span>
-            <h3>3 MESES GRATIS DEL PLAN PRO</h3>
+            <h3>3 MESES GRATIS DEL PLAN TURBI</h3>
             <p>Regístrate ahora y asegura tu cupo de tienda fundadora. Solo para las primeras 50 tiendas, sin compromiso.</p>
         </div>
 
         <div class="price-grid reveal">
             <article class="card price-card">
                 <div class="top">
-                    <h3>PLAN FREE</h3>
-                    <svg class="icon" style="color:var(--txt-3);width:1.4rem;height:1.4rem"><use href="#i-gift"/></svg>
+                    <h3>PLAN TURBI</h3>
+                    <svg class="icon" style="color:var(--amber);width:1.4rem;height:1.4rem"><use href="#i-rocket"/></svg>
                 </div>
-                <p class="desc">Perfecto para conocer la plataforma.</p>
-                <div class="price-num">$0</div>
-                <div class="price-per">primeros 30 días</div>
+                <p class="desc">Ideal para arrancar y vender online.</p>
+                <div class="price-num">$29.99<span style="font-size:1rem;color:var(--txt-3)"> / mes</span></div>
+                <div class="price-per">facturación mensual</div>
                 <ul class="feat-list">
-                    <li><svg class="icon" style="color:var(--txt-3)"><use href="#i-check"/></svg> Perfil de tienda básico</li>
-                    <li><svg class="icon" style="color:var(--txt-3)"><use href="#i-check"/></svg> Publicación de productos</li>
-                    <li><svg class="icon" style="color:var(--txt-3)"><use href="#i-check"/></svg> Leads por chat y WhatsApp</li>
-                    <li class="no"><svg class="icon"><use href="#i-close"/></svg> Sello verificado</li>
-                    <li class="no"><svg class="icon"><use href="#i-close"/></svg> Posicionamiento destacado</li>
+                    <li><svg class="icon" style="color:var(--amber)"><use href="#i-check"/></svg> Publicaciones ilimitadas</li>
+                    <li><svg class="icon" style="color:var(--amber)"><use href="#i-check"/></svg> 1 vendedor incluido</li>
+                    <li><svg class="icon" style="color:var(--amber)"><use href="#i-check"/></svg> Sello de tienda verificada</li>
+                    <li><svg class="icon" style="color:var(--amber)"><use href="#i-check"/></svg> Métricas básicas de leads</li>
+                    <li><svg class="icon" style="color:var(--amber)"><use href="#i-check"/></svg> Leads por chat y WhatsApp</li>
                 </ul>
-                <button data-shop-cta class="btn btn-ghost" style="width:100%">Comenzar gratis</button>
+                <button data-shop-cta class="btn btn-ghost" style="width:100%">Obtener plan TURBI</button>
             </article>
 
             <div class="pro-wrap">
@@ -1236,18 +1237,36 @@
                         <svg class="icon" style="color:var(--amber);width:1.4rem;height:1.4rem"><use href="#i-crown"/></svg>
                     </div>
                     <p class="desc">Para tiendas listas para escalar.</p>
-                    <div class="price-num grad-text">$29.99<span style="font-size:1rem;color:var(--txt-3);-webkit-text-fill-color:var(--txt-3)"> / mes</span></div>
+                    <div class="price-num grad-text">$49.99<span style="font-size:1rem;color:var(--txt-3);-webkit-text-fill-color:var(--txt-3)"> / mes</span></div>
                     <div class="price-per">facturación mensual</div>
                     <ul class="feat-list">
-                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Todo lo del plan Free</li>
-                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Sello de tienda verificada</li>
-                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Posicionamiento destacado</li>
+                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Todo lo del plan TURBI</li>
+                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Hasta 3 vendedores</li>
+                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> 3 productos destacados al mes</li>
                         <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Métricas avanzadas de leads</li>
-                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Soporte prioritario</li>
+                        <li><svg class="icon" style="color:var(--red)"><use href="#i-check"/></svg> Posicionamiento destacado</li>
                     </ul>
                     <button data-shop-cta class="btn btn-primary" style="width:100%">Obtener plan PRO</button>
                 </article>
             </div>
+
+            <article class="card price-card">
+                <div class="top">
+                    <h3>PLAN PRO+</h3>
+                    <svg class="icon" style="color:var(--amber);width:1.4rem;height:1.4rem"><use href="#i-crown"/></svg>
+                </div>
+                <p class="desc">Máxima potencia para tiendas líderes.</p>
+                <div class="price-num">$79.99<span style="font-size:1rem;color:var(--txt-3)"> / mes</span></div>
+                <div class="price-per">facturación mensual</div>
+                <ul class="feat-list">
+                    <li><svg class="icon" style="color:var(--amber)"><use href="#i-check"/></svg> Todo lo del plan Pro</li>
+                    <li><svg class="icon" style="color:var(--amber)"><use href="#i-check"/></svg> Hasta 5 vendedores (+$10 por extra)</li>
+                    <li><svg class="icon" style="color:var(--amber)"><use href="#i-check"/></svg> 10 productos destacados al mes</li>
+                    <li><svg class="icon" style="color:var(--amber)"><use href="#i-check"/></svg> Métricas avanzadas de leads</li>
+                    <li><svg class="icon" style="color:var(--amber)"><use href="#i-check"/></svg> Soporte prioritario</li>
+                </ul>
+                <button data-shop-cta class="btn btn-ghost" style="width:100%">Obtener plan PRO+</button>
+            </article>
         </div>
     </div>
 </section>
