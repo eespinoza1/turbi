@@ -17,8 +17,8 @@
     <meta property="og:site_name" content="TURBI">
     <meta property="og:locale" content="es_VE">
     <meta property="og:url" content="https://turbi.com.ve/">
-    <meta property="og:title" content="TURBI — Encuentra el repuesto que tu auto necesita, ahora">
-    <meta property="og:description" content="El ecosistema que conecta conductores con tiendas de autopartes verificadas en Venezuela. Web + app móvil para iOS y Android.">
+    <meta property="og:title" content="TURBI — Marketplace de repuestos y autopartes en Venezuela">
+    <meta property="og:description" content="Compra y vende repuestos de vehículos en Venezuela. Busca por marca, modelo y año en tiendas de autopartes verificadas, o publica tu inventario y vende. Web + app para iOS y Android.">
     <meta property="og:image" content="https://turbi.com.ve/logo.jpeg">
 
     <!-- Twitter -->
@@ -34,6 +34,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- CDN de la silueta 3D (se carga diferida, pero adelantamos la conexión) -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 
     <!-- ============ DATOS ESTRUCTURADOS (JSON-LD) ============ -->
     <script type="application/ld+json">
@@ -762,15 +764,15 @@
     <div class="grid-bg" aria-hidden="true"></div>
     <div class="wrap">
         <div class="reveal">
-            <span class="chip"><svg class="icon"><use href="#i-flame"/></svg> Caracas · Venezuela</span>
+            <span class="chip"><svg class="icon"><use href="#i-flame"/></svg> Marketplace de repuestos · Caracas, Venezuela</span>
             <h1 class="display">
-                LO QUE TU AUTO<br>
-                <span class="grad-text">NECESITA,</span><br>
-                AHORA<span style="color:var(--red)">.</span>
+                COMPRA Y VENDE<br>
+                <span class="grad-text">REPUESTOS</span><br>
+                DE TU AUTO<span style="color:var(--red)">.</span>
             </h1>
             <p class="hero-sub">
-                El ecosistema que conecta conductores con <strong>tiendas de autopartes verificadas</strong> en Venezuela.
-                Busca tu repuesto en la web o en la app móvil. Vende sin fricción desde tu panel de tienda.
+                El <strong>marketplace de repuestos y autopartes</strong> de Venezuela. Busca, compara y compra
+                en <strong>tiendas verificadas</strong> desde la web o la app — o publica tu inventario y vende sin fricción.
             </p>
             <div class="hero-ctas">
                 <a data-users-app href="#" class="btn btn-primary">
@@ -850,17 +852,37 @@
             </div>
             -->
 
-            <!-- Silueta del auto a contraluz entre el humo (3D, Three.js) -->
-            <div class="silueta-wrap">
-                <canvas id="silueta-scene" aria-label="Automóvil a contraluz entre el humo que enciende sus faros"></canvas>
-                <div class="silueta-controls">
-                    <button id="silueta-toggle" type="button">Apagar luces</button>
-                    <button id="silueta-replay" type="button">Repetir</button>
+            <!-- Maqueta del teléfono: muestra el catálogo de repuestos (deja claro que es un marketplace) -->
+            <div class="phone" aria-hidden="true">
+                <div class="p-search"><svg class="icon"><use href="#i-search"/></svg> Pastillas de freno Aveo 2012…</div>
+                <div class="p-chiprow">
+                    <span class="p-chip on">Chevrolet</span><span class="p-chip on">Aveo</span><span class="p-chip on">2012</span><span class="p-chip">Frenos</span>
+                </div>
+                <div class="p-item">
+                    <div class="thumb ico-red"><svg class="icon"><use href="#i-disc"/></svg></div>
+                    <div><b>Pastillas delanteras cerámicas</b>
+                    <small><span class="p-verified"><svg class="icon" style="width:.7rem;height:.7rem"><use href="#i-badge"/></svg> Repuestos Alfa</span> · 1.2 km</small></div>
+                    <span class="price">$18</span>
+                </div>
+                <div class="p-item">
+                    <div class="thumb ico-orange"><svg class="icon"><use href="#i-disc"/></svg></div>
+                    <div><b>Kit pastillas + discos</b>
+                    <small><span class="p-verified"><svg class="icon" style="width:.7rem;height:.7rem"><use href="#i-badge"/></svg> AutoMotor 2010</span> · 3.5 km</small></div>
+                    <span class="price">$52</span>
+                </div>
+                <div class="p-item">
+                    <div class="thumb ico-amber"><svg class="icon"><use href="#i-disc"/></svg></div>
+                    <div><b>Pastillas semi-metálicas</b>
+                    <small><span class="p-verified"><svg class="icon" style="width:.7rem;height:.7rem"><use href="#i-badge"/></svg> Frenos del Este</span> · 5 km</small></div>
+                    <span class="price">$14</span>
+                </div>
+                <div class="p-item" style="background:rgba(255,0,77,.1);border-color:rgba(255,0,77,.3);justify-content:center">
+                    <b style="font-size:.7rem;color:#FF8AAD">💬 3 tiendas respondieron tu búsqueda</b>
                 </div>
             </div>
             <div class="float-card tl">
                 <div class="ico" style="background:rgba(255,0,77,.15);color:var(--red)"><svg class="icon"><use href="#i-zap"/></svg></div>
-                <div><small>Match en</small><b>2.4s</b></div>
+                <div><small>Repuesto hallado en</small><b>2.4s</b></div>
             </div>
             <div class="float-card bl">
                 <div class="ico" style="background:rgba(34,197,94,.15);color:#4ade80"><svg class="icon"><use href="#i-badge"/></svg></div>
@@ -1001,7 +1023,7 @@
         <div class="section-head reveal">
             <span class="chip"><svg class="icon"><use href="#i-flag"/></svg> Guía rápida</span>
             <h2 class="section-title">ASÍ FUNCIONA <span class="grad-text">TURBI</span></h2>
-            <p>Tres pasos para cada lado de la pista: si manejas, encuentra; si vendes, conecta.</p>
+            <p>Tres pasos para cada lado del marketplace: si compras, encuentra tu repuesto; si vendes, publica tu inventario.</p>
         </div>
 
         <div class="how-grid reveal">
@@ -1161,31 +1183,12 @@
     <div class="wrap">
         <div class="app-grid">
             <div class="reveal" style="order:2">
-                <div class="phone" aria-hidden="true">
-                    <div class="p-search"><svg class="icon"><use href="#i-search"/></svg> Pastillas de freno Aveo 2012…</div>
-                    <div class="p-chiprow">
-                        <span class="p-chip on">Chevrolet</span><span class="p-chip on">Aveo</span><span class="p-chip on">2012</span><span class="p-chip">Frenos</span>
-                    </div>
-                    <div class="p-item">
-                        <div class="thumb ico-red"><svg class="icon"><use href="#i-disc"/></svg></div>
-                        <div><b>Pastillas delanteras cerámicas</b>
-                        <small><span class="p-verified"><svg class="icon" style="width:.7rem;height:.7rem"><use href="#i-badge"/></svg> Repuestos Alfa</span> · 1.2 km</small></div>
-                        <span class="price">$18</span>
-                    </div>
-                    <div class="p-item">
-                        <div class="thumb ico-orange"><svg class="icon"><use href="#i-disc"/></svg></div>
-                        <div><b>Kit pastillas + discos</b>
-                        <small><span class="p-verified"><svg class="icon" style="width:.7rem;height:.7rem"><use href="#i-badge"/></svg> AutoMotor 2010</span> · 3.5 km</small></div>
-                        <span class="price">$52</span>
-                    </div>
-                    <div class="p-item">
-                        <div class="thumb ico-amber"><svg class="icon"><use href="#i-disc"/></svg></div>
-                        <div><b>Pastillas semi-metálicas</b>
-                        <small><span class="p-verified"><svg class="icon" style="width:.7rem;height:.7rem"><use href="#i-badge"/></svg> Frenos del Este</span> · 5 km</small></div>
-                        <span class="price">$14</span>
-                    </div>
-                    <div class="p-item" style="background:rgba(255,0,77,.1);border-color:rgba(255,0,77,.3);justify-content:center">
-                        <b style="font-size:.7rem;color:#FF8AAD">💬 3 tiendas respondieron tu búsqueda</b>
+                <!-- Silueta del auto a contraluz entre el humo (3D, Three.js) -->
+                <div class="silueta-wrap">
+                    <canvas id="silueta-scene" aria-label="Automóvil a contraluz entre el humo que enciende sus faros"></canvas>
+                    <div class="silueta-controls">
+                        <button id="silueta-toggle" type="button">Apagar luces</button>
+                        <button id="silueta-replay" type="button">Repetir</button>
                     </div>
                 </div>
             </div>
@@ -1352,7 +1355,7 @@
         <div class="faq-list reveal">
             <details class="faq-item">
                 <summary>¿Qué es TURBI?</summary>
-                <div>TURBI es un ecosistema venezolano (web + app móvil para iOS y Android) que conecta conductores con tiendas de autopartes verificadas. Los conductores buscan repuestos por marca, modelo y año; las tiendas publican su inventario y reciben clientes.</div>
+                <div>TURBI es el marketplace venezolano de repuestos y autopartes (web + app móvil para iOS y Android) donde puedes comprar y vender. Los conductores buscan y compran repuestos por marca, modelo y año en tiendas verificadas; las tiendas publican su inventario y venden a quienes lo buscan.</div>
             </details>
             <details class="faq-item">
                 <summary>¿Cuánto cuesta usar TURBI como conductor?</summary>
@@ -1619,23 +1622,61 @@
 })();
 </script>
 
-<!-- ============ SILUETA 3D DEL AUTO (Three.js) ============ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/GammaCorrectionShader.js"></script>
+<!-- ============ SILUETA 3D DEL AUTO (Three.js, carga diferida) ============ -->
 <script>
 (() => {
 const canvas = document.getElementById('silueta-scene');
 const container = canvas && canvas.parentElement;
-if (!canvas || !window.THREE || !THREE.EffectComposer) return;   // si Three.js no cargó, se queda en negro
+if (!canvas) return;
+
+// Los 8 archivos desde un único CDN -> reutiliza la misma conexión HTTP/2
+const BASE = 'https://cdn.jsdelivr.net/npm/three@0.128.0/';
+const SRCS = [
+  BASE + 'build/three.min.js',
+  BASE + 'examples/js/shaders/CopyShader.js',
+  BASE + 'examples/js/shaders/LuminosityHighPassShader.js',
+  BASE + 'examples/js/postprocessing/EffectComposer.js',
+  BASE + 'examples/js/postprocessing/RenderPass.js',
+  BASE + 'examples/js/postprocessing/ShaderPass.js',
+  BASE + 'examples/js/postprocessing/UnrealBloomPass.js',
+  BASE + 'examples/js/shaders/GammaCorrectionShader.js'
+];
+let started = false, booted = false;
+
+function start(){
+  if (started) return; started = true;
+  const first = document.createElement('script');        // three.min.js primero (los demás dependen de él)
+  first.src = SRCS[0];
+  first.onload = () => {
+    let left = SRCS.length - 1;
+    if (!left) return init();
+    for (let i = 1; i < SRCS.length; i++){
+      const s = document.createElement('script');
+      s.src = SRCS[i]; s.async = false;                  // se descargan en paralelo pero ejecutan en orden
+      s.onload = s.onerror = () => { if (!--left) init(); };
+      document.head.appendChild(s);
+    }
+  };
+  first.onerror = () => {};                               // si el CDN falla, el hueco queda con el fondo de la web
+  document.head.appendChild(first);
+}
+
+// No descargar Three.js hasta que el hero esté cerca de pantalla y el navegador esté libre
+function schedule(){
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)){ io.disconnect(); start(); } }, { rootMargin: '300px' });
+    io.observe(canvas);
+  } else start();
+}
+function boot(){ 'requestIdleCallback' in window ? requestIdleCallback(schedule, {timeout:2500}) : setTimeout(schedule, 300); }
+if (document.readyState !== 'loading') boot(); else addEventListener('DOMContentLoaded', boot);
+
+function init(){
+  if (booted || !window.THREE || !THREE.EffectComposer) return;   // si algo no cargó, se queda con el fondo
+  booted = true;
 
 const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
 renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.72;
@@ -1880,13 +1921,13 @@ function addSmoke(z, w, h, y, density, front){
   m.position.set(0, y, z);
   scene.add(m); smokeLayers.push(m);
 }
-// detrás del coche: varias capas para dar profundidad
-for (let i = 0; i < 7; i++) addSmoke(-6.6 + i*0.8, 22, 9, 3.6, 0.55, false);
+// detrás del coche: varias capas para dar profundidad (menos capas, un poco más densas)
+for (let i = 0; i < 5; i++) addSmoke(-6.6 + i*1.1, 22, 9, 3.6, 0.6, false);
 // a los lados y alrededor de las ruedas
 addSmoke(-0.6, 18, 3.2, 1.3, 0.35, false);
 addSmoke(0.9, 18, 2.4, 1.0, 0.28, false);
 // delante: bruma baja que atraviesan los haces de luz
-for (let i = 0; i < 5; i++) addSmoke(2.6 + i*0.9, 14, 3, 1.3, 0.32, true);
+for (let i = 0; i < 4; i++) addSmoke(2.6 + i*1.1, 14, 3, 1.3, 0.34, true);
 
 /* ---------- Postproceso: bloom ---------- */
 const composer = new THREE.EffectComposer(renderer);
@@ -1926,7 +1967,9 @@ if (window.ResizeObserver) new ResizeObserver(resize).observe(container);
 addEventListener('resize', resize); resize();
 
 const clock = new THREE.Clock();
+let rafId = 0, visible = true;
 function frame(now){
+  if (!visible){ rafId = 0; return; }        // fuera de pantalla: deja de renderizar
   const dt = Math.min(clock.getDelta(), 0.05);
   const s = !modelReady ? 0 : reduced ? 99 : (now - t0) / 1000;
 
@@ -1971,9 +2014,18 @@ function frame(now){
   camera.lookAt(lookAt);
 
   composer.render();
-  requestAnimationFrame(frame);
+  rafId = requestAnimationFrame(frame);
 }
-requestAnimationFrame(frame);
+
+// Pausa/reanuda el bucle según la escena entre o salga del viewport (ahorra GPU al hacer scroll)
+if ('IntersectionObserver' in window){
+  new IntersectionObserver(es => {
+    visible = es[0].isIntersecting;
+    if (visible && !rafId){ clock.getDelta(); rafId = requestAnimationFrame(frame); }
+  }, { threshold: 0 }).observe(canvas);
+}
+rafId = requestAnimationFrame(frame);
+}   // fin init()
 })();
 </script>
 </body>
