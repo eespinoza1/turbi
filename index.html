@@ -378,6 +378,16 @@
         .store-badge svg{ width:2rem; height:2rem; }
         .store-badge b{ display:block; font-size:1.05rem; }
         .store-badge small{ color:var(--txt-3); font-size:.72rem; }
+        .qr-download{
+            display:flex; align-items:center; gap:1.1rem; margin-top:1.6rem;
+            max-width:30rem; padding:1rem 1.2rem;
+            border:1px solid var(--line); border-radius:1rem; background:rgba(255,255,255,.03);
+            transition:border-color .2s ease, background .2s ease;
+        }
+        .qr-download:hover{ border-color:rgba(255,255,255,.2); background:rgba(255,255,255,.05); }
+        .qr-download img{ width:120px; height:120px; border-radius:.6rem; background:#fff; padding:.4rem; flex:0 0 auto; }
+        .qr-download span{ font-size:.85rem; color:var(--txt-2); line-height:1.4; }
+        .qr-download b{ display:block; color:#fff; font-size:.95rem; margin-bottom:.3rem; }
 
         /* ============ CATEGORÍAS ============ */
         .cat-head{ display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:3rem; }
@@ -727,6 +737,7 @@
             <a href="#ecosistema">Ecosistema</a>
             <a href="#categorias">Categorías</a>
             <a href="#como-funciona">Cómo funciona</a>
+            <a href="#app">Descargar app</a>
             <a href="#precios">Precios</a>
             <a href="#faq">FAQ</a>
         </nav>
@@ -756,6 +767,7 @@
         <a href="#ecosistema">ECOSISTEMA</a>
         <a href="#categorias">CATEGORÍAS</a>
         <a href="#como-funciona">CÓMO FUNCIONA</a>
+        <a href="#app">DESCARGAR APP</a>
         <a href="#precios">PRECIOS</a>
         <a href="#faq">FAQ</a>
         <a data-users-app href="#" style="color:var(--red);border:none;display:inline-flex;align-items:center;gap:.7rem;margin-top:1rem">
@@ -930,7 +942,7 @@
                         <svg viewBox="0 0 24 24"><use href="#i-apple"/></svg>
                         <span><small>Descárgala en el</small><b>App Store</b></span>
                     </a>
-                    <a href="https://play.google.com/store/apps/details?id=com.turbi.app&amp;pli=1" target="_blank" rel="noopener" class="store-badge" aria-label="Descargar TURBI en Google Play">
+                    <a href="https://play.google.com/store/apps/details?id=com.turbi.app" target="_blank" rel="noopener" class="store-badge" aria-label="Descargar TURBI en Google Play">
                         <svg viewBox="0 0 24 24"><use href="#i-gplay"/></svg>
                         <span><small>Disponible en</small><b>Google Play</b></span>
                     </a>
@@ -1223,11 +1235,19 @@
                         <svg viewBox="0 0 24 24"><use href="#i-apple"/></svg>
                         <span><small>Descárgala en el</small><b>App Store</b></span>
                     </a>
-                    <a href="https://play.google.com/store/apps/details?id=com.turbi.app&amp;pli=1" target="_blank" rel="noopener" class="store-badge" aria-label="Descargar TURBI en Google Play">
+                    <a href="https://play.google.com/store/apps/details?id=com.turbi.app" target="_blank" rel="noopener" class="store-badge" aria-label="Descargar TURBI en Google Play">
                         <svg viewBox="0 0 24 24"><use href="#i-gplay"/></svg>
                         <span><small>Disponible en</small><b>Google Play</b></span>
                     </a>
                 </div>
+                <!-- QR a la página de descarga (ideal para visitantes de escritorio) -->
+                <a href="descargar.html" class="qr-download" aria-label="Escanea el código QR para descargar la app TURBI">
+                    <img src="qr-descargar.png" width="120" height="120" alt="Código QR para descargar la app TURBI" loading="lazy">
+                    <span>
+                        <b>¿Estás en la computadora?</b>
+                        Escanea este código con la cámara de tu teléfono y descarga la app al instante.
+                    </span>
+                </a>
             </div>
         </div>
     </div>
